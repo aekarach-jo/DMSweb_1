@@ -98,15 +98,18 @@ export class AppComponent {
       this.dataUserName = localStorage.getItem('iduserName')
       if (user.permission == 'ADMIN') {
         console.log(user.permission);
-        // this.router.navigateByUrl('/room')
+        this.router.navigateByUrl('/room')
+        
       }
       if (user.permission == 'OWNER') {
         console.log(user.permission);
-        // this.router.navigateByUrl('/room')
+        this.router.navigateByUrl('/room')
+
       }
       if (user.permission == 'USER') {
         console.log(user.permission);
-        // this.router.navigateByUrl('/room')
+        this.router.navigateByUrl('/room')
+
       }
     }, error => {
       this.submitLogin = true
@@ -206,5 +209,6 @@ export class AppComponent {
   ngOnInit() {
     this.getAllUser();
     userDesign();
+    
   }
 }
