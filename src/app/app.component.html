@@ -1,64 +1,59 @@
-<body >
+<div *ngIf="statusLogin == 'login'">
   <div class="container">
     <div class="navbar">
-      <div class="menu" >
-        <h3 class="logo">Brand<span>Name</span></h3>
-        <div class="hamburger-menu" >
+      <div class="menu">
+        <h3 class="logo">ห้องเชือด<span> 101</span></h3>
+        <div class="hamburger-menu">
           <div class="bar"></div>
         </div>
       </div>
     </div>
-
     <div class="main-container">
       <div class="main">
-        <header>
+        <div class="header">
           <div class="overlay">
             <div class="inner">
-              <h2 class="title">Future is here</h2>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Laudantium illum tenetur consequatur veritatis?
-              </p>
-              <button class="btn">Read more</button>
+              <div class="card card-router-outlet" >
+                <router-outlet></router-outlet>
+              </div>
             </div>
           </div>
-        </header>
+        </div>
       </div>
-
       <div class="shadow one"></div>
       <div class="shadow two"></div>
     </div>
-
     <div class="links">
       <ul>
         <li>
-          <a href="#" style="--i: 0.05s;">Home</a>
+          <a style="--i: 0.05s; font-weight: 800;">Dashboard</a>
+        </li>
+        <li class="mt-5">
+          <a routerLink="room" class="toggleClose" style="--i: 0.1s;">ผังห้อง</a>
+        </li>
+        <li class="">
+          <a routerLink="room" class="toggleClose" style="--i: 0.1s;">ลงทะเบียน</a>
         </li>
         <li>
-          <a href="#" style="--i: 0.1s;">Services</a>
+          <a style="--i: 0.15s;">จดมิเตอร์</a>
         </li>
         <li>
-          <a href="#" style="--i: 0.15s;">Portfolio</a>
+          <a style="--i: 0.2s;">จัดการผู้ใช้งาน</a>
+        </li>
+        <li class="mt-5">
+          <a style="--i: 0.25s;">ตั้งค่า</a>
         </li>
         <li>
-          <a href="#" style="--i: 0.2s;">Testimonials</a>
-        </li>
-        <li>
-          <a href="#" style="--i: 0.25s;">About</a>
-        </li>
-        <li>
-          <a type="button" (click)="logout()" href="#" style="--i: 0.3s;">Logout</a>
+          <a type="button" class="text-danger " (click)="logout()" href="#" style="--i: 0.3s; ">ออกจากระบบ</a>
         </li>
       </ul>
     </div>
   </div>
-  <router-outlet></router-outlet>
-</body>
+</div>
 
 
 
-
-<div *ngIf="statusLogin == 'logout' || statusLogin == null">
+<body *ngIf="statusLogin == 'logout' || statusLogin == null">
   <!-- ********************************   Login   *********************************** -->
   <div class="container-login">
     <div class="myCard">
@@ -66,12 +61,13 @@
         <div class="col-md-6">
           <div class="myLeftCtn">
             <form [formGroup]="formLogin" (ngSubmit)="checkUserAndPass()" class="myForm text-center">
-              <h1>LOGIN</h1>
-              <div class="form-group m-2">
-                <i for="userName" class="fas fa-user ">
-                  <span class="material-icons">
-                    account_circle
-                  </span></i>
+              <header>LOGIN</header>
+              <div class="form-group">
+                <i for="userName" class="fas">
+                  <!-- <span class="material-icons">
+                      account_circle
+                    </span> -->
+                </i>
                 <input formControlName="userName" class="myInput" type="text" placeholder="Username" id="userName"
                   [ngClass]="{'is-invalid': submitLogin}" (ngModelChange)="onChange()" required>
                 <div class="invalid-feedback" *ngIf="statusUsername == false && formValidLogin.userName.errors">
@@ -81,24 +77,25 @@
                   บัญชีผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง
                 </div>
               </div>
-              <div class="form-group mb-5">
-                <i for="password" class="fas fa-envalope">
-                  <span class="material-icons">
-                    vpn_key
-                  </span></i>
+              <div class="form-group mb-4 mt-2">
+                <i for="password" class="fas">
+                  <!-- <span class="material-icons">
+                      vpn_key
+                    </span> -->
+                </i>
                 <input formControlName="password" class="myInput" type="password" placeholder="password" id="password"
                   (ngModelChange)="onChange()" required>
               </div>
 
-              <input type="submit" class="butt mb-5" value="LOGIN">
-              <a type="button" class="mt-4" (click)="onSwitchPage()">Create new account</a>
+              <input type="submit" class="butt mb-5" value="LOGIN"><br>
+              <a type="button" class="mt-1" (click)="onSwitchPage()">Create new account</a>
             </form>
           </div>
         </div>
         <div class="col-md-6">
           <div class="myRightCtn">
             <div class="box">
-              <h1>Dormitory</h1>
+              <header>Dormitory</header>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur eaque, ipsum aut autem
                 pariatur ut cupiditate possimus voluptatum delectus iste.</p>
               <input type="button" class="butt_out" value="Learn More">
@@ -108,11 +105,11 @@
       </div>
     </div>
   </div>
-</div>
+
 
   <!-- ********************************   Register   *********************************** -->
-  <!-- 
-  <div class="container-login" *ngIf="this.showRegisterPage == 1 || statusLogin == 'logout' || statusLogin == null">
+
+  <div class="container-login" *ngIf="this.showRegisterPage == 1 ">
     <div class="myCard">
       <div class="row">
         <div class="col-md-6">
@@ -120,26 +117,17 @@
             <form [formGroup]="formUser" (ngSubmit)="oncreateUser()" class="myForm text-center">
               <header>Create new account</header>
               <div class="form-group m-2">
-                <i for="userName" class="fas fa-user">
-                  <span class="material-icons">
-                    account_circle
-                  </span></i>
+                <i for="userName" class="fas fa-user"></i>
                 <input formControlName="userName" class="myInput" type="text" placeholder="username" id="userName"
                   required>
               </div>
               <div class="form-group mb-2">
-                <i for="password" class="fas fa-envalope">
-                  <span class="material-icons">
-                    vpn_key
-                  </span></i>
+                <i for="password" class="fas fa-envalope"></i>
                 <input formControlName="password" class="myInput" type="password" placeholder="password" id="password"
                   required>
               </div>
               <div class="form-group mb-2">
-                <i class="fas fa-envalope">
-                  <span class="material-icons">
-                    vpn_key
-                  </span></i>
+                <i class="fas fa-envalope"></i>
                 <input class="myInput" type="password" placeholder="confirm-password" id="confirm-password" required>
               </div>
               <div class="form-group">
@@ -175,4 +163,4 @@
       </div>
     </div>
   </div>
-</div> -->
+</body>

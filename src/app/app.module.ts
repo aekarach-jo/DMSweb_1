@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoomComponent } from './components/room/room.component';
 import { Material } from './materials.module';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { Material } from './materials.module';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    Material
+    Material,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
