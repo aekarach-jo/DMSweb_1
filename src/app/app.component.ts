@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { user } from './Models/user';
 import { ApiService } from './Services/api.service';
 
-declare const userDesign : any ;
+// declare const userDesign : any ;
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,7 @@ export class AppComponent {
   num = 1
   showRegisterPage: number = 0
   formUser: any
-  dataUser: any
+  permission: any
   filterByPermission: any
   formLogin: any
   statusLogin: any
@@ -26,7 +26,7 @@ export class AppComponent {
   dataUserName: any
   constructor(public router: Router, public fb: FormBuilder, public callApi: ApiService) {
     this.statusLogin = localStorage.getItem('statuslogin')
-    this.dataUser = localStorage.getItem('permission')
+    this.permission = localStorage.getItem('permission')
     this.dataUserName = localStorage.getItem('iduserName')
     this.formLogin = fb.group({
       userName: [null, [Validators.required]],
@@ -47,7 +47,14 @@ export class AppComponent {
 
   get formValidLogin() { return this.formLogin.controls }
 
-
+  btnToggle() {
+    const hamburger_menu = document.querySelector(".hamburger-menu");
+    const container = document.querySelector(".container");
+    hamburger_menu.addEventListener("click", () => {
+    container.classList.toggle("active");
+    })
+  }
+  
 
 
   checkUserAndPass() {
@@ -94,17 +101,15 @@ export class AppComponent {
       localStorage.setItem('permission', user.permission)
       localStorage.setItem('statuslogin', 'login')
       this.statusLogin = localStorage.getItem('statuslogin')
-      this.dataUser = localStorage.getItem('permission')
+      this.permission = localStorage.getItem('permission')
       this.dataUserName = localStorage.getItem('iduserName')
       if (user.permission == 'ADMIN') {
         console.log(user.permission);
         this.router.navigateByUrl('/room')
-        
       }
       if (user.permission == 'OWNER') {
         console.log(user.permission);
         this.router.navigateByUrl('/room')
-
       }
       if (user.permission == 'USER') {
         console.log(user.permission);
@@ -171,8 +176,6 @@ export class AppComponent {
 
   getAllUser() {
     this.callApi.getAllUser().subscribe(user => {
-      console.log(user);
-
     })
   }
 
@@ -188,6 +191,7 @@ export class AppComponent {
     this.formUser.value.creationDateTime = new Date
     this.callApi.createUser(this.formUser.value).subscribe(data => {
       console.log(data);
+      this.onSwitchPage()
       this.emptyForm();
       this.getAllUser();
     })
@@ -208,7 +212,5 @@ export class AppComponent {
 
   ngOnInit() {
     this.getAllUser();
-    userDesign();
-    
   }
 }

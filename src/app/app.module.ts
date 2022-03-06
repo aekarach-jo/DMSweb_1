@@ -8,11 +8,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoomComponent } from './components/room/room.component';
 import { Material } from './materials.module';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { ManageUserComponent } from './components/manage-user/manage-user.component';
+import { InvoiceDataComponent } from './components/invoice-data/invoice-data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RoomComponent
+    RoomComponent,
+    UserDetailComponent,
+    ManageUserComponent,
+    InvoiceDataComponent
   ],
   imports: [
     BrowserModule,

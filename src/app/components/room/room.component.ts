@@ -19,8 +19,16 @@ export class RoomComponent implements OnInit {
   emptyRoom = "ว่าง"
   busyRoom = "ไม่ว่าง"
   reserveRoom = "จอง"
+  filterFloor: any
+
+  statusLogin : any
+  permission : any
+  dataUserName : any
 
   constructor(public router: Router, public callapi: ApiService, public fb: FormBuilder) {
+    this.statusLogin = localStorage.getItem('statuslogin')
+    this.permission = localStorage.getItem('permission')
+    this.dataUserName = localStorage.getItem('iduserName')
     this.formRoom = fb.group({
       roomId: [null],
       roomType: [null],
@@ -66,14 +74,11 @@ export class RoomComponent implements OnInit {
     })
   }
 
-  filter(data: string) {
-
-  }
-
   getAllRoom() {
     this.callapi.getAllRoom().subscribe(data => {
-      this.roomAllData = data;
+      this.roomAllData = data; 
       console.log(this.roomAllData);
+      
     })
   }
 
@@ -82,6 +87,13 @@ export class RoomComponent implements OnInit {
       this.getDataRoomById = data;
       console.log(this.getDataRoomById);
       this.patchValue(this.getDataRoomById);
+    })
+  }
+
+  getRoomByFloor(floor : string){
+    this.callapi.getRoomByFloor(floor).subscribe(floor =>{
+      this.roomAllData = floor
+      console.log(floor);
     })
   }
 
@@ -128,6 +140,10 @@ export class RoomComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.statusLogin);
+    console.log(this.permission);
+    console.log(this.dataUserName);
+    
     this.getAllRoom();
   }
 }
