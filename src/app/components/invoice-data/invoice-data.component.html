@@ -1,0 +1,67 @@
+<div class="width-height-card hiden-scroll">
+    <mat-form-field appearance="standard">
+        <mat-label class="text-white">ค้นหา</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="ค้นหา" #input>
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="ห้องที่" class="text-color w-200" >
+            <th mat-header-cell *matHeaderCellDef> ห้องที่ </th>
+            <td mat-cell *matCellDef="let element"> {{element.roomNumber}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="สถานะห้อง" class="text-color">
+            <th mat-header-cell *matHeaderCellDef> สถานะห้อง </th>
+            <td mat-cell *matCellDef="let element"> มีผู้เช่า</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="มิเตอร์น้ำ" class="text-color" >
+            <th mat-header-cell *matHeaderCellDef> มิเตอร์น้ำ </th>
+            <td mat-cell *matCellDef="let element">
+                <input matInput class="input-in-table-water" >
+            </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="มิเตอร์ไฟ" class="text-color">
+            <th mat-header-cell *matHeaderCellDef> มิเตอร์ไฟ </th>
+            <td mat-cell *matCellDef="let element">
+                <input matInput class="input-in-table-power">
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="เพิ่มเติม" class="text-color">
+            <th mat-header-cell *matHeaderCellDef> เพิ่มเติม </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" class="text-color">
+                    <button mat-menu-item (click)="getUserDetailById(element.userDetailId)">
+                        <mat-icon style="color: rgb(110, 201, 110);">drag_indicator</mat-icon>
+                        <span>รายละเอียดทั้งหมด</span>
+                    </button>
+                    <button mat-menu-item (click)="getUserDetailById(element.userDetailId)" data-toggle="modal"
+                        data-target="#modalEditRoom">
+                        <mat-icon style="color: orange;"> border_color</mat-icon>
+                        <span>แก้ไข</span>
+                    </button>
+                    <button mat-menu-item (click)="deleteUserDetail(element.userDetailId)">
+                        <mat-icon style="color: red;">backspace</mat-icon>
+                        <span>ลบ</span>
+                    </button>
+                </mat-menu>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">ไม่สามารถค้นหา "{{input.value}}"</td>
+        </tr>
+    </table>
+</div>

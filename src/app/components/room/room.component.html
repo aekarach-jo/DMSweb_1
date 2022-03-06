@@ -1,9 +1,27 @@
-<div class="width-height-card hiden-scroll">
+<div class="width-height-card hiden-scroll" *ngIf="statusLogin == 'login'">
     <div class="search-filter mb-4 ml-3">
         <input class="form-control pl-2" type="text" name="search" [(ngModel)]="searchText" placeholder=" ค้นหา..">
+        <!-- <div class="row row-cols-sm-5 div-btn-floor">
+            <div class="col"> <input class="btn btn-danger btn-floor" type="button" value="ชั้นที่ 1"
+                    (click)="getRoomByFloor('1')">
+            </div>
+            <div class="col"> <input class="btn btn-danger btn-floor" type="button" value="ชั้นที่ 2"
+                    (click)="getRoomByFloor('2')">
+            </div>
+            <div class="col"> <input class="btn btn-danger btn-floor" type="button" value="ชั้นที่ 3"
+                    (click)="getRoomByFloor('3')">
+            </div>
+            <div class="col"> <input class="btn btn-danger btn-floor" type="button" value="ชั้นที่ 4"
+                    (click)="getRoomByFloor('4')">
+            </div>
+            <div class="col"> <input class="btn btn-danger btn-floor" type="button" value="Reset"
+                    (click)="getAllRoom()">
+            </div>
+        </div> -->
     </div>
+
     <div class="row row-cols-md-5" *ngIf="roomAllData != null">
-        <div *ngFor="let item of roomAllData |filter:searchText" class="col mb-4">
+        <div *ngFor="let item of roomAllData | filter:searchText" class="col mb-5">
             <div class="card-room">
                 <div *ngIf="item.roomStatus == busyRoom" class="card-header card-header-style-1">{{item.roomNumber}}
                 </div>
@@ -11,25 +29,26 @@
                 </div>
                 <div *ngIf="item.roomStatus == reserveRoom" class="card-header card-header-style-3">{{item.roomNumber}}
                 </div>
-                <div class="card-body">
+                <div class="card-body mt-4 ">
                     <img class="material-icons icon-in-room"
                         src="https://img.icons8.com/ios-filled/100/000000/door-opened.png" />
                 </div>
                 <!-- <a *ngIf="item.roomStatus == emptyRoom" type="text" class="text-center " style="margin-left: 3.5rem; font-weight: 900;">ว่าง</a>
                 <a *ngIf="item.roomStatus == busyRoom" type="text" class="text-center " style="margin-left: 3.5rem; font-weight: 900;">ไม่ว่าง</a> -->
-                <div class="card-footer pl-1 pr-1 ">
-                    <button class="float-left font-in-card" data-toggle="modal" data-target="#modalEditRoom"
+                <div class=" pl-1 pr-1" *ngIf="permission == 'ADMIN'">
+                    <button class="d-block mx-auto btn btn-warning font-in-card" data-toggle="modal" type="button" data-target="#modalEditRoom"
                         (click)="getRoomById(item.roomId)">แก้ไข</button>
-                    <button class="float-right font-in-card" (click)="getRoomById(item.roomId)"
+                    <!-- <button class="float-right font-in-card" (click)="getRoomById(item.roomId)"
                         *ngIf="item.roomStatus == busyRoom">ไม่ว่าง</button>
                     <button class="float-right font-in-card" data-toggle="modal" data-target="#modalRegisterUser"
-                        (click)="getRoomById(item.roomId)" *ngIf="item.roomStatus == emptyRoom">เพิ่ม</button>
+                        (click)="getRoomById(item.roomId)" *ngIf="item.roomStatus == emptyRoom">เพิ่ม</button> -->
                 </div>
+
             </div>
         </div>
         <!-- เพิ่มห้อง -->
-        <div class="col mt-5 ml-4">
-            <button class="btn btn-success rounded-pill" data-toggle="modal" data-target="#modalAddRoom"><span
+        <div class="col mt-5 ml-5" *ngIf="permission == 'ADMIN'">
+            <button class="btn rounded-pill" data-toggle="modal" data-target="#modalAddRoom"><span
                     class="material-icons icon-add-room">
                     add
                 </span>
@@ -39,9 +58,63 @@
 </div>
 
 
+<!-- modal edit room -->
+<div class="modal fade" id="modalEditRoom" data-backdrop="true" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-full-width">
+        <div class="modal-content modal-content-full-width" [formGroup]="formRoom">
+            <div class="modal-header modal-header-bg">
+                <p>แก้ไขข้อมูลห้องพัก</p>
+            </div>
+            <div class="modal-body modal-body-style">
+                <div class="row row-cols-md-1">
+                    <div class="form-group col-sm-2">
+                        <label for="roomNumber" class="font-color">ห้องที่</label>
+                        <input formControlName="roomNumber" class="form-control pl-2" type="text">
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="floor" class="font-color">ชั้นที่</label>
+                        <input formControlName="floor" class="form-control pl-2" type="text">
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="roomType" class="font-color">ประเภทห้อง</label>
+                        <select formControlName="roomType" class="form-control pl-2" type="text">
+                            <option value="แอร์">แอร์</option>
+                            <option value="พัดลม">พัดลม</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="roomStatus" class="font-color">สถานะห้อง</label>
+                        <select formControlName="roomStatus" class="form-control pl-2" type="text"
+                            id="exampleFormControlSelect1">
+                            <option value="ว่าง">ว่าง</option>
+                            <option value="ไม่ว่าง">ไม่ว่าง</option>
+                            <option value="จอง">จอง</option>
+                        </select>
+                    </div>
+                    <div class="row row-cols-md-2">
+                        <div class="col-6">
+                            <label for="waterMeter" class="font-color font-color-water">มิเตอร์น้ำ</label>
+                            <input formControlName="waterMeter" class="form-control pl-2" type="text">
+                        </div>
+                        <div class="col-6">
+                            <label for="powerMeter" class="font-color font-color-power">มิเตอร์ไฟ</label>
+                            <input formControlName="powerMeter" class="form-control pl-2" type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer modal-footer-style">
+                <button class="btn btn-success btn-style-success" type="submit"
+                    (click)="onEditRoom(this.getDataRoomById.roomId)" data-dismiss="modal">ยืนยัน</button>
+                <button class="btn btn-danger btn-style-cancel" data-dismiss="modal"
+                    (click)="emptyFormRoom()">ยกเลิก</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- modal add room -->
-<div class="modal fade" id="modalAddRoom" data-backdrop="false" aria-hidden="true">
+<div class="modal fade" id="modalAddRoom" data-backdrop="true" aria-hidden="true">
     <div class="modal-dialog modal-dialog-full-width">
         <div class="modal-content modal-content-full-width">
             <div class="modal-header modal-header-bg">
@@ -88,61 +161,8 @@
             <div class="modal-footer modal-footer-style">
                 <button class="btn btn-success btn-style-success" type="submit" (click)="onCreateRoom()"
                     data-dismiss="modal">ยืนยัน</button>
-                <button class="btn btn-danger btn-style-cancel" data-dismiss="modal" (click)="emptyFormRoom()">ยกเลิก</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- modal add room -->
-<div class="modal fade" id="modalEditRoom" data-backdrop="false" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-full-width">
-        <div class="modal-content modal-content-full-width">
-            <div class="modal-header modal-header-bg">
-                <p>เพิ่มห้อง</p>
-            </div>
-            <div class="modal-body modal-body-style" [formGroup]="formRoom">
-                <div class="row row-cols-md-1">
-                    <div class="form-group col-sm-2">
-                        <label for="roomNumber" class="font-color">ห้องที่</label>
-                        <input formControlName="roomNumber" class="form-control pl-2" type="text">
-                    </div>
-                    <div class="form-group col-sm-2">
-                        <label for="floor" class="font-color">ชั้นที่</label>
-                        <input formControlName="floor" class="form-control pl-2" type="text">
-                    </div>
-                    <div class="form-group col-sm-2">
-                        <label for="roomType" class="font-color">ประเภทห้อง</label>
-                        <select formControlName="roomType" class="form-control pl-2" type="text">
-                            <option value="แอร์">แอร์</option>
-                            <option value="พัดลม">พัดลม</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-sm-2">
-                        <label for="roomStatus" class="font-color">สถานะห้อง</label>
-                        <select formControlName="roomStatus" class="form-control pl-2" type="text"
-                            id="exampleFormControlSelect1">
-                            <option value="ว่าง">ว่าง</option>
-                            <option value="ไม่ว่าง">ไม่ว่าง</option>
-                            <option value="จอง">จอง</option>
-                        </select>
-                    </div>
-                    <div class="row row-cols-md-2">
-                        <div class="col-6">
-                            <label for="waterMeter" class="font-color font-color-water">มิเตอร์น้ำ</label>
-                            <input formControlName="waterMeter" class="form-control pl-2" type="text">
-                        </div>
-                        <div class="col-6">
-                            <label for="powerMeter" class="font-color font-color-power">มิเตอร์ไฟ</label>
-                            <input formControlName="powerMeter" class="form-control pl-2" type="text">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer modal-footer-style">
-                <button class="btn btn-success btn-style-success" type="submit" (click)="onCreateRoom()"
-                    data-dismiss="modal">ยืนยัน</button>
-                <button class="btn btn-danger btn-style-cancel" data-dismiss="modal" (click)="emptyFormRoom()">ยกเลิก</button>
+                <button class="btn btn-danger btn-style-cancel" data-dismiss="modal"
+                    (click)="emptyFormRoom()">ยกเลิก</button>
             </div>
         </div>
     </div>

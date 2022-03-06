@@ -1,13 +1,6 @@
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
 
 .width-height-card {
-    position: relative;
     align-items: center;
     justify-content: center;
     height: auto;
@@ -18,10 +11,9 @@
 
 @media  screen and (max-width:420px) {
     .width-height-card {
-        position: relative;
         align-items: center;
         justify-content: center;
-        height: auto;
+        height: 100vh;
         width: auto;
         padding: 20px;
         overflow-x: hidden;
@@ -32,102 +24,34 @@
     display: none;
 }
 
-
-.font-color{
-    color: #fff;
-    font-size: 15px;
-    font-weight: 500;
-    margin: 8px;
-}
-
-.card-room{
-    align-items: center;
-    margin-left: 1rem;
-    justify-content: center;
-    position: relative;
-    width: 8.5rem;
-    height: 13rem;
-    background: rgba(166, 230, 255, 0.5);
-    border-radius: 15px;
-    border-bottom-left-radius: 60px;
-    border-bottom-right-radius: 60px;
-    box-shadow: 0 0 0.6em 1px #b8b0b0;
-}
-
-.card-header-style-1{
-    height: 20px; vertical-align: top;
-    text-align: center;
-    font-weight: 700;
-    padding-top: 0px;
-     box-shadow: 0 0 0.5em 0.5px #f04f64;
-    background-color: rgba(255, 153, 153,0.8);
-    color: rgba(255, 255, 255,1);
-    border-radius: 10px;
-}
-.card-header-style-2{
-    height: 20px; vertical-align: top;
-    text-align: center;
-    font-weight: 700;
-    padding-top: 0px;
-    box-shadow: 0 0 0.5em 0.5px #4ff064;
-    background-color: rgba(98, 219, 124, 0.8);
-    color: rgba(255, 255, 255,1);
-    border-radius: 10px;
-}
-.card-header-style-3{
-    height: 20px; vertical-align: top;
-    text-align: center;
-    font-weight: 700;
-    padding-top: 0px;
-    box-shadow: 0 0 0.5em 0.5px #e5f04f;
-    background-color: rgba(207, 219, 98, 0.8);
-    color: rgba(255, 255, 255,1);
-    border-radius: 10px;
-}
-.card-body{
-    height: 60%;
+table {
     width: 100%;
-    margin-left: 1.1rem;
-    margin-top: 1.5rem;
-    
 }
-
-.div-btn-floor{
-    left: 20%;
-    text-align: center;
-    justify-content: flex-end;
-    align-items: center;
-}
-.btn-floor{
- 
-}
-
-
-.icon-in-room{
-    background-color: rgba(255, 255, 255,0.8);
-    border-radius: 10px;
-}
-.font-in-card{
+  
+.mat-form-field {
     font-size: 14px;
-    border-radius: 15px;
-    width: 3rem;
-    background-color: rgba(198, 234, 240, 0.2);
-    color: rgb(255, 255, 255);
-    margin-top: 7px;
-    box-shadow: 0 0 0.5em 0.5px #dff5f7;
+    width: 100%;
 }
-
-.icon-add-room{
-    padding: 0.8rem; 
-    font-size: 4rem;
+  
+.info-mat{
+    color: darkgreen;
+}
+.edit-mat{
+    color: rgb(119, 119, 26);
+}
+.delete-mat{
+    color: red;
+}
+.text-menu-style{
+    padding-left: 1rem;
+    text-align: left;
+    align-content: center;
     justify-content: center;
-    align-items: center;
-    text-align: center;
 }
 
 .modal-dialog-full-width{
-    left: 34%;
-    top: 20%;
+    left: 24%;
+    top: 5%;
     justify-content: center;
     align-items: center;
     position: relative;
@@ -146,11 +70,12 @@
 }
 
 .modal-content-full-width {
-    height: 56vh;
+    height: 80vh;
+    width: 200%;
     border-radius: 10px;
     position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    background: rgba(128, 128, 128, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.2);
     border-right: 1px solid rgba(255, 255, 255, 0.1);
     overflow: hidden;
     backdrop-filter: blur(7px);
@@ -226,19 +151,44 @@
     margin-top: 10px;
 }
 
-.search-filter{
-    min-width: 5rem;
-    width: 12rem;
+
+.modal-body-style{
+    margin: 1rem;
+    height: 75%;
+}
+.modal-footer-style{
+    margin: 1rem;
+    width: 100%;
+    height: 10%;
+    text-align: center;
+    justify-content: flex-end;
+    align-items: center;
+}
+.btn-style-success{
+    width: 4.5rem;
+    height: 2.5rem;
+    margin-right: 18px;
+    margin-top: 10px;
+}
+.btn-style-cancel{
+    width: 4.5rem;
+    height: 2.5rem;
+    margin-right: 18px;
+    margin-top: 10px;
 }
 
-.font-color{
-    color: #fff;
+.text-color{
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-left: 8px;
 }
-.font-color-water{
-    color: rgb(186, 229, 247);
-    font-weight: 400;
-}
-.font-color-power{
-    color: rgb(245, 218, 182);
-    font-weight: 400;
+
+.date-picker{
+    color: black;
+    background-color: beige;
+    height: 1.8rem;
+
+    border-radius: 7px;
+    padding-bottom: 2.7rem;
 }
