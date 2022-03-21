@@ -1,8 +1,13 @@
+
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { invoice } from '../Models/invoice';
+import { payment } from '../Models/payment';
+import { report } from '../Models/report';
 import { room } from '../Models/room';
+import { setting } from '../Models/setting';
 import { user } from '../Models/user';
 import { userDetail } from '../Models/userDetail';
 
@@ -108,6 +113,9 @@ export class ApiService {
   public getInvoiceByStatus(status: string) {
     return this.http.get<invoice>(`${environment.apiUrl}Invoice/GetInvoiceByStatus/${status}`)
   }
+  public getInvoiceByMonth(start: Date , end :Date) {
+    return this.http.get<invoice>(`${environment.apiUrl}Invoice/GetInvoiceByMonth/${start}/${end}`)
+  }
   public createInvoice(invoice: invoice) {
     return this.http.post<invoice>(`${environment.apiUrl}Invoice/CreateInvoice`, invoice)
   }
@@ -117,4 +125,70 @@ export class ApiService {
   public deleteInvoice(invoiceID: string) {
     return this.http.get<invoice>(`${environment.apiUrl}Invoice/DeleteInvoice/${invoiceID}`)
   }
+
+
+  public getAllReport() {
+    return this.http.get<report>(`${environment.apiUrl}Report/GetAllReport`)
+  }
+  public getReportById(reportID: string) {
+    return this.http.get<report>(`${environment.apiUrl}Report/GetReportById/${reportID}`)
+  }
+  public getReportByNumber(number: string) {
+    return this.http.get<report>(`${environment.apiUrl}Report/GetReportByNumber/${number}`)
+  }
+  public getReportByStatus(status: string) {
+    return this.http.get<report>(`${environment.apiUrl}Report/GetReportByStatus/${status}`)
+  }
+  public createReport(report: report) {
+    return this.http.post<report>(`${environment.apiUrl}Report/CreateReport`, report)
+  }
+  public editReport(reportID: string, report: report) {
+    return this.http.put<report>(`${environment.apiUrl}Report/EditReport/${reportID}`, report)
+  }
+  public deleteReport(reportID: string) {
+    return this.http.get<report>(`${environment.apiUrl}Report/DeleteReport/${reportID}`)
+  }
+
+
+  public getAllPayment() {
+    return this.http.get<payment>(`${environment.apiUrl}Payment/GetAllPayment`)
+  }
+  public getPaymentById(paymentID: string) {
+    return this.http.get<payment>(`${environment.apiUrl}Payment/GetPaymentById/${paymentID}`)
+  }
+  public getPaymentByNumber(number: string) {
+    return this.http.get<payment>(`${environment.apiUrl}Payment/GetPaymentByNumber/${number}`)
+  }
+  public getPaymentByStatus(status: string) {
+    return this.http.get<payment>(`${environment.apiUrl}Payment/GetPaymentByStatus/${status}`)
+  }
+  public createPayment(payment: payment) {
+    return this.http.post<payment>(`${environment.apiUrl}Payment/CreatePayment`, payment)
+  }
+  public editPayment(paymentID: string, payment: payment) {
+    return this.http.put<payment>(`${environment.apiUrl}Payment/EditPayment/${paymentID}`, payment)
+  }
+  public deletePayment(paymentID: string) {
+    return this.http.get<payment>(`${environment.apiUrl}Payment/DeletePayment/${paymentID}`)
+  }
+  
+  
+  public getAllSetting() {
+    return this.http.get<setting>(`${environment.apiUrl}Setting/GetAllSetting`)
+  }
+  public getSettingById(settingID: string) {
+    return this.http.get<setting>(`${environment.apiUrl}Setting/GetSettingById/${settingID}`)
+  }
+  public createSetting(setting: setting) {
+    return this.http.post<setting>(`${environment.apiUrl}Setting/CreateSetting`, setting)
+  }
+  public editSetting(settingID: string, setting: setting) {
+    return this.http.put<setting>(`${environment.apiUrl}Setting/EditSetting/${settingID}`, setting)
+  }
+  public deleteSetting(settingID: string) {
+    return this.http.get<setting>(`${environment.apiUrl}Setting/DeleteSetting/${settingID}`)
+  }
+
+
+
 }

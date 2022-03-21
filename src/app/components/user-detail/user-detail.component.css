@@ -4,7 +4,7 @@
     position: relative;
     align-items: center;
     justify-content: center;
-    height: auto;
+    height: 780px;
     width: auto;
     padding: 20px;
     overflow-x: hidden;
@@ -29,7 +29,7 @@
 }
 
 .form-control{
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 1);
     color: #000000;
     font-weight: 500;
     font-size: 20px;
@@ -43,7 +43,7 @@
     margin-left: 8px;
 }
 .date-picker{
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 1);
     color: #000000;
     height: 1.8rem;
     border-radius: 7px;
@@ -73,3 +73,13 @@
     background-color: rgba(0, 0, 0, 0);
 }
 
+.form-login{
+    width: 12rem;
+
+}
+
+.mat-step-text-label {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: white;
+}

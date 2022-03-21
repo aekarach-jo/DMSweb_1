@@ -55,7 +55,8 @@
   <nav class="navbar navbar-expand-lg navStyle border-bottom">
     <div class=" brandStyle  " id="menu-toggle" routerLink="/room">
       <img class="img-style" src="https://img.icons8.com/fluency/24/000000/hostel.png" />
-      Dormitory</div>
+      Dormitory
+    </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <img src="https://img.icons8.com/plumpy/48/000000/menu-squared-2.png" />
@@ -65,8 +66,19 @@
         <!-- <li class="nav-item">
         <a class="nav-link navOption btn login-style"></a>
       </li> -->
+        <li class="nav-item mr-4" *ngIf="permission == 'ADMIN'">
+          <a routerLink="setting">
+            <span class="icon">
+              <img class="d-block mx-auto" type="button"
+                src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/48/ffffff/external-setting-basic-ui-elements-flatart-icons-outline-flatarticons.png" />
+            </span>
+          </a>
+          <!-- <a class="nav-link navOption btn btn-danger" (click)="logout()">ออกจากระบบ</a> -->
+        </li>
         <li class="nav-item">
-          <a class="nav-link navOption btn btn-secondary" (click)="logout()">ออกจากระบบ</a>
+          <img class="d-block mx-auto" (click)="logout()" type="button"
+            src="https://img.icons8.com/color/48/000000/shutdown--v1.png" />
+          <!-- <a class="nav-link navOption btn btn-danger" (click)="logout()">ออกจากระบบ</a> -->
         </li>
       </ul>
     </div>
@@ -77,23 +89,15 @@
   <div class="menu">
     <div class="navigation ">
       <ul>
-        <li class="list">
+        <li class="list" *ngIf="permission == 'ADMIN' || permission == 'USER'">
           <a routerLink="room">
             <span class="icon">
-              <img src="https://img.icons8.com/fluency/48/000000/room.png" />
+              <img src="https://img.icons8.com/dusk/54/000000/room.png" />
             </span>
             <span class="text">ROOM</span>
           </a>
         </li>
-        <li class="list"  *ngIf="permission == 'ADMIN'">
-          <a routerLink="user-detail">
-            <span class="icon">
-              <img src="https://img.icons8.com/emoji/48/000000/memo-emoji.png" />
-            </span>
-            <span class="text">REGISTER</span>
-          </a>
-        </li>
-        <li class="list"  *ngIf="permission == 'ADMIN'">
+        <li class="list" *ngIf="permission == 'ADMIN'">
           <a routerLink="invoice-data">
             <span class="icon empty">
               <img
@@ -103,11 +107,38 @@
           </a>
           <!-- <div class="indicator"></div> -->
         </li>
-        <li class="list"  *ngIf="permission == 'ADMIN'">
+        <li class="list" *ngIf="permission == 'ADMIN'">
+          <a routerLink="user-detail">
+            <span class="icon">
+              <img
+                src="https://img.icons8.com/external-flat-geotatah/64/000000/external-register-training-management-system-flat-flat-geotatah.png" />
+            </span>
+            <span class="text">REGISTER</span>
+          </a>
+        </li>
+        <li class="list" *ngIf="permission == 'ADMIN'">
           <a routerLink="manage-user">
             <span class="icon empty">
+              <img
+                src="https://img.icons8.com/external-febrian-hidayat-fill-lineal-febrian-hidayat/48/000000/external-manage-business-and-management-febrian-hidayat-fill-lineal-febrian-hidayat.png" />
+            </span> <span class="text empty">Manage USER</span>
+          </a>
+          <!-- <div class="indicator"></div> -->
+        </li>
+        <li class="list" *ngIf="permission == 'ADMIN'">
+          <a routerLink="report">
+            <span class="icon empty">
+              <img
+                src="https://img.icons8.com/external-flatart-icons-flat-flatarticons/48/000000/external-report-world-cancer-awareness-flatart-icons-flat-flatarticons.png" />
+            </span> <span class="text empty">Report</span>
+          </a>
+          <!-- <div class="indicator"></div> -->
+        </li>
+        <li class="list" *ngIf="permission == 'ADMIN' || permission == 'USER'">
+          <a routerLink="profile">
+            <span class="icon empty">
               <img src="https://img.icons8.com/color/55/000000/user.png" />
-            </span> <span class="text empty">CUSTOMER</span>
+            </span> <span class="text empty">Profile</span>
           </a>
           <!-- <div class="indicator"></div> -->
         </li>
@@ -120,7 +151,7 @@
 
 <div class="body-color" *ngIf="statusLogin == 'logout' || statusLogin == null ">
   <!-- ********************************   Login   *********************************** -->
-  <div class="container">
+  <div class="container container-login">
     <div class="myCard">
       <div class="row">
         <div class="col-md-6">
@@ -128,11 +159,6 @@
             <form [formGroup]="formLogin" (ngSubmit)="checkUserAndPass()" class="myForm text-center">
               <header>LOGIN</header>
               <div class="form-group">
-                <i for="userName" class="fas">
-                  <!-- <span class="material-icons">
-                      account_circle
-                    </span> -->
-                </i>
                 <input formControlName="userName" class="myInput" type="text" placeholder="Username" id="userName"
                   [ngClass]="{'is-invalid': submitLogin}" (ngModelChange)="onChange()" required>
                 <div class="invalid-feedback" *ngIf="statusUsername == false && formValidLogin.userName.errors">
@@ -143,17 +169,12 @@
                 </div>
               </div>
               <div class="form-group mb-4 mt-2">
-                <i for="password" class="fas">
-                  <!-- <span class="material-icons">
-                      vpn_key
-                    </span> -->
-                </i>
                 <input formControlName="password" class="myInput" type="password" placeholder="password" id="password"
                   (ngModelChange)="onChange()" required>
               </div>
-
               <input type="submit" class="butt mb-5" value="LOGIN"><br>
-              <a type="button" class="mt-1" (click)="onSwitchPage()">Create new account</a>
+              <!-- <a type="button" class="mt-1" (click)="onSwitchPage()">Create new account</a> -->
+              <a type="button" class="mt-1" (click)="loginWithGuest()">Login with guest</a>
             </form>
           </div>
         </div>

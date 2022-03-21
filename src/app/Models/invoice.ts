@@ -1,16 +1,22 @@
 export interface invoice {
     invoiceId: string
     invoiceNumber: string
-    invoiceRoomRate: Number
-    waterMeterOld: Number
-    waterMeterNew: Number
-    waterMeterUnit: Number
-    powerMeterOld: Number
-    powerMeterNew: Number
-    powerMeterUnit: Number
-    centerCervice: Number
+    invoiceRoomRate: number
+    waterMeterOld: number
+    waterMeterNew: number
+    waterMeterUnit: number
+    waterPrice: number
+    waterTotalPrice: number
+    powerMeterOld: number
+    powerMeterNew: number
+    powerMeterUnit: number
+    powerPrice: number
+    powerTotalPrice: number
+    centerService: number
+    otherNote: string
+    otherPrice: number
     invoiceStatus: string
-    invoiceTotal: Number
+    invoiceTotal: number
     creationDateTime: string
     status: string
     roomId: string

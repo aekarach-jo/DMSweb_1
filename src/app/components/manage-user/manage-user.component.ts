@@ -150,6 +150,11 @@ export class ManageUserComponent implements OnInit {
     })
   }
 
+  onEditUser(id : string){
+    console.log(id);
+    
+  }
+
   deleteUserDetail(id: string) {
     Swal.fire({
       position: 'center',
@@ -177,6 +182,7 @@ export class ManageUserComponent implements OnInit {
       }
     })
   }
+
 
 
   getRoomByStatus() {

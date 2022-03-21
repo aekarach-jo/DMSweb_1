@@ -2,12 +2,14 @@
     <mat-stepper #stepper class="bg-stepper">
         <mat-step [stepControl]="formUserDetail" errorMessage="Name is required.">
             <form [formGroup]="formUserDetail">
-                <ng-template matStepLabel>ลงทะเบียนผู้เช่า</ng-template>
+                <ng-template matStepLabel>
+                    <p class="text-white mt-2">ลงทะเบียนผู้เช่า</p>
+                </ng-template>
                 <div>
                     <div class="row row-cols-md-2 ">
                         <div class="col-md-6 left-col">
                             <label for="firstName" class="text-color">ชื่อ</label>
-                            <input formControlName="firstName" class="form-control" type="text" >
+                            <input formControlName="firstName" class="form-control" type="text">
                         </div>
                         <div class="col-md-6 right-col">
                             <label for="lastName" class="text-color">นามสกุล</label>
@@ -94,31 +96,21 @@
         </mat-step>
         <mat-step [stepControl]="formUser" errorMessage="Address is required.">
             <form [formGroup]="formUser" (ngSubmit)="createUserDetail()">
-                <ng-template matStepLabel>ลงทะเบียนเข้าระบบ</ng-template>
-                <div class="row row-cols-md-2 ">
-                    <div class="col-sm-6">
-                        <div class="col">
-                            <label for="userName" class="text-color float-right" >Username</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="col">
-                            <input formControlName="userName" class="form-control" type="text">
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="col mt-2">
-                            <label for="password" class="text-color float-right">Password</label>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="col mt-2">
-                            <input formControlName="password" class="form-control" type="text">
+                <ng-template matStepLabel>
+                    <p class="text-white mt-2">ลงทะเบียนเข้าระบบ</p>
+                </ng-template>
+                <div class="container ">
+                    <div class="row">
+                        <div class="col col-center ">
+                            <label for="userName" class="text-color ">Username</label>
+                            <input formControlName="userName" class="form-control form-login" type="text">
+                            <label for="password" class="text-color mt-3">Password</label>
+                            <input formControlName="password" class="form-control form-login" type="text">
                         </div>
                     </div>
                 </div>
-                <button *ngIf="this.formUser.value.userName != null && this.formUser.value.password != null" class="float-right bg-info mt-4"
-                    mat-button matStepperNext type="submit">ยืนยัน</button>
+                <button *ngIf="this.formUser.value.userName != null && this.formUser.value.password != null"
+                    class="float-right bg-info mt-4" mat-button matStepperNext type="submit">ยืนยัน</button>
             </form>
         </mat-step>
     </mat-stepper>
