@@ -1,0 +1,46 @@
+<div class="container width-height-container  hiden-scroll">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="ห้องที่" class="text-color">
+            <th mat-header-cell *matHeaderCellDef width="100"> ห้องที่ </th>
+            <td mat-cell *matCellDef="let element"> {{element.roomNumber}} </td>
+        </ng-container>
+        <ng-container matColumnDef="หัวข้อ" class="text-color">
+            <th mat-header-cell *matHeaderCellDef width="200"> หัวข้อ </th>
+            <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+        </ng-container>
+        <ng-container matColumnDef="ข้อความ" class="text-color">
+            <th mat-header-cell *matHeaderCellDef width="500"> ข้อความ </th>
+            <td mat-cell *matCellDef="let element"> {{element.note}} </td>
+        </ng-container>
+        <ng-container matColumnDef="วันที่" class="text-color">
+            <th mat-header-cell *matHeaderCellDef width="100"> วันที่ </th>
+            <td mat-cell *matCellDef="let element"> {{element.date | date: 'dd/MM/yyyy'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="สถานะ" class="text-color">
+            <th mat-header-cell *matHeaderCellDef width="150"> สถานะ </th>
+            <td mat-cell *matCellDef="let element">
+                <p *ngIf="element.reportStatus == 'รอยืนยัน'" class="btn btn-warning" type="button"
+                    (click)="getReportById(element.reportId,1)"> {{ element.reportStatus}}
+                </p>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="เพิ่มเติม" class="text-color">
+            <th mat-header-cell *matHeaderCellDef width="50"> </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.reportStatus == 'ยืนยันแล้ว'">
+                    <img src="https://img.icons8.com/office/32/000000/checkmark--v1.png" />
+                </div>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="ย้ายไปข้อมูลรวม" class="text-color">
+            <th mat-header-cell *matHeaderCellDef width="50"> </th>
+            <td mat-cell *matCellDef="let element">
+                <a class="float-right" type="button" *ngIf="element.reportStatus == 'ยืนยันแล้ว'" (click)="getReportById(element.reportId,2)">
+                    <img src="https://img.icons8.com/external-anggara-flat-anggara-putra/28/000000/external-delete-interface-anggara-flat-anggara-putra-3.png" />
+                </a>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

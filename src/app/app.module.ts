@@ -11,6 +11,10 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { ManageUserComponent } from './components/manage-user/manage-user.component';
 import { InvoiceDataComponent } from './components/invoice-data/invoice-data.component';
+import { ReportComponent } from './components/report/report.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { SettingComponent } from './components/setting/setting.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { InvoiceDataComponent } from './components/invoice-data/invoice-data.com
     RoomComponent,
     UserDetailComponent,
     ManageUserComponent,
-    InvoiceDataComponent
+    InvoiceDataComponent,
+    ReportComponent,
+    ProfileComponent,
+    PaymentComponent,
+    SettingComponent
   ],
   imports: [
     BrowserModule,

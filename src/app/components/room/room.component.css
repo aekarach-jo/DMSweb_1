@@ -1,19 +1,15 @@
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-
 .width-height-card {
     position: relative;
     align-items: center;
     justify-content: center;
-    height: auto;
+    height: 780px;
     width: auto;
     padding: 20px;
     overflow-x: hidden;
+     /* background-image: linear-gradient(-135deg, #b2cfd1 0%, #405670 74%); */
+     box-shadow: 0 0 0.5em 1px #fcfcfc; 
+     border-radius: 20px;
 }
 
 @media  screen and (max-width:420px) {
@@ -21,10 +17,13 @@
         position: relative;
         align-items: center;
         justify-content: center;
-        height: auto;
+        height: 100vh;
         width: auto;
         padding: 20px;
         overflow-x: hidden;
+         /* background-image: linear-gradient(-135deg, #b2cfd1 0%, #405670 74%); */
+     box-shadow: 0 0 0.5em 1px #fcfcfc; 
+     border-radius: 20px;
     }
 }
 
@@ -87,19 +86,6 @@
 .card-body{
     height: 60%;
     width: 100%;
-    margin-left: 1.1rem;
-    margin-top: 1.5rem;
-    
-}
-
-.div-btn-floor{
-    left: 20%;
-    text-align: center;
-    justify-content: flex-end;
-    align-items: center;
-}
-.btn-floor{
- 
 }
 
 
@@ -110,11 +96,12 @@
 .font-in-card{
     font-size: 14px;
     border-radius: 15px;
-    width: 3rem;
+    height: 20px;
     background-color: rgba(198, 234, 240, 0.2);
     color: rgb(255, 255, 255);
-    margin-top: 7px;
+    margin-top: 15px;
     box-shadow: 0 0 0.5em 0.5px #dff5f7;
+    padding-bottom: 24px;
 }
 
 .icon-add-room{
@@ -124,95 +111,35 @@
     align-items: center;
     text-align: center;
 }
-
-.modal-dialog-full-width{
-    left: 34%;
-    top: 20%;
-    justify-content: center;
-    align-items: center;
+.modal-dialog-full-width {
+    
+    min-height: 50%;
+    min-width: 50%;
     position: relative;
-    margin: 2rem;
 }
 
-@media  screen and (max-width:420px) {
-    .modal-dialog-full-width{
-        left: 0%;
-        top:8%;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        margin: 2rem;
-    }
-}
 
 .modal-content-full-width {
-    height: 56vh;
     border-radius: 10px;
     position: relative;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 1);
     border: 1px solid rgba(255, 255, 255, 0.25);
-    background: rgba(128, 128, 128, 0.5);
+    background: rgba(255, 255, 255, 0.1);
     border-right: 1px solid rgba(255, 255, 255, 0.1);
     overflow: hidden;
     backdrop-filter: blur(7px);
-    justify-content: center;
-    align-items: center;
-}
-
-@media  screen and (max-width:420px) {
-    .modal-content-full-width {
-        height: 62vh;
-        border-radius: 10px;
-        position: relative;
-        box-shadow: 0 -0 100px 650px rgba(0, 0, 0, 0.7);
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        background: rgba(128, 128, 128, 0.5);
-        border-right: 1px solid rgba(255, 255, 255, 0.1);
-        overflow: hidden;
-        backdrop-filter: blur(7px);
-        justify-content: center;
-        align-items: center;
-    }
 }
 .modal-header-bg {
     background-color: #313131;
-    padding-top: 15px;
     color: antiquewhite;
-    width: 100%;
-    height: 8vh;
-    font-size: 30px;
-    font-weight: 600;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
 }
 
-@media  screen and (max-width:420px) {
-    .modal-header-bg {
-        background-color: #313131;
-        padding-top: 30px;
-        color: antiquewhite;
-        width: 100%;
-        height: 7vh;
-        font-size: 25px;
-        font-weight: 600;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-    }
-}
 
 .modal-body-style{
     margin: 1rem;
     height: 75%;
 }
-.modal-footer-style{
-    margin: 1rem;
-    width: 100%;
-    height: 10%;
-    text-align: center;
-    justify-content: flex-end;
-    align-items: center;
-}
+
 .btn-style-success{
     width: 4.5rem;
     height: 2.5rem;
@@ -229,16 +156,36 @@
 .search-filter{
     min-width: 5rem;
     width: 12rem;
+    background-color: rgba(0, 0, 0, 0);
+    color: #fcfcfc;
+    box-shadow: 0 0 0.2em 1px #ffffff; 
+    border-radius: 20px;
 }
 
 .font-color{
     color: #fff;
 }
 .font-color-water{
+    margin-left: 28px;
     color: rgb(186, 229, 247);
     font-weight: 400;
 }
 .font-color-power{
+    margin-left: 28px;
     color: rgb(245, 218, 182);
     font-weight: 400;
+}
+
+.meter-style{
+    margin-left: 24px;
+    width: 8rem;
+}
+
+@media  screen and (max-width:420px) {
+    .meter-style{
+        margin-right: 15px;
+        margin-left: 24px;
+        margin-bottom: 5px;
+        width: 8rem;
+    }
 }

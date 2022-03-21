@@ -1,67 +1,493 @@
-<div class="width-height-card hiden-scroll">
-    <mat-form-field appearance="standard">
-        <mat-label class="text-white">ค้นหา</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="ค้นหา" #input>
-    </mat-form-field>
+<div class="container width-height-container hiden-scroll">
+    <mat-stepper #stepper class="bg-stepper">
+        <mat-step [stepControl]="formInvoice" errorMessage="Name is required.">
+            <form [formGroup]="formInvoice">
+                <ng-template matStepLabel>
+                    <p class="text-white mt-2">จดมิเตอร์</p>
+                </ng-template>
+                <div class="row row-cols-md-5">
+                    <div *ngFor="let item of roomStatusData" class="col mb-5 ">
+                        <button class="card-room " data-toggle="modal" data-target="#modalInvoice"
+                            (click)="getRoomById(item.roomId)">
+                            <div class="card-header card-header-style">{{item.roomNumber}}
+                            </div>
+                            <div class="card-body ">
+                                <img class="material-icons icon-in-room"
+                                    src="https://img.icons8.com/external-icongeek26-outline-colour-icongeek26/84/000000/external-electric-meter-measurement-icongeek26-outline-colour-icongeek26.png" />
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>
+                <p class="text-white mt-2">รายการเดือนนี้</p>
+            </ng-template>
+            <div class="table-responsive">
+                <table class="table text-white">
+                    <thead>
+                        <tr>
+                            <th scope="col">ห้องที่</th>
+                            <th scope="col">ครั้งนี้</th>
+                            <th scope="col">ครั้งก่อน</th>
+                            <th scope="col">จำนวนหน่วย</th>
+                            <th scope="col">ส่งบิล</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let invoice of showInvoiceFilterMonth">
+                        <tr>
+                            <td scope="row">
+                                <div *ngFor="let room of roomStatusData">
+                                    <div class="number-room" *ngIf="room.roomId == invoice.roomId">{{room.roomNumber}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col">
+                                    <div class="row">
+                                        <p class="input-style form-control">{{invoice.waterMeterNew}}</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="input-style form-control">{{invoice.powerMeterNew}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col">
+                                    <div class="row">
+                                        <p class="input-style form-control">{{invoice.waterMeterOld}}</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="input-style form-control">{{invoice.powerMeterOld}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col">
+                                    <div class="row">
+                                        <p class="input-style form-control">{{invoice.waterMeterUnit}}</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="input-style form-control">{{invoice.powerMeterUnit}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div *ngIf="invoice.invoiceStatus == 'ยังไม่ชำระ'" class="image mt-3" type="button"
+                                    (click)="getInvoiceById(invoice.invoiceId)" data-toggle="modal"
+                                    data-target="#modalEditInvoice">
+                                    <img src="https://img.icons8.com/color/46/26e07f/ok--v1.png" />
+                                </div>
+                                <div *ngIf="invoice.invoiceStatus == 'ยังไม่ส่งบิล'" class="image mt-3" type="button"
+                                    (click)="getInvoiceById(invoice.invoiceId)" data-toggle="modal"
+                                    data-target="#modalShowInvoice">
+                                    <img
+                                        src="https://img.icons8.com/external-sbts2018-lineal-color-sbts2018/46/000000/external-send-social-media-sbts2018-lineal-color-sbts2018.png" />
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>
+                <p class="text-white mt-2">รายการทั้งหมด</p>
+            </ng-template>
+            <div class="table-responsive">
+                <table class="table text-white">
+                    <thead>
+                        <tr>
+                            <th scope="col">ห้องที่</th>
+                            <th scope="col">ครั้งนี้</th>
+                            <th scope="col">ครั้งก่อน</th>
+                            <th scope="col">จำนวนหน่วย</th>
+                            <th scope="col">ส่งบิล</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let invoice of invoiceAllData">
+                        <tr>
+                            <td scope="row">
+                                <div *ngFor="let room of roomStatusData">
+                                    <div class="number-room" *ngIf="room.roomId == invoice.roomId">{{room.roomNumber}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col">
+                                    <div class="row">
+                                        <p class="input-style form-control">{{invoice.waterMeterNew}}</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="input-style form-control">{{invoice.powerMeterNew}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col">
+                                    <div class="row">
+                                        <p class="input-style form-control">{{invoice.waterMeterOld}}</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="input-style form-control">{{invoice.powerMeterOld}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col">
+                                    <div class="row">
+                                        <p class="input-style form-control">{{invoice.waterMeterUnit}}</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="input-style form-control">{{invoice.powerMeterUnit}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="image mt-3" type="button" (click)="getInvoiceById(invoice.invoiceId)"
+                                    data-toggle="modal" data-target="#modalShowInvoice">
+                                    <img
+                                        src="https://img.icons8.com/external-sbts2018-lineal-color-sbts2018/46/000000/external-send-social-media-sbts2018-lineal-color-sbts2018.png" />
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</div>
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-        <!-- Position Column -->
-        <ng-container matColumnDef="ห้องที่" class="text-color w-200" >
-            <th mat-header-cell *matHeaderCellDef> ห้องที่ </th>
-            <td mat-cell *matCellDef="let element"> {{element.roomNumber}} </td>
-        </ng-container>
+<!-- ------------------------------------------------------------------- -->
+<!-- -----------------------  Modal จดมิเตอร์  ------------------------------- -->
+<!-- ------------------------------------------------------------------- -->
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="สถานะห้อง" class="text-color">
-            <th mat-header-cell *matHeaderCellDef> สถานะห้อง </th>
-            <td mat-cell *matCellDef="let element"> มีผู้เช่า</td>
-        </ng-container>
+<div class="modal fade" id="modalInvoice" aria-hidden="true" data-backdrop="true">
+    <div class="modal-dialog modal-dialog-full-width">
+        <div class="modal-content modal-content-full-width" [formGroup]="formInvoice">
+            <div class="modal-header modal-header-bg">{{getRoomNumber}}</div>
+            <div class="modal-body mb-5">
+                <div class="row row-cols-md-2">
+                    <div class="col-sm-3 mt-3" style="height: 19rem;">
+                        <div class="form-group col " style="text-align: center;">
+                            <span class="material-icons"
+                                style="font-size: 5rem; color: rgb(71, 187, 255); ">opacity</span>
+                        </div>
+                        <div class="form-group col ">
+                            <label for="waterMeterOld" class="text-color">เลขก่อนหน้า</label>
+                            <input formControlName="waterMeterOld" class="form-control" type="number"
+                                [(ngModel)]="waterMeterOld">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="waterMeterNew" class="text-color">เลขปัจจุบัน</label>
+                            <input formControlName="waterMeterNew" class="form-control" type="number" (keyup)="calMeterWater()"
+                                [(ngModel)]="meterWater">
+                        </div>
+                        <div class="form-group col">
+                            <label for="waterMeterUnit" class="text-color">จำนวนที่ใช้</label>
+                            <input formControlName="waterMeterUnit" class="form-control" type="number"
+                                placeholder="{{meterWaterUnit}}" readonly>
+                        </div>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="มิเตอร์น้ำ" class="text-color" >
-            <th mat-header-cell *matHeaderCellDef> มิเตอร์น้ำ </th>
-            <td mat-cell *matCellDef="let element">
-                <input matInput class="input-in-table-water" >
-            </td>
-        </ng-container>
+                    </div>
+                    <div class="col-sm-3 mt-3" style="height: 17rem;">
+                        <div class="form-group col " style="text-align: center;">
+                            <span class="material-icons" style="font-size: 5rem; color: rgb(202, 62, 62); ">bolt</span>
+                        </div>
+                        <div class="form-group col ">
+                            <label for="powerMeterOld" class="text-color">เลขก่อนหน้า</label>
+                            <input formControlName="powerMeterOld" class="form-control" type="number"
+                                [(ngModel)]="powerMeterOld">
+                        </div>
+                        <div class="form-group col ">
+                            <label for="powerMeterNew" class="text-color">เลขปัจจุบัน</label>
+                            <input formControlName="powerMeterNew" class="form-control" type="number" (keyup)="calMeterPower()"
+                                [(ngModel)]="meterPower">
+                        </div>
+                        <div class="form-group col">
+                            <label for="powerMeterUnit" class="text-color">จำนวนที่ใช้</label>
+                            <input formControlName="powerMeterUnit" class="form-control" type="number"
+                                placeholder="{{meterPowerUnit}}" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <div class="form-group col">
+                    <div class="row">
+                        <div class="col" class="text-color">น้ำ {{meterPowerPrice}}.-/หน่วย</div>
+                        <div class="col" class="text-color">
+                            {{meterWaterTotlePrice}} บาท</div>
+                    </div>
+                </div>
+                <div class="form-group col">
+                    <div class="row">
+                        <div class="col" class="text-color">ไฟ {{meterPowerPrice}}.-/หน่วย</div>
+                        <div class="col" class="text-color">
+                            {{meterPowerTotlePrice}} บาท</div>
+                    </div>
+                </div>
+                <button class="btn btn-success" data-dismiss="modal" (click)="onCreateInvoiceData()">ยืนยัน</button>
+                <button class="btn btn-danger" data-target="close" data-dismiss="modal"
+                    (click)="emptyFormInvoice()">ยกเลิก</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="มิเตอร์ไฟ" class="text-color">
-            <th mat-header-cell *matHeaderCellDef> มิเตอร์ไฟ </th>
-            <td mat-cell *matCellDef="let element">
-                <input matInput class="input-in-table-power">
-            </td>
-        </ng-container>
 
-        <ng-container matColumnDef="เพิ่มเติม" class="text-color">
-            <th mat-header-cell *matHeaderCellDef> เพิ่มเติม </th>
-            <td mat-cell *matCellDef="let element">
-                <button mat-icon-button [matMenuTriggerFor]="menu">
-                    <mat-icon>more_vert</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu" class="text-color">
-                    <button mat-menu-item (click)="getUserDetailById(element.userDetailId)">
-                        <mat-icon style="color: rgb(110, 201, 110);">drag_indicator</mat-icon>
-                        <span>รายละเอียดทั้งหมด</span>
-                    </button>
-                    <button mat-menu-item (click)="getUserDetailById(element.userDetailId)" data-toggle="modal"
-                        data-target="#modalEditRoom">
-                        <mat-icon style="color: orange;"> border_color</mat-icon>
-                        <span>แก้ไข</span>
-                    </button>
-                    <button mat-menu-item (click)="deleteUserDetail(element.userDetailId)">
-                        <mat-icon style="color: red;">backspace</mat-icon>
-                        <span>ลบ</span>
-                    </button>
-                </mat-menu>
-            </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+<!-- ------------------------------------------------------------------- -->
+<!-- -----------------------  Modal ส่งบิล   ------------------------------- -->
+<!-- ------------------------------------------------------------------- -->
 
-        <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">ไม่สามารถค้นหา "{{input.value}}"</td>
-        </tr>
-    </table>
+<div class="modal fade" id="modalShowInvoice" aria-hidden="true" data-backdrop="true">
+    <div class="modal-dialog modal-dialog-showInvoice">
+        <div class="modal-content modal-content-showInvoice">
+            <div class="modal-header modal-header-showInvoice"></div>
+            <div class="modal-body modal-body-showInvoice">
+                <div class="hiden-scroll">
+                    <div class="row">
+                        <div class="col-6">
+                            <h1 class="text-rightCol">บิลชำระค่าเช่าห้อง</h1>
+                        </div>
+                        <div class="col-6">
+                            <p class="text-rightCol float-right m-2">P01</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <h2 class="text-rightCol">ห้องที่</h2>
+                        </div>
+                        <div class="col-6">
+                            <p class="text-rightCol float-right m-2">วันที่</p>
+                        </div>
+                    </div>
+                    <form [formGroup]="formInvoice">
+                        <table class="table table-responsive table-bordered text-color">
+                            <thead>
+                                <tr class="text-center">
+                                    <th [width]="150" scope="col" class="align-middle text-center">รายการ</th>
+                                    <th [width]="150" scope="col" class="align-middle">ครั้งนี้</th>
+                                    <th [width]="150" scope="col" class="align-middle">ครั้งก่อน</th>
+                                    <th [width]="170" scope="col" class="align-middle">จำนวนหน่วย</th>
+                                    <th [width]="150" scope="col" class="align-middle">ราคาหน่วย</th>
+                                    <th [width]="150" scope="col" class="align-middle">รวม</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <tr>
+                                    <th scope="row">ค่าน้ำ</th>
+                                    <td>
+                                        <input formControlName="waterMeterNew" class="input-bill-style " type="number"
+                                            readonly>
+                                    </td>
+                                    <td>
+                                        <input formControlName="waterMeterOld" class="input-bill-style " type="number"
+                                            readonly>
+                                    </td>
+                                    <td>
+                                        <input formControlName="waterMeterUnit" class="input-bill-style " type="number"
+                                            readonly>
+                                    </td>
+                                    <td>
+                                        <input formControlName="waterPrice" class="input-bill-style " type="number"
+                                            readonly>
+                                    </td>
+                                    <td>
+                                        <input formControlName="waterTotalPrice" class="input-bill-style " type="number"
+                                            readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ค่าไฟ</th>
+                                    <td>
+                                        <input formControlName="powerMeterNew" class="input-bill-style " type="number"
+                                            readonly>
+                                    </td>
+                                    <td>
+                                        <input formControlName="powerMeterOld" class="input-bill-style " type="number"
+                                            readonly>
+                                    </td>
+                                    <td>
+                                        <input formControlName="powerMeterUnit" class="input-bill-style " type="number"
+                                            readonly>
+                                    </td>
+                                    <td>
+                                        <input formControlName="powerPrice" class="input-bill-style " type="number"
+                                            readonly>
+                                    </td>
+                                    <td>
+                                        <input formControlName="powerTotalPrice" class="input-bill-style " type="number"
+                                            readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ค่าเช่าห้อง</th>
+                                    <td colspan="4"></td>
+                                    <td>
+                                        <input formControlName="invoiceRoomRate" class="input-bill-style " type="number"
+                                            readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ค่าส่วนกลาง</th>
+                                    <td colspan="4"></td>
+                                    <td>
+                                        <input formControlName="centerService" class="input-bill-style " type="number"
+                                            readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">อื่นๆ</th>
+                                    <td colspan="4">
+                                        <input formControlName="otherNote" class="input-other-style" type="text">
+                                    </td>
+                                    <td>
+                                        <input formControlName="otherPrice" class="input-other-style text-center"
+                                            type="number" (keyup)="calEditInvoice()" [(ngModel)]="otherPrice">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="5">รวม</th>
+                                    <td>
+                                        <input formControlName="invoiceTotal" class="input-bill-style " type="number"
+                                            [(ngModel)]="invoiceTotal">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer d-block mx-auto">
+                <button class="btn btn-primary rounded-pill" data-dismiss="modal"
+                    (click)="onEditInvoiceData()">ส่งบิล</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ------------------------------------------------------------------- -->
+<!-- -----------------------  Modal แก้ไขบิล   ------------------------------- -->
+<!-- ------------------------------------------------------------------- -->
+
+<div class="modal fade" id="modalEditInvoice" aria-hidden="true" data-backdrop="true">
+    <div class="modal-dialog modal-dialog-showInvoice">
+        <div class="modal-content modal-content-showInvoice">
+            <div class="modal-header modal-header-showInvoice"></div>
+            <div class="modal-body modal-body-showInvoice">
+                <div class="hiden-scroll">
+                    <div class="row">
+                        <div class="col-6">
+                            <h1 class="text-rightCol">บิลชำระค่าเช่าห้อง</h1>
+                        </div>
+                        <div class="col-6">
+                            <p class="text-rightCol float-right m-2">P01</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <h2 class="text-rightCol">ห้องที่</h2>
+                        </div>
+                        <div class="col-6">
+                            <p class="text-rightCol float-right m-2">วันที่</p>
+                        </div>
+                    </div>
+                    <form [formGroup]="formInvoice">
+                        <table class="table table-responsive table-bordered text-color">
+                            <thead>
+                                <tr class="text-center">
+                                    <th [width]="150" scope="col" class="align-middle text-center">รายการ</th>
+                                    <th [width]="150" scope="col" class="align-middle">ครั้งนี้</th>
+                                    <th [width]="150" scope="col" class="align-middle">ครั้งก่อน</th>
+                                    <th [width]="170" scope="col" class="align-middle">จำนวนหน่วย</th>
+                                    <th [width]="150" scope="col" class="align-middle">ราคาหน่วย</th>
+                                    <th [width]="150" scope="col" class="align-middle">รวม</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <tr>
+                                    <th scope="row">ค่าน้ำ</th>
+                                    <td>
+                                        <input formControlName="waterMeterNew" class="input-bill-style " type="number">
+                                    </td>
+                                    <td>
+                                        <input formControlName="waterMeterOld" class="input-bill-style " type="number">
+                                    </td>
+                                    <td>
+                                        <input formControlName="waterMeterUnit" class="input-bill-style " type="number">
+                                    </td>
+                                    <td>
+                                        <input formControlName="waterPrice" class="input-bill-style " type="number">
+                                    </td>
+                                    <td>
+                                        <input formControlName="waterTotalPrice" class="input-bill-style "
+                                            type="number">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ค่าไฟ</th>
+                                    <td>
+                                        <input formControlName="powerMeterNew" class="input-bill-style " type="number">
+                                    </td>
+                                    <td>
+                                        <input formControlName="powerMeterOld" class="input-bill-style " type="number">
+                                    </td>
+                                    <td>
+                                        <input formControlName="powerMeterUnit" class="input-bill-style " type="number">
+                                    </td>
+                                    <td>
+                                        <input formControlName="powerPrice" class="input-bill-style " type="number">
+                                    </td>
+                                    <td>
+                                        <input formControlName="powerTotalPrice" class="input-bill-style "
+                                            type="number">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ค่าเช่าห้อง</th>
+                                    <td colspan="4"></td>
+                                    <td>
+                                        <input formControlName="invoiceRoomRate" class="input-bill-style "
+                                            type="number">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ค่าส่วนกลาง</th>
+                                    <td colspan="4"></td>
+                                    <td>
+                                        <input formControlName="centerService" class="input-bill-style " type="number">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">อื่นๆ</th>
+                                    <td colspan="4">
+                                        <input formControlName="otherNote" class="input-other-style" type="text">
+                                    </td>
+                                    <td>
+                                        <input formControlName="otherPrice" class="input-other-style text-center"
+                                            type="number" (keyup)="calEditInvoice()" [(ngModel)]="otherPrice">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="5">รวม</th>
+                                    <td>
+                                        <input formControlName="invoiceTotal" class="input-bill-style " type="number"
+                                            [(ngModel)]="invoiceTotal">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer d-block mx-auto">
+                <button class="btn btn-primary rounded-pill" data-dismiss="modal"
+                    (click)="onEditInvoiceData()">ส่งบิล</button>
+            </div>
+        </div>
+    </div>
 </div>

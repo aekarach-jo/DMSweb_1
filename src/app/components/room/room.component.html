@@ -1,6 +1,6 @@
-<div class="width-height-card hiden-scroll" *ngIf="statusLogin == 'login'">
+<div class="container width-height-card hiden-scroll" *ngIf="statusLogin == 'login'">
     <div class="search-filter mb-4 ml-3">
-        <input class="form-control pl-2" type="text" name="search" [(ngModel)]="searchText" placeholder=" ค้นหา..">
+        <input class="form-control pl-2 search-filter" type="text" name="search" [(ngModel)]="searchText" placeholder=" ค้นหา..">
         <!-- <div class="row row-cols-sm-5 div-btn-floor">
             <div class="col"> <input class="btn btn-danger btn-floor" type="button" value="ชั้นที่ 1"
                     (click)="getRoomByFloor('1')">
@@ -29,13 +29,13 @@
                 </div>
                 <div *ngIf="item.roomStatus == reserveRoom" class="card-header card-header-style-3">{{item.roomNumber}}
                 </div>
-                <div class="card-body mt-4 ">
+                <div class="card-body mt-3 ">
                     <img class="material-icons icon-in-room"
                         src="https://img.icons8.com/ios-filled/100/000000/door-opened.png" />
                 </div>
                 <!-- <a *ngIf="item.roomStatus == emptyRoom" type="text" class="text-center " style="margin-left: 3.5rem; font-weight: 900;">ว่าง</a>
                 <a *ngIf="item.roomStatus == busyRoom" type="text" class="text-center " style="margin-left: 3.5rem; font-weight: 900;">ไม่ว่าง</a> -->
-                <div class=" pl-1 pr-1" *ngIf="permission == 'ADMIN'">
+                <div *ngIf="permission == 'ADMIN'">
                     <button class="d-block mx-auto btn btn-warning font-in-card" data-toggle="modal" type="button" data-target="#modalEditRoom"
                         (click)="getRoomById(item.roomId)">แก้ไข</button>
                     <!-- <button class="float-right font-in-card" (click)="getRoomById(item.roomId)"
@@ -91,19 +91,19 @@
                             <option value="จอง">จอง</option>
                         </select>
                     </div>
-                    <div class="row row-cols-md-2">
-                        <div class="col-6">
+                    <div class="row">
+                        <div class="col-md-6 d-block">
                             <label for="waterMeter" class="font-color font-color-water">มิเตอร์น้ำ</label>
-                            <input formControlName="waterMeter" class="form-control pl-2" type="text">
+                            <input formControlName="waterMeter" class="form-control meter-style float-right" type="number">
                         </div>
-                        <div class="col-6">
-                            <label for="powerMeter" class="font-color font-color-power">มิเตอร์ไฟ</label>
-                            <input formControlName="powerMeter" class="form-control pl-2" type="text">
+                        <div class="col-md-6 d-block">
+                            <label for="powerMeter" class="font-color font-color-power ">มิเตอร์ไฟ</label>
+                            <input formControlName="powerMeter" class="form-control meter-style float-right " type="number">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer modal-footer-style">
+            <div class="modal-footer">
                 <button class="btn btn-success btn-style-success" type="submit"
                     (click)="onEditRoom(this.getDataRoomById.roomId)" data-dismiss="modal">ยืนยัน</button>
                 <button class="btn btn-danger btn-style-cancel" data-dismiss="modal"
@@ -149,11 +149,11 @@
                     <div class="row row-cols-md-2">
                         <div class="col-6">
                             <label for="waterMeter" class="font-color font-color-water">มิเตอร์น้ำ</label>
-                            <input formControlName="waterMeter" class="form-control" type="text">
+                            <input formControlName="waterMeter" class="form-control meter-style float-right" type="text">
                         </div>
                         <div class="col-6">
                             <label for="powerMeter" class="font-color font-color-power">มิเตอร์ไฟ</label>
-                            <input formControlName="powerMeter" class="form-control" type="text">
+                            <input formControlName="powerMeter" class="form-control meter-style float-right" type="text">
                         </div>
                     </div>
                 </div>

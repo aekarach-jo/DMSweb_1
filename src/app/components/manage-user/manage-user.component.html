@@ -1,4 +1,4 @@
-<div class="width-height-card hiden-scroll">
+<div class="container width-height-card hiden-scroll">
     <mat-form-field appearance="standard" >
         <mat-label class="text-white">ค้นหา</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="ค้นหา" #input>
@@ -37,7 +37,7 @@
                         <mat-icon>more_vert</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu" class="text-color">
-                        <button mat-menu-item (click)="getUserDetailById(element.userDetailId)" >
+                        <button mat-menu-item (click)="getUserDetailById(element.userDetailId)"  data-toggle="modal" data-target="#modalDataRoom">
                             <mat-icon style="color: rgb(110, 201, 110);">drag_indicator</mat-icon>
                             <span>รายละเอียดทั้งหมด</span>
                         </button>
@@ -63,9 +63,92 @@
 
 
 
-<div class="modal fade" id="modalEditRoom" data-backdrop="true" aria-hidden="true">
+<div class="modal fade" id="modalDataRoom" data-backdrop="true" aria-hidden="true">
     <div class="modal-dialog modal-dialog-full-width">
         <div class="modal-content modal-content-full-width" [formGroup]="formUserDetail">
+            <div class="modal-header modal-header-bg">
+                <p>รายละเอียดข้อมูลผู้เช่า</p>
+            </div>
+            <div class="modal-body modal-body-style">
+                <div class="row row-cols-md-2">
+                    <div class="col-md-6 left-col">
+                        <label for="firstName" class="text-color">ชื่อ</label>
+                        <input formControlName="firstName" class="form-control" type="text" readonly>
+                    </div>
+                    <div class="col-md-6 right-col">
+                        <label for="lastName" class="text-color">นามสกุล</label>
+                        <input formControlName="lastName" class="form-control" type="text" readonly>
+                    </div>
+                </div>
+                <div class="row row-cols-md-2">
+                    <div class="col-md-6 left-col">
+                        <label for="birthday" class="text-color">วัน/เดือน/ปีเกิด</label>
+                        <input formControlName="birthday" class="form-control" type="text" readonly>
+                    </div>
+                    <div class="col-md-6 right-col">
+                        <label for="tel" class="text-color">เบอร์โทรศัพท์</label>
+                        <input formControlName="tel" class="form-control" type="text" readonly>
+                    </div>
+                </div>
+                <div class="row row-cols-md-2">
+                    <div class="col-md-6 left-col">
+                        <label for="email" class="text-color">อีเมล</label>
+                        <input formControlName="email" class="form-control" type="text" readonly>
+                    </div>
+                    <div class="col-md-6 right-col">
+                        <label for="age" class="text-color">อายุ</label>
+                        <input formControlName="age" class="form-control" type="number" readonly>
+                    </div>
+                </div>
+                <div class="row row-cols-md-2">
+                    <div class="col-md-6 left-col">
+                        <label for="idCard" class="text-color">เลขบัตรประจำตัวประชาชน</label>
+                        <input formControlName="idCard" class="form-control" type="text" readonly>
+                    </div>
+    
+                </div>
+                <div class="row row-cols-md-1">
+                    <div class="col-md-12 left-col">
+                        <label for="address" class="text-color">ที่อยู่</label>
+                        <textarea formControlName="address" class="form-control" type="text" readonly></textarea>
+                    </div>
+                </div>
+                <div class="row row-cols-md-3">
+                    <div class="col-md-4 left-col">
+                        <label for="deposit" class="text-color">เงินมัดจำ</label>
+                        <input formControlName="deposit" class="form-control" type="number" readonly>
+                    </div>
+                    <div class="col-md-4 right-col">
+                        <label for="roomNumber" class="text-color">ห้องที่เช่า</label>
+                        <input formControlName="roomNumber" class="form-control" type="text" readonly>
+                    </div>
+                    <div class="col-md-4 right-col">
+                        <label for="bookingDateOfStay" class="text-color">วันที่เข้าอยู่</label>
+                        <input formControlName="bookingDateOfStay" class="form-control" type="datetime" readonly>
+                    </div>
+                </div>
+                <!-- <div class="row row-cols-md-3 mt-5">
+                    <div class="col-md-6 left-col">
+                        <label class="text-color">อัปโหลด สำเนาบัตร</label>
+                        <input type="file" class="form-control-file">
+                    </div>
+                    <div class="col-md-6 right-col">
+                        <label class="text-color">อัปโหลด สำเนาเอกสาร</label>
+                        <input type="file" class="form-control-file">
+                    </div>
+                </div> -->
+            </div>
+            <div class="modal-footer modal-footer-style">
+                <button class="btn btn-danger btn-style-cancel" data-dismiss="modal">ปิด</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalEditRoom" data-backdrop="true" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-full-width">
+        <div class="modal-content modal-content-full-width" [formGroup]="formUserDetail" (ngSubmit)="onEditUser(formUserDetail.userDetailId)">
             <div class="modal-header modal-header-bg">
                 <p>แก้ไขข้อมูลผู้เช่า</p>
             </div>

@@ -21,6 +21,7 @@ export class UserDetailComponent implements OnInit {
   userData: any
   formUserDetail: any
   formUser: any
+  formRoom: any
   userDetailData: any
   getUserDetailId: any
 
@@ -54,6 +55,18 @@ export class UserDetailComponent implements OnInit {
         deletetionDateTime: [null],
         userDetailId: [null],
         Status: [null],
+      }),
+      this.formRoom = fb.group({
+        roomId: [null],
+        roomType: [null],
+        roomNumber: [null],
+        roomRate: [null],
+        waterMeter: [null],
+        powerMeter: [null],
+        floor: [null],
+        roomStatus: [null],
+        status: [null],
+        userId: [null]
       })
   }
 
@@ -96,8 +109,8 @@ export class UserDetailComponent implements OnInit {
 
   getAllUserDetail() {
     this.callapi.getAllUserDetail().subscribe(data => {
-      this.userDetailData = data;
-      console.log(data);
+      this.userDetailData = data
+      console.log(data)
     })
   }
 
@@ -113,9 +126,9 @@ export class UserDetailComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.formUserDetail.value.bookingDate = new Date;
-        this.formUserDetail.value.status = "Open";
-        this.formUserDetail.value.userStatus = "In";
-        console.log(this.formUserDetail.value);
+        this.formUserDetail.value.status = "Open"
+        this.formUserDetail.value.userStatus = "In"
+        console.log(this.formUserDetail.value)
         this.callapi.createUserDetail(this.formUserDetail.value).subscribe(create => {
           console.log(create);
           this.getUserDetailId = create.userDetailId
@@ -133,9 +146,8 @@ export class UserDetailComponent implements OnInit {
     this.formUser.value.permission = "USER"
     console.log(this.formUser.value);
     this.callapi.createUser(this.formUser.value).subscribe(data => {
+      this.getRoomByRoomNumber();
       console.log(data);
-      this.emptyUserForm();
-      this.emptyUserDetailForm()
     })
 
     Swal.fire({
@@ -147,10 +159,21 @@ export class UserDetailComponent implements OnInit {
     })
   }
 
+  getRoomByRoomNumber() {
+    this.callapi.getRoomByNumber(this.formUserDetail.value.roomNumber).subscribe(room => {
+      this.formRoom.value = room
+      this.formRoom.value.roomStatus = "ไม่ว่าง"
+      this.callapi.editRoom(room.roomId, this.formRoom.value).subscribe(edit => {
+        console.log(edit)
+        this.emptyUserForm()
+        this.emptyUserDetailForm()
+      })
+    })
+  }
+
   getRoomByStatus() {
     this.callapi.getRoomByRoomStatus("ว่าง").subscribe(room => {
-      this.roomStatusData = room;
-
+      this.roomStatusData = room
     })
   }
 

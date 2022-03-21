@@ -140,10 +140,6 @@ export class RoomComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.statusLogin);
-    console.log(this.permission);
-    console.log(this.dataUserName);
-    
     this.getAllRoom();
   }
 }

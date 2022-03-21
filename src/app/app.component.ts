@@ -13,7 +13,6 @@ import { ApiService } from './Services/api.service';
 })
 export class AppComponent {
   title = 'DMSweb_V2';
-  num = 1
   showRegisterPage: number = 0
   formUser: any
   permission: any
@@ -94,28 +93,37 @@ export class AppComponent {
     }
   }
 
+  loginWithGuest(){
+    this.formLogin.value.userName = "GUEST"
+    this.formLogin.value.password = "GUEST"
+    this.checkUserAndPass()
+  }
+
   login() {
     this.callApi.checkUserAndPass(this.formLogin.value.userName, this.formLogin.value.password).subscribe(user => {
-      localStorage.setItem('iduser', user.userId)
-      localStorage.setItem('iduserName', user.userName)
-      localStorage.setItem('permission', user.permission)
-      localStorage.setItem('statuslogin', 'login')
-      this.statusLogin = localStorage.getItem('statuslogin')
-      this.permission = localStorage.getItem('permission')
-      this.dataUserName = localStorage.getItem('iduserName')
-      if (user.permission == 'ADMIN') {
-        console.log(user.permission);
-        this.router.navigateByUrl('/room')
-      }
-      if (user.permission == 'OWNER') {
-        console.log(user.permission);
-        this.router.navigateByUrl('/room')
-      }
-      if (user.permission == 'USER') {
-        console.log(user.permission);
-        this.router.navigateByUrl('/room')
-
-      }
+        localStorage.setItem('iduser', user.userId)
+        localStorage.setItem('iduserName', user.userName)
+        localStorage.setItem('permission', user.permission)
+        localStorage.setItem('statuslogin', 'login')
+        this.statusLogin = localStorage.getItem('statuslogin')
+        this.permission = localStorage.getItem('permission')
+        this.dataUserName = localStorage.getItem('iduserName')
+        if (user.permission == 'ADMIN') {
+          console.log(user.permission);
+          this.router.navigateByUrl('/room')
+        }
+        if (user.permission == 'OWNER') {
+          console.log(user.permission);
+          this.router.navigateByUrl('/room')
+        }
+        if (user.permission == 'USER') {
+          console.log(user.permission);
+          this.router.navigateByUrl('/room')
+        }
+        if (user.permission == 'GUEST') {
+          console.log(user.permission);
+          this.router.navigateByUrl('/room')
+        }
     }, error => {
       this.submitLogin = true
       this.statusUsername = true
@@ -204,6 +212,8 @@ export class AppComponent {
       this.filterByPermission = "USER";
     } else if (permission == "OWNER") {
       this.filterByPermission = "OWNER"
+    } else if(permission == "GUEST"){
+      this.filterByPermission = "GUEST"
     } else {
       this.filterByPermission = ""
     }

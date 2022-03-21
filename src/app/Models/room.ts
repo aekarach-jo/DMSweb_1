@@ -3,8 +3,8 @@ export interface room {
     roomType: string
     roomNumber: string
     roomRate: string
-    waterMeter: string
-    powerMeter: string
+    waterMeter: number
+    powerMeter: number
     floor: string
     roomStatus: string
     status: string
