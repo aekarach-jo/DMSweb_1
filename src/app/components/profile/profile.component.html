@@ -1,0 +1,95 @@
+<div class="container width-height-container hiden-scroll">
+    <div class="row">
+        <div class="col-lg-3 leftCol m-3 ml-4">
+            <div class="row">
+                <div class="d-block mx-auto">
+                    <img src="https://img.icons8.com/bubbles/200/000000/user.png" />
+                    <hr width="100%" size="3" color="fcfcfc">
+                    <div class="col mt-4">
+                        <div class="row">
+                            <a class="text-leftCol d-block mx-auto" type="button"
+                                (click)="switchPages(1)">ใบแจ้งหนี้</a>
+                        </div>
+                        <div class="row">
+                            <a class="text-leftCol d-block mx-auto" type="button" (click)="switchPages(2)">แจ้งซ่อม</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <form class="col-lg-8 rightCol hiden-scroll m-3" *ngIf="switchPage == 1">
+            <div class="row">
+                <div class="col-6">
+                    <h1 class="text-rightCol">บิลชำระค่าห้อง</h1>
+                </div>
+                <div class="col-6">
+                    <p class="text-rightCol float-right m-2">P01</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <h2 class="text-rightCol">ห้องที่</h2>
+                </div>
+                <div class="col-6">
+                    <p class="text-rightCol float-right m-2">วันที่</p>
+                </div>
+            </div>
+            <div class="col">
+                <table class="table table-bordered text-color table-style">
+                    <thead>
+                        <tr>
+                            <th scope="col">รายการ</th>
+                            <th scope="col">ครั้งนี้</th>
+                            <th scope="col">ครั้งก่อน</th>
+                            <th scope="col">จำนวนหน่วย</th>
+                            <th scope="col">ราคาหน่วย</th>
+                            <th scope="col">รวม</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">ค่าน้ำ</th>
+                            <td>580</td>
+                            <td>576</td>
+                            <td>4</td>
+                            <td>29</td>
+                            <td>116</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">ค่าไฟ</th>
+                            <td>5682.7</td>
+                            <td>5502.5</td>
+                            <td>180.2</td>
+                            <td>5</td>
+                            <td>901</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">ค่าเช่าห้อง</th>
+                            <td colspan="4"></td>
+                            <td>2500</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">อื่นๆ</th>
+                            <td colspan="4"></td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <th colspan="5" class="text-center">รวม</th>
+                            <td>3527</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class=" btn-status">ชำระแล้ว</div> -->
+            <div class=" btn-status">ยังไม่ชำระ</div>
+        </form>
+        <form [formGroup]="formReport" class="col-lg-8 rightCol m-3" *ngIf="switchPage == 2">
+            <h1 class="text-white">แจ้งซ่อม</h1>
+            <input formControlName="title" class="form-control mb-3" type="text" placeholder="หัวข้อ">
+            <textarea formControlName="note" class="form-control" cols="100" rows="10" type="text" placeholder="ข้อความ..."></textarea>
+
+            <button class="btn btn-outline-light btn-send" (click)="onCreateReport()">ส่ง</button>
+        </form>
+    </div>
+</div>

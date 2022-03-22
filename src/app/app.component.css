@@ -1,0 +1,330 @@
+/* **************************  CSS Login Page   ************************* */
+
+.container{
+    position: absolute;
+    height: 50vh;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.body-color{
+    background-image: linear-gradient(135deg, #b2cfd1 0%, #405670 74%);
+    height: 100vh;
+}
+
+
+@media screen and (max-width: 420px) {
+    .body-color{
+        background-image: linear-gradient(135deg, #b2cfd1 0%, #405670 74%);
+        height: 100vh;
+    }
+    
+}
+
+
+
+@media screen and (max-width: 420px) {
+    .container-login {
+        position: absolute;
+        width: 45vh;
+        margin-right: 0;
+        margin-left: 0;
+        top: 32%;
+    }
+}
+@media screen and (min-width: 421px) and (max-width: 820px)  {
+    .container-login {
+        position: absolute;
+        width: 60vh;
+        margin-right: 0;
+        margin-left: 0;
+        top: 0%;
+
+    }
+}
+
+.myLeftCtn {
+  position: relative;
+    background: rgb(255, 255, 255);
+    border-radius: 25px;
+    height: 100%;
+    padding: 25px;
+    padding-left: 50px;
+}
+
+.myRightCtn {
+    position: relative;
+    background: linear-gradient(45deg, #292929, #282f92);
+    border-radius: 25px;
+    height: 100%;
+    padding: 25px;
+    color: rgba(255, 255, 255,0.5);
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media all and (max-width: 420px) 
+{  
+  .myLeftCtn {
+    position: relative;
+    background: #fff;
+    border-radius: 25px;
+    height: 100%;
+    padding: 25px;
+    padding-left: 50px;
+}}
+
+
+@media all and (max-width: 420px) {}
+  .myLeftCtn header {
+    color: #b0b3b2;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.row {
+    height: 100%;
+}
+
+.myCard {
+    position: relative;
+    background: #fff;
+    height: 100%;
+    border-radius: 25px;
+    -webkit-box-shadow: 0px 10px 40px -10px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 0px 10px 40px -10px rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 10px 40px -10px rgba(0, 0, 0, 0.7);
+}
+
+.myRightCtn header {
+    color: #fff;
+    font-size: 4vw;
+    margin: 3vw;
+}
+
+.box {
+    position: relative;
+    margin: 20px;
+    margin-bottom: 100px;
+}
+
+.myLeftCtn .myInput {
+    width: 100%;
+    border-radius: 25px;
+    padding: 10px;
+    padding-left: 50px;
+    border: none;
+    -webkit-box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+}
+
+.myLeftCtn .myInput:focus {
+    outline: none;
+}
+
+.myForm {
+    position: relative;
+    margin-top: 50px;
+}
+
+.myLeftCtn .butt {
+  background: linear-gradient(45deg, #000000, #193e6e);
+    color: #fff;
+    font-weight: 500;
+    margin-top: 1rem;
+    width: 150px;
+    border: none;
+    border-radius: 25px;
+    padding: 10px;
+    -webkit-box-shadow: 0px 10px 41px -11px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 0px 10px 41px -11px rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 10px 41px -11px rgba(0, 0, 0, 0.7);
+}
+
+.myLeftCtn .butt:hover {
+    background: linear-gradient(45deg, #ffffff, #6e6e6e);
+}
+
+.myLeftCtn .butt:focus {
+    outline: none;
+}
+
+.fas {
+    position: relative;
+    color: #327e61;
+}
+
+.butt_out {
+    background: transparent;
+    color: #fff;
+    width: 120px;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    padding: 10px;
+    -webkit-box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+    -moz-box-shadow: 0px 10px 49px -14px rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 10px 91px -14px rgba(0, 0, 0, 0.7);
+}
+
+.myRightCtn .butt_out:hover {
+    background: linear-gradient(45deg, #ffffff, #6e6e6e);
+}
+
+.myRightCtn header {
+    font-weight: 400;
+}
+
+
+/* ********************************************************** */
+
+
+/* ********************************************************** */
+
+
+/* ********************************************************** */
+
+
+/* ********************************************************** */
+
+.navStyle {
+    padding: 5px;
+}
+.navbar-collapse-style {
+  background-color: #828282;
+}
+.brandStyle{
+ font-size: 24px;
+ color: aliceblue;
+ font-weight: 700;
+ /* background-image: linear-gradient(-135deg, #b2cfd1 0%, #405670 74%); */
+ /* box-shadow: 0 0 0.5em 1px #646464; */
+ border-radius: 12px;
+}
+
+.img-style{
+  padding-bottom: 0.5rem;
+}
+.login-style{
+  background: #548B54;
+}
+.navOption{
+  font-size: 12px;
+  color: aliceblue;
+  margin-right: 1rem;
+}
+.btn-position{
+  margin-left: 2rem;
+  margin-top: 3rem;
+}
+.menu-style{
+  background: #313131;
+}
+.icon-menu{
+  height: 6rem; 
+  width: 6rem;
+  border-color: aliceblue;
+  background-clip: border-box;
+  background-color: rgb(223, 227, 247);
+  border-radius: 15px;
+  box-shadow: 0 0 0.9em 1px #ffffff;
+}
+
+
+.menu{
+  box-sizing: border-box;
+  padding-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: top;
+  
+}
+
+.navigation{
+  width: 300px;
+  height: 70px;
+  /* background: rgb(230, 221, 221); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.navigation ul{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 350px;
+}
+.navigation ul li{
+  position: relative;
+  list-style: none;
+  width: 70px;
+  height: 70px;
+}
+.navigation ul li a{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+
+}
+
+.navigation ul li a .icon{
+  position: relative;
+  display: block;
+  line-height: 75px;
+  font-size: 1.5em;
+  text-align: center;
+  transition: 0.5s;
+  color: #222327;
+  margin-right: 4px;
+}
+
+.navigation ul li:hover a .icon{
+  transform: translateY(-20px);
+}
+
+/* .empty{
+  margin-left: 9rem;
+} */
+
+.navigation ul li a .text{
+  position: absolute;
+  color: #f8f9ff;
+  font-weight: 700;
+  font-size: 0.75em;
+  letter-spacing: 0.05em;
+  transition: 0.5s;
+  opacity: 0;
+  transform: translateY(5px);
+}
+
+.navigation ul li:hover a .text{
+  opacity: 1;
+  transform: translateY(20px);
+ 
+}
+
+.indicator{
+  position: absolute;
+  top: -50%;
+  width: 70px;
+  height: 70px;
+  background: #24d848;
+  border-radius: 50%;
+  border: 6px solid #222327;
+  transition: 0.5s;
+  padding-right: 3rem;
+
+
+}

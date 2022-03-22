@@ -1,0 +1,37 @@
+<div class="container width-height-container hiden-scroll">
+    <p class="text-header">ตั้งค่าหอหัก</p>
+    <button *ngIf="this.showButtonCreate == true"  class="btn btn-info d-block mx-auto mt-4" type="button" (click)="onCreateSetting()">สร้าง</button>
+    <div *ngIf="this.showButtonCreate == false" class="container container-input ">
+        <form [formGroup]="formSetting"  class="form-inline box-input">
+            <div class="form-group ">
+                <label class="text-style" for="waterPrice">ค่าน้ำ</label>
+                <input formControlName="waterPrice" class="form-control box-input" type="number">
+            </div>
+        </form>
+        <form [formGroup]="formSetting"  class="form-inline box-input">
+            <div class="form-group">
+                <label class="text-style" for="powerPrice">ค่าไฟ</label>
+                <input formControlName="powerPrice" class="form-control box-input" type="number">
+            </div>
+        </form>
+        <form [formGroup]="formSetting"  class="form-inline box-input">
+            <div class="form-group">
+                <label class="text-style" for="centerService">ค่าส่วนกลาง</label>
+                <input formControlName="centerService" class="form-control box-input" type="number">
+            </div>
+        </form>
+        <form [formGroup]="formSetting"  class="form-inline box-input">
+            <div class="form-group">
+                <label class="text-style" for="roomrateTypeAir">ค่าห้อง แอร์</label>
+                <input formControlName="roomrateTypeAir" class="form-control box-input" type="number">
+            </div>
+        </form>
+        <form [formGroup]="formSetting"  class="form-inline box-input">
+            <div class="form-group">
+                <label class="text-style" for="roomrateTypeFan">ค่าห้อง พัดลม</label>
+                <input formControlName="roomrateTypeFan" class="form-control box-input" type="number">
+            </div>
+        </form>
+        <button class="btn btn-info d-block mx-auto mt-4" type="button" (click)="onEditSetting()">บันทึก</button>
+    </div>
+</div>
