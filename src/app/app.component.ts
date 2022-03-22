@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { user } from './Models/user';
 import { ApiService } from './Services/api.service';
 
@@ -13,7 +14,7 @@ import { ApiService } from './Services/api.service';
 })
 export class AppComponent {
   title = 'DMSweb_V2';
-  showRegisterPage: number = 0
+  showRegisterPage: number = 1
   formUser: any
   permission: any
   filterByPermission: any
@@ -196,9 +197,17 @@ export class AppComponent {
   oncreateUser() {
     this.formUser.value.Status = "Open"
     this.formUser.value.userStatus = "Open"
+    this.formUser.value.permission = "ADMIN"
     this.formUser.value.creationDateTime = new Date
     this.callApi.createUser(this.formUser.value).subscribe(data => {
       console.log(data);
+      Swal.fire({
+        position: "center",
+        icon: 'success',
+        title: "สำเร็จ",
+        showConfirmButton: false,
+        timer: 1000
+      })
       this.onSwitchPage()
       this.emptyForm();
       this.getAllUser();

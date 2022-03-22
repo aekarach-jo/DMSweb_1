@@ -357,7 +357,7 @@ export class InvoiceDataComponent implements OnInit {
 
   getAllSetting() {
     this.callapi.getAllSetting().subscribe(data => {
-      this.formInvoice.value.waterPrice = data[0].waterPrice
+        this.formInvoice.value.waterPrice = data[0].waterPrice
       this.formInvoice.value.powerPrice = data[0].powerPrice
       this.formInvoice.value.centerService = data[0].centerService
       this.roomrateTypeFan = data[0].roomrateTypeFan
@@ -365,6 +365,7 @@ export class InvoiceDataComponent implements OnInit {
 
       this.meterWaterPrice = data[0].waterPrice
       this.meterPowerPrice = data[0].powerPrice
+      
     })
   }
 

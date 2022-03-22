@@ -25,6 +25,8 @@ export class RoomComponent implements OnInit {
   permission : any
   dataUserName : any
 
+  settingData : any
+  valid: any[]=[]
   constructor(public router: Router, public callapi: ApiService, public fb: FormBuilder) {
     this.statusLogin = localStorage.getItem('statuslogin')
     this.permission = localStorage.getItem('permission')
@@ -139,8 +141,33 @@ export class RoomComponent implements OnInit {
     })
   }
 
+  getAllSetting(){
+    this.callapi.getAllSetting().subscribe(data =>{
+      this.settingData = data
+      console.log(this.settingData);   
+      if(this.settingData.length == 0){
+        Swal.fire({
+          title: 'กรุณาตั้งค่าก่อนสร้างห้อง',
+          icon: 'warning',
+          showCancelButton: false,
+          confirmButtonText: 'ไปยังหน้าตั้งค่า',
+          confirmButtonColor: '#313131',
+          showLoaderOnConfirm: true,
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          showCloseButton: false,
+          preConfirm: () => {
+            localStorage.setItem('index', '7')
+            this.router.navigateByUrl('/setting')
+          }
+        })
+      }
+    })
+  }
+
   ngOnInit() {
     this.getAllRoom();
+    this.getAllSetting();
   }
 }
 

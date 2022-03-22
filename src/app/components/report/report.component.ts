@@ -11,7 +11,7 @@ import { ApiService } from 'src/app/Services/api.service';
 })
 export class ReportComponent implements OnInit {
   dataSource: any
-  displayedColumns: string[] = ['ห้องที่', 'หัวข้อ', 'ข้อความ','วันที่', 'สถานะ', 'เพิ่มเติม', 'ย้ายไปข้อมูลรวม'];
+  displayedColumns: string[] = ['ห้องที่','รายละเอียด','วันที่', 'เพิ่มเติม', 'ย้ายไปข้อมูลรวม'];
   formReport: any
   formRoom: any
   reportData: any
@@ -19,7 +19,8 @@ export class ReportComponent implements OnInit {
   statusLogin: any
   permission: any
   dataUserName: any
-
+  getId: any
+  showRoomNumber: any
   constructor(public callapi: ApiService, public fb: FormBuilder, public router: Router) {
     this.statusLogin = localStorage.getItem('statuslogin')
     this.permission = localStorage.getItem('permission')
@@ -81,15 +82,13 @@ export class ReportComponent implements OnInit {
   //   })
   // }
 
-  getReportById(id: string, check : number) {
+  getReportById(id: string) {
     this.callapi.getReportById(id).subscribe(data => {
       this.reportDataById = data
+      this.getId = data.reportId
+      this.showRoomNumber = data.roomNumber
+      this.patchValue(this.reportDataById)
       console.log(data);
-      if(check == 1){
-          this.onChangeStatus(data.reportId)
-      }else if(check == 2){
-        this.onDelete(data.reportId)
-      }
     })
   }
 
@@ -99,10 +98,9 @@ export class ReportComponent implements OnInit {
     })
   }
 
-  onChangeStatus(id : string) {
-    this.formReport.value = this.reportDataById
+  onChangeStatus() {
     this.formReport.value.reportStatus = "ยืนยันแล้ว"
-    this.callapi.editReport(id , this.formReport.value).subscribe(data => {
+    this.callapi.editReport(this.getId , this.formReport.value).subscribe(data => {
       this.dataSource = data
       console.log("แก้ไขเรียบร้อย");
       this.getAllReport();
