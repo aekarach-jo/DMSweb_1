@@ -154,6 +154,13 @@ export class ManageUserComponent implements OnInit {
   onEditUserDetail(){
     console.log(this.getId);
     this.callapi.editUserDetail(this.getId, this.formUserDetail.value).subscribe(data =>{
+      Swal.fire({
+        position: "center",
+        icon: 'success',
+        title: "ลบแล้ว",
+        showConfirmButton: false,
+        timer: 1000
+      })
       console.log(data);
       this.getAllUserDetail()
     })
