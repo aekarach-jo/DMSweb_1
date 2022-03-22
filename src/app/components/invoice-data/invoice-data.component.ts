@@ -25,6 +25,9 @@ export class InvoiceDataComponent implements OnInit {
   showInvoiceFilterMonth: any
   getInvoiceId: any
   getInvoiceIdData: any
+  showInvoiceNumber: any
+  showRoomNumber: any
+  showCreationDate: any
 
   formInvoice: any
   formRoom: any
@@ -257,6 +260,14 @@ export class InvoiceDataComponent implements OnInit {
     this.callapi.getInvoiceById(id).subscribe(data => {
       this.getInvoiceIdData = data
       this.getInvoiceId = data.invoiceId
+      this.showInvoiceNumber = data.invoiceNumber
+      this.showCreationDate = data.creationDateTime
+
+      for (let i = 0; i < this.roomStatusData.length; i++) {
+        if (this.roomStatusData[i].roomId == data.roomId) {
+          this.showRoomNumber = this.roomStatusData[i].roomNumber
+        }
+      }
       this.patchValue(this.getInvoiceIdData)
       console.log(this.formInvoice.value);
     })
@@ -302,10 +313,11 @@ export class InvoiceDataComponent implements OnInit {
           showConfirmButton: false,
           timer: 1000
         })
+        this.getAllInvoice()
+        this.getRoomByStatus()
+        this.emptyFormInvoice()
       })
-      this.getAllInvoice()
-      this.getRoomByStatus()
-      this.emptyFormInvoice()
+
     })
   }
 
@@ -323,6 +335,7 @@ export class InvoiceDataComponent implements OnInit {
         showConfirmButton: false,
         timer: 1000
       })
+      this.getInvoiceByFilterMonth()
       this.getAllInvoice()
       this.getRoomByStatus()
       this.emptyFormInvoice()

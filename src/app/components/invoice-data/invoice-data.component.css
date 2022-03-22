@@ -1,10 +1,9 @@
 
-
 .width-height-container {
     position: relative;
     align-items: center;
     justify-content: center;
-    height: 780px;
+    height: 740px;
     width: auto;
     padding: 20px;
     overflow-x: hidden;
@@ -224,7 +223,12 @@ table {
     left: 15px;    
 
 }
-
+.text-header{
+    position: relative;
+    color: #000000;
+    font-size: 20px;
+    font-weight: 350;
+}
 
 .text-color{
     color: rgb(0, 0, 0);
