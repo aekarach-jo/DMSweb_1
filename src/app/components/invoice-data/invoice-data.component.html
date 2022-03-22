@@ -3,7 +3,7 @@
         <mat-step [stepControl]="formInvoice" errorMessage="Name is required.">
             <form [formGroup]="formInvoice">
                 <ng-template matStepLabel>
-                    <p class="text-white mt-2">จดมิเตอร์</p>
+                    <p class="text-white mt-2" type="button" (click)="getAllInvoice()">จดมิเตอร์</p>
                 </ng-template>
                 <div class="row row-cols-md-5">
                     <div *ngFor="let item of roomStatusData" class="col mb-5 ">
@@ -22,7 +22,7 @@
         </mat-step>
         <mat-step>
             <ng-template matStepLabel>
-                <p class="text-white mt-2">รายการเดือนนี้</p>
+                <p class="text-white mt-2" type="button" (click)="getInvoiceByFilterMonth()">รายการเดือนนี้</p>
             </ng-template>
             <div class="table-responsive">
                 <table class="table text-white">
@@ -93,7 +93,7 @@
         </mat-step>
         <mat-step>
             <ng-template matStepLabel>
-                <p class="text-white mt-2">รายการทั้งหมด</p>
+                <p class="text-white mt-2" type="button" (click)="getAllInvoice()">รายการทั้งหมด</p>
             </ng-template>
             <div class="table-responsive">
                 <table class="table text-white">
@@ -145,8 +145,14 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="image mt-3" type="button" (click)="getInvoiceById(invoice.invoiceId)"
-                                    data-toggle="modal" data-target="#modalShowInvoice">
+                                <div *ngIf="invoice.invoiceStatus == 'ยังไม่ชำระ'" class="image mt-3" type="button"
+                                    (click)="getInvoiceById(invoice.invoiceId)" data-toggle="modal"
+                                    data-target="#modalEditInvoice">
+                                    <img src="https://img.icons8.com/color/46/26e07f/ok--v1.png" />
+                                </div>
+                                <div *ngIf="invoice.invoiceStatus == 'ยังไม่ส่งบิล'" class="image mt-3" type="button"
+                                    (click)="getInvoiceById(invoice.invoiceId)" data-toggle="modal"
+                                    data-target="#modalShowInvoice">
                                     <img
                                         src="https://img.icons8.com/external-sbts2018-lineal-color-sbts2018/46/000000/external-send-social-media-sbts2018-lineal-color-sbts2018.png" />
                                 </div>
@@ -176,17 +182,17 @@
                                 style="font-size: 5rem; color: rgb(71, 187, 255); ">opacity</span>
                         </div>
                         <div class="form-group col ">
-                            <label for="waterMeterOld" class="text-color">เลขก่อนหน้า</label>
+                            <label for="waterMeterOld" class="text-color text-white">เลขก่อนหน้า</label>
                             <input formControlName="waterMeterOld" class="form-control" type="number"
                                 [(ngModel)]="waterMeterOld">
                         </div>
                         <div class="form-group col ">
-                            <label for="waterMeterNew" class="text-color">เลขปัจจุบัน</label>
+                            <label for="waterMeterNew" class="text-color text-white">เลขปัจจุบัน</label>
                             <input formControlName="waterMeterNew" class="form-control" type="number" (keyup)="calMeterWater()"
                                 [(ngModel)]="meterWater">
                         </div>
                         <div class="form-group col">
-                            <label for="waterMeterUnit" class="text-color">จำนวนที่ใช้</label>
+                            <label for="waterMeterUnit" class="text-color text-white">จำนวนที่ใช้</label>
                             <input formControlName="waterMeterUnit" class="form-control" type="number"
                                 placeholder="{{meterWaterUnit}}" readonly>
                         </div>
@@ -197,17 +203,17 @@
                             <span class="material-icons" style="font-size: 5rem; color: rgb(202, 62, 62); ">bolt</span>
                         </div>
                         <div class="form-group col ">
-                            <label for="powerMeterOld" class="text-color">เลขก่อนหน้า</label>
+                            <label for="powerMeterOld" class="text-color text-white">เลขก่อนหน้า</label>
                             <input formControlName="powerMeterOld" class="form-control" type="number"
                                 [(ngModel)]="powerMeterOld">
                         </div>
                         <div class="form-group col ">
-                            <label for="powerMeterNew" class="text-color">เลขปัจจุบัน</label>
+                            <label for="powerMeterNew" class="text-color text-white">เลขปัจจุบัน</label>
                             <input formControlName="powerMeterNew" class="form-control" type="number" (keyup)="calMeterPower()"
                                 [(ngModel)]="meterPower">
                         </div>
                         <div class="form-group col">
-                            <label for="powerMeterUnit" class="text-color">จำนวนที่ใช้</label>
+                            <label for="powerMeterUnit" class="text-color text-white">จำนวนที่ใช้</label>
                             <input formControlName="powerMeterUnit" class="form-control" type="number"
                                 placeholder="{{meterPowerUnit}}" readonly>
                         </div>
@@ -217,15 +223,15 @@
             <div class="modal-footer ">
                 <div class="form-group col">
                     <div class="row">
-                        <div class="col" class="text-color">น้ำ {{meterPowerPrice}}.-/หน่วย</div>
-                        <div class="col" class="text-color">
+                        <div class="col" class="text-color text-white">น้ำ {{meterPowerPrice}}.-/หน่วย</div>
+                        <div class="col" class="text-color text-white">
                             {{meterWaterTotlePrice}} บาท</div>
                     </div>
                 </div>
                 <div class="form-group col">
                     <div class="row">
-                        <div class="col" class="text-color">ไฟ {{meterPowerPrice}}.-/หน่วย</div>
-                        <div class="col" class="text-color">
+                        <div class="col" class="text-color text-white">ไฟ {{meterPowerPrice}}.-/หน่วย</div>
+                        <div class="col" class="text-color text-white">
                             {{meterPowerTotlePrice}} บาท</div>
                     </div>
                 </div>
@@ -253,15 +259,15 @@
                             <h1 class="text-rightCol">บิลชำระค่าเช่าห้อง</h1>
                         </div>
                         <div class="col-6">
-                            <p class="text-rightCol float-right m-2">P01</p>
+                            <p class="text-header float-right " >{{showInvoiceNumber}}</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h2 class="text-rightCol">ห้องที่</h2>
+                            <h2 class="text-header">{{showRoomNumber}}</h2>
                         </div>
                         <div class="col-6">
-                            <p class="text-rightCol float-right m-2">วันที่</p>
+                            <p class="text-header float-right ">{{showCreationDate | date: 'dd/MM/yyyy'}}</p>
                         </div>
                     </div>
                     <form [formGroup]="formInvoice">
@@ -385,15 +391,15 @@
                             <h1 class="text-rightCol">บิลชำระค่าเช่าห้อง</h1>
                         </div>
                         <div class="col-6">
-                            <p class="text-rightCol float-right m-2">P01</p>
+                            <p class="text-rightCol float-right m-2">{{showInvoiceNumber}}</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h2 class="text-rightCol">ห้องที่</h2>
+                            <h2 class="text-rightCol">{{showRoomNumber}}</h2>
                         </div>
                         <div class="col-6">
-                            <p class="text-rightCol float-right m-2">วันที่</p>
+                            <p class="text-rightCol float-right m-2">{{showCreationDate | date: 'dd/MM/yyyy'}}</p>
                         </div>
                     </div>
                     <form [formGroup]="formInvoice">
