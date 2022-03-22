@@ -23,6 +23,7 @@ export class ManageUserComponent implements OnInit {
   displayedColumns: string[] = ['ห้องที่', 'ชื่อ-นามสกุล', 'เบอร์โทรศัพท์', 'เพิ่มเติม'];
   dataSource: any
   getUserDetaialID: any
+  getId:any
   constructor(public callapi: ApiService, public fb: FormBuilder, public router: Router, public dialog: MatDialog) {
     this.formUserDetail = fb.group({
       userDetailId: [null],
@@ -144,15 +145,18 @@ export class ManageUserComponent implements OnInit {
 
   getUserDetailById(id: string) {
     this.callapi.getUserDetailById(id).subscribe(data => {
-
       this.getUserDetaialID = data
+      this.getId = data.userDetailId
       this.patchValue(this.getUserDetaialID)
     })
   }
 
-  onEditUser(id : string){
-    console.log(id);
-    
+  onEditUserDetail(){
+    console.log(this.getId);
+    this.callapi.editUserDetail(this.getId, this.formUserDetail.value).subscribe(data =>{
+      console.log(data);
+      this.getAllUserDetail()
+    })
   }
 
   deleteUserDetail(id: string) {
@@ -199,5 +203,3 @@ export class ManageUserComponent implements OnInit {
   }
 
 }
-
-export class DialogContent { }

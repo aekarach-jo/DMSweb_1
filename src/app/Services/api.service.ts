@@ -67,7 +67,7 @@ export class ApiService {
     return this.http.get<room>(`${environment.apiUrl}Room/GetRoomByFloor/${floor}`)
   }
   public createRoom(room: room) {
-    return this.http.post<room>(`${environment.apiUrl}Room/CreateRoom`, room)
+    return this.http.post<room>(`${environment.apiUrl}Room/CreateRoom/`, room)
   }
   public editRoom(roomID: string, room: room) {
     return this.http.put<room>(`${environment.apiUrl}Room/EditRoom/${roomID}`, room)
@@ -79,7 +79,7 @@ export class ApiService {
 
 
   public getAllUserDetail() {
-    return this.http.get<userDetail>(`${environment.apiUrl}UserDetail/GetAllUserDetail`)
+    return this.http.get<userDetail>(`${environment.apiUrl}UserDetail/GetAllUserDetail/`)
   }
   public getUserDetailById(userDetailID: string) {
     return this.http.get<userDetail>(`${environment.apiUrl}UserDetail/GetUserDetailById/${userDetailID}`)
@@ -91,7 +91,7 @@ export class ApiService {
     return this.http.get<userDetail>(`${environment.apiUrl}UserDetail/GetUserDetailByTelephone/${userDetailName}`)
   }
   public createUserDetail(userDetail: userDetail) {
-    return this.http.post<userDetail>(`${environment.apiUrl}UserDetail/CreateUserDetail`, userDetail)
+    return this.http.post<userDetail>(`${environment.apiUrl}UserDetail/CreateUserDetail/`, userDetail)
   }
   public editUserDetail(userDetailID: string, userDetail: userDetail) {
     return this.http.put<userDetail>(`${environment.apiUrl}UserDetail/EditUserDetail/${userDetailID}`, userDetail)
@@ -102,7 +102,7 @@ export class ApiService {
 
 
   public getAllInvoice() {
-    return this.http.get<invoice>(`${environment.apiUrl}Invoice/GetAllInvoice`)
+    return this.http.get<invoice>(`${environment.apiUrl}Invoice/GetAllInvoice/`)
   }
   public getInvoiceById(invoiceID: string) {
     return this.http.get<invoice>(`${environment.apiUrl}Invoice/GetInvoiceById/${invoiceID}`)
@@ -117,7 +117,7 @@ export class ApiService {
     return this.http.get<invoice>(`${environment.apiUrl}Invoice/GetInvoiceByMonth/${start}/${end}`)
   }
   public createInvoice(invoice: invoice) {
-    return this.http.post<invoice>(`${environment.apiUrl}Invoice/CreateInvoice`, invoice)
+    return this.http.post<invoice>(`${environment.apiUrl}Invoice/CreateInvoice/`, invoice)
   }
   public editInvoice(invoiceID: string, invoice: invoice) {
     return this.http.put<invoice>(`${environment.apiUrl}Invoice/EditInvoice/${invoiceID}`, invoice)
@@ -128,7 +128,7 @@ export class ApiService {
 
 
   public getAllReport() {
-    return this.http.get<report>(`${environment.apiUrl}Report/GetAllReport`)
+    return this.http.get<report>(`${environment.apiUrl}Report/GetAllReport/`)
   }
   public getReportById(reportID: string) {
     return this.http.get<report>(`${environment.apiUrl}Report/GetReportById/${reportID}`)
@@ -151,7 +151,7 @@ export class ApiService {
 
 
   public getAllPayment() {
-    return this.http.get<payment>(`${environment.apiUrl}Payment/GetAllPayment`)
+    return this.http.get<payment>(`${environment.apiUrl}Payment/GetAllPayment/`)
   }
   public getPaymentById(paymentID: string) {
     return this.http.get<payment>(`${environment.apiUrl}Payment/GetPaymentById/${paymentID}`)
@@ -163,7 +163,7 @@ export class ApiService {
     return this.http.get<payment>(`${environment.apiUrl}Payment/GetPaymentByStatus/${status}`)
   }
   public createPayment(payment: payment) {
-    return this.http.post<payment>(`${environment.apiUrl}Payment/CreatePayment`, payment)
+    return this.http.post<payment>(`${environment.apiUrl}Payment/CreatePayment/`, payment)
   }
   public editPayment(paymentID: string, payment: payment) {
     return this.http.put<payment>(`${environment.apiUrl}Payment/EditPayment/${paymentID}`, payment)
@@ -180,7 +180,7 @@ export class ApiService {
     return this.http.get<setting>(`${environment.apiUrl}Setting/GetSettingById/${settingID}`)
   }
   public createSetting(setting: setting) {
-    return this.http.post<setting>(`${environment.apiUrl}Setting/CreateSetting`, setting)
+    return this.http.post<setting>(`${environment.apiUrl}Setting/CreateSetting/`, setting)
   }
   public editSetting(settingID: string, setting: setting) {
     return this.http.put<setting>(`${environment.apiUrl}Setting/EditSetting/${settingID}`, setting)

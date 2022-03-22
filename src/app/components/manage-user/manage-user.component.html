@@ -148,7 +148,7 @@
 
 <div class="modal fade" id="modalEditRoom" data-backdrop="true" aria-hidden="true">
     <div class="modal-dialog modal-dialog-full-width">
-        <div class="modal-content modal-content-full-width" [formGroup]="formUserDetail" (ngSubmit)="onEditUser(formUserDetail.userDetailId)">
+        <div class="modal-content modal-content-full-width" [formGroup]="formUserDetail">
             <div class="modal-header modal-header-bg">
                 <p>แก้ไขข้อมูลผู้เช่า</p>
             </div>
@@ -235,7 +235,7 @@
                 </div>
             </div>
             <div class="modal-footer modal-footer-style">
-                <button class="btn btn-success btn-style-success" type="submit" data-dismiss="modal">ยืนยัน</button>
+                <button class="btn btn-success btn-style-success" type="submit" data-dismiss="modal" (click)="onEditUserDetail()">ยืนยัน</button>
                 <button class="btn btn-danger btn-style-cancel" data-dismiss="modal">ยกเลิก</button>
             </div>
         </div>

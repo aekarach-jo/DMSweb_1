@@ -108,6 +108,7 @@ export class ProfileComponent implements OnInit {
         this.formReport.value.date = new Date;
         this.formReport.value.roomId = this.roomId
         this.formReport.value.reportStatus = "รอยืนยัน"
+        this.formReport.value.image = ""
         console.log(this.formReport.value);
         this.callapi.createReport(this.formReport.value).subscribe(data => {
           Swal.fire({
@@ -127,12 +128,17 @@ export class ProfileComponent implements OnInit {
   getRoomNumber() {
     console.log(this.userId);
     this.callapi.getUserByID(this.userId).subscribe(data => {
+      console.log(data);
+      
       this.callapi.getUserDetailById(data.userDetailId).subscribe(i => {
         this.roomNumber = i.roomNumber;
+        console.log(this.roomNumber);
         this.callapi.getRoomByNumber(this.roomNumber).subscribe(roomData => {
           this.roomId = roomData.roomId;
+          console.log(this.roomId);
+          
         })
-        console.log(this.roomNumber);
+
       })
     })
   }
