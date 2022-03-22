@@ -24,6 +24,7 @@ export class AppComponent {
   statusUsername: boolean = false
   versionForHtml: any
   dataUserName: any
+  checkAdminIsEmpty: any
   constructor(public router: Router, public fb: FormBuilder, public callApi: ApiService) {
     this.statusLogin = localStorage.getItem('statuslogin')
     this.permission = localStorage.getItem('permission')
@@ -185,6 +186,9 @@ export class AppComponent {
 
   getAllUser() {
     this.callApi.getAllUser().subscribe(user => {
+      this.checkAdminIsEmpty = user
+      console.log(user);
+      
     })
   }
 
