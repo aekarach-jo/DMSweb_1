@@ -60,13 +60,8 @@ export class InvoiceDataComponent implements OnInit {
   meterPowerPrice: number
   powerMeterOld: number
 
-  otherPrice: number = 0
-  invoiceTotal: number = 0
-
-  displayedColumns: string[] = ['ห้องที่', 'สถานะห้อง', 'มิเตอร์น้ำ', 'มิเตอร์ไฟ', 'เพิ่มเติม'];
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  otherPrice: number
+  invoiceTotal: number
 
   constructor(public callapi: ApiService, public fb: FormBuilder, public router: Router, public dialog: MatDialog) {
     this.statusLogin = localStorage.getItem('statuslogin')
@@ -262,7 +257,7 @@ export class InvoiceDataComponent implements OnInit {
       this.getInvoiceId = data.invoiceId
       this.showInvoiceNumber = data.invoiceNumber
       this.showCreationDate = data.creationDateTime
-
+      this.invoiceTotal = data.invoiceTotal
       for (let i = 0; i < this.roomStatusData.length; i++) {
         if (this.roomStatusData[i].roomId == data.roomId) {
           this.showRoomNumber = this.roomStatusData[i].roomNumber
@@ -323,8 +318,6 @@ export class InvoiceDataComponent implements OnInit {
 
   onEditInvoiceData() {
     this.formInvoice.value.invoiceStatus = "ยังไม่ชำระ"
-    this.formInvoice.value.otherPrice = this.otherPrice
-
     console.log(this.formInvoice.value);
     this.callapi.editInvoice(this.getInvoiceId, this.formInvoice.value).subscribe(data => {
       console.log(data);
@@ -344,7 +337,8 @@ export class InvoiceDataComponent implements OnInit {
 
 
   calEditInvoice() {
-    this.invoiceTotal += this.otherPrice
+
+    this.formInvoice.value.invoiceTotal = (this.formInvoice.value.otherPrice + this.formInvoice.value.invoiceTotal)
   }
   calMeterWater() {
     this.meterWaterUnit = this.meterWater - this.waterMeterOld
@@ -357,7 +351,7 @@ export class InvoiceDataComponent implements OnInit {
 
   getAllSetting() {
     this.callapi.getAllSetting().subscribe(data => {
-        this.formInvoice.value.waterPrice = data[0].waterPrice
+      this.formInvoice.value.waterPrice = data[0].waterPrice
       this.formInvoice.value.powerPrice = data[0].powerPrice
       this.formInvoice.value.centerService = data[0].centerService
       this.roomrateTypeFan = data[0].roomrateTypeFan
@@ -365,7 +359,7 @@ export class InvoiceDataComponent implements OnInit {
 
       this.meterWaterPrice = data[0].waterPrice
       this.meterPowerPrice = data[0].powerPrice
-      
+
     })
   }
 
