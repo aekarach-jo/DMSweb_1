@@ -29,8 +29,8 @@
                     <thead>
                         <tr>
                             <th scope="col">ห้องที่</th>
-                            <th scope="col">ครั้งนี้</th>
                             <th scope="col">ครั้งก่อน</th>
+                            <th scope="col">ครั้งนี้</th>
                             <th scope="col">จำนวนหน่วย</th>
                             <th scope="col">ส่งบิล</th>
                         </tr>
@@ -46,20 +46,20 @@
                             <td>
                                 <div class="col">
                                     <div class="row">
-                                        <p class="input-style form-control">{{invoice.waterMeterNew}}</p>
+                                        <p class="input-style form-control">{{invoice.waterMeterOld}}</p>
                                     </div>
                                     <div class="row">
-                                        <p class="input-style form-control">{{invoice.powerMeterNew}}</p>
+                                        <p class="input-style form-control">{{invoice.powerMeterOld}}</p>
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="col">
                                     <div class="row">
-                                        <p class="input-style form-control">{{invoice.waterMeterOld}}</p>
+                                        <p class="input-style form-control">{{invoice.waterMeterNew}}</p>
                                     </div>
                                     <div class="row">
-                                        <p class="input-style form-control">{{invoice.powerMeterOld}}</p>
+                                        <p class="input-style form-control">{{invoice.powerMeterNew}}</p>
                                     </div>
                                 </div>
                             </td>
@@ -117,20 +117,20 @@
                             <td>
                                 <div class="col">
                                     <div class="row">
-                                        <p class="input-style form-control">{{invoice.waterMeterNew}}</p>
+                                        <p class="input-style form-control">{{invoice.waterMeterOld}}</p>
                                     </div>
                                     <div class="row">
-                                        <p class="input-style form-control">{{invoice.powerMeterNew}}</p>
+                                        <p class="input-style form-control">{{invoice.powerMeterOld}}</p>
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="col">
                                     <div class="row">
-                                        <p class="input-style form-control">{{invoice.waterMeterOld}}</p>
+                                        <p class="input-style form-control">{{invoice.waterMeterNew}}</p>
                                     </div>
                                     <div class="row">
-                                        <p class="input-style form-control">{{invoice.powerMeterOld}}</p>
+                                        <p class="input-style form-control">{{invoice.powerMeterNew}}</p>
                                     </div>
                                 </div>
                             </td>
@@ -235,8 +235,8 @@
                             {{meterPowerTotlePrice}} บาท</div>
                     </div>
                 </div>
-                <button class="btn btn-success" data-dismiss="modal" (click)="onCreateInvoiceData()">ยืนยัน</button>
-                <button class="btn btn-danger" data-target="close" data-dismiss="modal"
+                <button class="btn btn-success text-white" data-dismiss="modal" (click)="onCreateInvoiceData()">ยืนยัน</button>
+                <button class="btn btn-danger text-white" data-target="close" data-dismiss="modal"
                     (click)="emptyFormInvoice()">ยกเลิก</button>
             </div>
         </div>
