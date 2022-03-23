@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { invoice } from 'src/app/Models/invoice';
 import { report } from 'src/app/Models/report';
 import { ApiService } from 'src/app/Services/api.service';
 import Swal from 'sweetalert2';
@@ -13,6 +14,7 @@ import Swal from 'sweetalert2';
 export class ProfileComponent implements OnInit {
   formReport: any
   formRoom: any
+  formInvoice: any
   switchPage = 1
   roomNumber: any
   roomId: any
@@ -21,7 +23,11 @@ export class ProfileComponent implements OnInit {
   permission: any
   dataUserName: any
   userId: any
-
+  formFindMonth: any
+  showInvoiceFilterMonth: any
+  invoicData: any
+  showInvoiceNumber: any
+  showCreationDate: any
   constructor(public router: Router, public callapi: ApiService, public fb: FormBuilder) {
     this.statusLogin = localStorage.getItem('statuslogin')
     this.permission = localStorage.getItem('permission')
@@ -50,7 +56,62 @@ export class ProfileComponent implements OnInit {
         roomStatus: [null],
         status: [null],
         userId: [null]
+      }),
+      this.formInvoice = fb.group({
+        invoiceId: [null],
+        invoiceNumber: [null],
+        invoiceRoomRate: [null],
+        waterMeterOld: [null],
+        waterMeterNew: [null],
+        waterMeterUnit: [null],
+        waterPrice: [null],
+        waterTotalPrice: [null],
+        powerMeterOld: [null],
+        powerMeterNew: [null],
+        powerMeterUnit: [null],
+        powerPrice: [null],
+        powerTotalPrice: [null],
+        centerService: [null],
+        otherNote: [null],
+        otherPrice: [null],
+        invoiceStatus: [null],
+        invoiceTotal: [null],
+        creationDateTime: [null],
+        status: [null],
+        roomId: [null],
+      }),
+      this.formFindMonth = this.fb.group({
+        monthStart: null,
+        monthEnd: null,
       })
+  }
+
+  patchValue2(receiveInvoiceId: invoice) {
+    console.log(receiveInvoiceId);
+
+    this.formInvoice.patchValue({
+      invoiceId: receiveInvoiceId.invoiceId,
+      invoiceNumber: receiveInvoiceId.invoiceNumber,
+      invoiceRoomRate: receiveInvoiceId.invoiceRoomRate,
+      waterMeterOld: receiveInvoiceId.waterMeterOld,
+      waterMeterNew: receiveInvoiceId.waterMeterNew,
+      waterMeterUnit: receiveInvoiceId.waterMeterUnit,
+      waterPrice: receiveInvoiceId.waterPrice,
+      waterTotalPrice: receiveInvoiceId.waterTotalPrice,
+      powerMeterOld: receiveInvoiceId.powerMeterOld,
+      powerMeterNew: receiveInvoiceId.powerMeterNew,
+      powerMeterUnit: receiveInvoiceId.powerMeterUnit,
+      powerPrice: receiveInvoiceId.powerPrice,
+      powerTotalPrice: receiveInvoiceId.powerTotalPrice,
+      centerService: receiveInvoiceId.centerService,
+      otherNote: receiveInvoiceId.otherNote,
+      otherPrice: receiveInvoiceId.otherPrice,
+      invoiceStatus: receiveInvoiceId.invoiceStatus,
+      invoiceTotal: receiveInvoiceId.invoiceTotal,
+      creationDateTime: receiveInvoiceId.creationDateTime,
+      status: receiveInvoiceId.status,
+      roomId: receiveInvoiceId.roomId,
+    })
   }
 
   emptyFormReport() {
@@ -86,12 +147,64 @@ export class ProfileComponent implements OnInit {
   switchPages(num: number) {
     if (num == 1) {
       this.switchPage = 1
-    } else {
+    } else if (num == 2) {
       this.switchPage = 2
+    } else {
+      this.switchPage = 3
     }
   }
 
+  getRoomNumber() {
+    console.log(this.userId);
+    this.callapi.getUserByID(this.userId).subscribe(data => {
+      this.callapi.getUserDetailById(data.userDetailId).subscribe(i => {
+        this.roomNumber = i.roomNumber;
+        console.log(this.roomNumber);
+        this.callapi.getRoomByNumber(this.roomNumber).subscribe(roomData => {
+          this.roomId = roomData.roomId;
+          console.log(this.roomId);
+          this.getInvoiceByFilterMonth()
+        })
 
+      })
+    })
+  }
+
+  getInvoiceByFilterMonth() {
+    let date = new Date();
+    console.log(date);
+    this.formFindMonth.value.monthStart = new Date();
+    this.formFindMonth.value.monthEnd = new Date();
+    this.formFindMonth.value.monthStart.setDate(1);
+    this.formFindMonth.value.monthStart.setHours(0);
+    this.formFindMonth.value.monthStart.setMinutes(0);
+    this.formFindMonth.value.monthStart.setSeconds(0);
+    this.formFindMonth.value.monthEnd.setMonth(date.getMonth() + 1);
+    this.formFindMonth.value.monthEnd.setDate(1);
+    this.formFindMonth.value.monthEnd.setHours(0);
+    this.formFindMonth.value.monthEnd.setMinutes(0);
+    this.formFindMonth.value.monthEnd.setSeconds(0);
+    if (this.formFindMonth != null) {
+      this.callapi.getInvoiceByMonth(
+        this.formFindMonth.value.monthStart.toUTCString(),
+        this.formFindMonth.value.monthEnd.toUTCString()).subscribe((data) => {
+          this.showInvoiceFilterMonth = data
+          console.log(data);
+          for (let i = 0; i < this.showInvoiceFilterMonth.length; i++) {
+            if (this.roomId == this.showInvoiceFilterMonth[i].roomId) {
+              this.invoicData = this.showInvoiceFilterMonth[i]
+              this.showInvoiceNumber = this.showInvoiceFilterMonth[i].invoiceNumber
+              this.showCreationDate = this.showInvoiceFilterMonth[i].creationDateTime
+              this.patchValue2(this.invoicData)
+              console.log(this.invoicData);
+            }
+          }
+          console.log(this.showInvoiceFilterMonth);
+
+          // console.log(this.invoice[0].pop());
+        })
+    }
+  }
 
   onCreateReport() {
     Swal.fire({
@@ -125,23 +238,7 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  getRoomNumber() {
-    console.log(this.userId);
-    this.callapi.getUserByID(this.userId).subscribe(data => {
-      console.log(data);
-      
-      this.callapi.getUserDetailById(data.userDetailId).subscribe(i => {
-        this.roomNumber = i.roomNumber;
-        console.log(this.roomNumber);
-        this.callapi.getRoomByNumber(this.roomNumber).subscribe(roomData => {
-          this.roomId = roomData.roomId;
-          console.log(this.roomId);
-          
-        })
 
-      })
-    })
-  }
 
 
   ngOnInit(): void {
