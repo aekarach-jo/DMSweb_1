@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { user } from './Models/user';
 import { ApiService } from './Services/api.service';
 
-// declare const userDesign : any ;
+declare const popup : any ;
 
 @Component({
   selector: 'app-root',
@@ -187,8 +187,6 @@ export class AppComponent {
   getAllUser() {
     this.callApi.getAllUser().subscribe(user => {
       this.checkAdminIsEmpty = user
-      console.log(user);
-      
     })
   }
 
@@ -232,8 +230,22 @@ export class AppComponent {
     }
   }
   
+  // popupToShowCheckout(){
+  //   let dates = new Date
+
+  //   console.log(dates);
+    
+    
+  //   Swal.fire({
+  //     position: "center",
+  //     icon: 'warning',
+  //     title: "มีผู้เช่าแจ้งย้ายออก",
+  //     showConfirmButton: false,
+  //   })
+  // }
 
   ngOnInit() {
     this.getAllUser();
+    // this.popupToShowCheckout()
   }
 }

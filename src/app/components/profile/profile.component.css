@@ -39,8 +39,22 @@
     padding: 20px;
     overflow-x: hidden;
     overflow-y: hidden;
+    left: 5%;
      /* background-image: linear-gradient(-135deg, #b2cfd1 0%, #405670 74%); */
-
+}
+@media  screen and (max-width:420px) {
+    .leftCol{
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        height: 280px;
+        width: auto;
+        padding: 20px;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        left: 15%;
+         /* background-image: linear-gradient(-135deg, #b2cfd1 0%, #405670 74%); */
+    }
 }
 .rightCol{
     transition: 1s ease-in;
@@ -332,6 +346,83 @@
     box-shadow: 0 0 25px 0 rgba(20, 27, 201, 0.6);
     cursor: pointer;
 }
+
+.btn-header-checkout{
+        color: #fcfcfc;
+        background-color: rgb(187, 91, 91);
+        position: relative;
+        left: 13%;
+        width: 130px;
+        height: 40px;
+        margin-top: 5px;
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+}
+
+.btn-header-checkout:hover{
+        color: #fcfcfc;
+        background-color: rgb(187, 91, 91);
+        position: relative;
+        left: 4%;
+        width: 130px;
+        height: 40px;
+        margin-top: 5px;
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+        transition: all 0.4s ease-in-out;
+}
+
+@media  screen and (max-width:420px) {
+    .btn-header-checkout{
+        color: #fcfcfc;
+        background-color: rgb(187, 91, 91);
+        position: relative;
+        left: 45%;
+        width: 130px;
+        height: 40px;
+        margin-top: 5px;
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+        transition: all 0.4s ease-in-out;
+}
+}
+
+@media  screen and (max-width:420px) {
+    .btn-header-checkout:hover{
+        color: #fcfcfc;
+        background-color: rgb(187, 91, 91);
+        position: relative;
+        left: 11%;
+        width: 130px;
+        height: 40px;
+        margin-top: 5px;
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+        transition: all 0.4s ease-in-out;
+    } 
+}
+
+.calendar-card {
+    width: 300px;
+    
+  }
+
+.modal-dialog-date{
+    position: relative;
+    width: 350px;
+}
+.modal-dialog-content{
+    position: relative;
+    background: rgba(255, 255, 255, 0.4);
+    width: 350px;
+}
+
+.text-header-date{
+    color: #ffffff;
+    font-size: 23px;
+    font-weight: 400;
+}
+
 
 @media  screen and (max-width:420px) {
     

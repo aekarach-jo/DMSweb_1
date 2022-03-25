@@ -1,0 +1,42 @@
+<div class="container width-height-card hiden-scroll">
+    <h1 class="header-title">คำร้องขอคืนห้องพัก</h1>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="ห้องที่" class="text-color">
+            <th mat-header-cell *matHeaderCellDef> ห้องที่ </th>
+            <td mat-cell *matCellDef="let element"> {{element.roomNumber}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="วันที่ต้องการออก" class="text-color">
+            <th mat-header-cell *matHeaderCellDef> วันที่ต้องการออก </th>
+            <td mat-cell *matCellDef="let element"> {{element.checkoutDate | date: 'dd/MM/yyyy'}} {{element.lastName}}
+            </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="สถานะการค้างชำระ" class="text-color">
+            <th mat-header-cell *matHeaderCellDef> สถานะการค้างชำระ </th>
+            <td mat-cell *matCellDef="let element"> {{element.invoiceStatus}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="สถานะ" class="text-color">
+            <th mat-header-cell *matHeaderCellDef> สถานะ </th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.checkoutStatus == 'สำเร็จแล้ว'" class="align-middle text-center" type="button" (click)="getCheckoutById(element.checkoutId)">
+                    <img src="https://img.icons8.com/office/32/000000/checkmark--v1.png" />
+                </div>
+                <div *ngIf="element.checkoutStatus == 'ยื่นคำร้อง'" class="align-middle text-center" type="button" (click)="getCheckoutById(element.checkoutId)">
+                    <img src="https://img.icons8.com/color/32/delete-sign--v1.png" />
+
+                </div>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+</div>

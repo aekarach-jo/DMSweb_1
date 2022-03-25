@@ -55,6 +55,16 @@
           <!-- <div class="indicator"></div> -->
         </li>
         <li class="list" *ngIf="permission == 'ADMIN'">
+          <a routerLink="invoice-data">
+            <span class="icon empty">
+              <img
+                src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/48/external-pay-currency-and-money-itim2101-lineal-color-itim2101.png" />
+            </span>
+            <span class="text empty">Payment</span>
+          </a>
+          <!-- <div class="indicator"></div> -->
+        </li>
+        <li class="list" *ngIf="permission == 'ADMIN'">
           <a routerLink="user-detail">
             <span class="icon">
               <img
@@ -78,6 +88,15 @@
               <img
                 src="https://img.icons8.com/external-flatart-icons-flat-flatarticons/48/000000/external-report-world-cancer-awareness-flatart-icons-flat-flatarticons.png" />
             </span> <span class="text empty">Report</span>
+          </a>
+          <!-- <div class="indicator"></div> -->
+        </li>
+        <li class="list" *ngIf="permission == 'ADMIN'">
+          <a routerLink="checkout">
+            <span class="icon empty">
+              <img
+                src="https://img.icons8.com/external-flaticons-flat-flat-icons/48/external-checkout-hospitality-services-flaticons-flat-flat-icons.png" />
+            </span> <span class="text empty">Checkout</span>
           </a>
           <!-- <div class="indicator"></div> -->
         </li>
