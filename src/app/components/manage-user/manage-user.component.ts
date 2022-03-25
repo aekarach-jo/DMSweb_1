@@ -24,7 +24,7 @@ export class ManageUserComponent implements OnInit {
   dataSource: any
   getUserDetaialID: any
   getId:any
-  constructor(public callapi: ApiService, public fb: FormBuilder, public router: Router, public dialog: MatDialog) {
+  constructor(public callapi: ApiService, public fb: FormBuilder, public router: Router) {
     this.formUserDetail = fb.group({
       userDetailId: [null],
       firstName: [null],

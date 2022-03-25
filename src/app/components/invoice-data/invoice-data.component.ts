@@ -218,6 +218,7 @@ export class InvoiceDataComponent implements OnInit {
 
   }
 
+
   getInvoiceByFilterMonth() {
     let date = new Date();
     console.log(date);

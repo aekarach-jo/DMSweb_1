@@ -4,7 +4,7 @@
     position: relative;
     align-items: center;
     justify-content: center;
-    height: 700px;
+    height: 720px;
     width: auto;
     padding: 20px;
     overflow-x: hidden;
@@ -148,6 +148,14 @@ table {
 .modal-header-bg {
     background-color: #313131;
     color: antiquewhite;
+}
+
+.header-title{
+    color: #fcfcfc;
+    padding-top: 18px;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
 }
 
 

@@ -136,6 +136,9 @@ export class ApiService {
   public getReportByNumber(number: string) {
     return this.http.get<report>(`${environment.apiUrl}Report/GetReportByNumber/${number}`)
   }
+  public getReportByRoomId(reportRoomId: string) {
+    return this.http.get<report>(`${environment.apiUrl}Report/GetReportByRoomId/${reportRoomId}`)
+  }
   public getReportByStatus(status: string) {
     return this.http.get<report>(`${environment.apiUrl}Report/GetReportByStatus/${status}`)
   }
