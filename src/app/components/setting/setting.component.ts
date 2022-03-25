@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { of } from 'rxjs';
 import { setting } from 'src/app/Models/setting';
 import { ApiService } from 'src/app/Services/api.service';
 import Swal from 'sweetalert2';
@@ -13,7 +14,7 @@ import Swal from 'sweetalert2';
 export class SettingComponent implements OnInit {
   formSetting: any
   settingAllData: any
-  showButtonCreate: boolean = false
+  showButtonCreate: boolean = true
   showButtonEdit: boolean = true
   constructor(public router: Router, public callapi: ApiService, public fb: FormBuilder) {
     this.formSetting = fb.group({
@@ -44,7 +45,11 @@ export class SettingComponent implements OnInit {
   getAllSetting() {
     this.callapi.getAllSetting().subscribe(data => {
       this.settingAllData = data
-      this.patchValue(this.settingAllData[0])
+      console.log(this.settingAllData.length);
+      
+      if(this.settingAllData.length != 0 ){
+        this.patchValue(this.settingAllData[0])
+      }
       console.log(data);
       if (this.settingAllData.length == 0) {
         this.showButtonCreate = true

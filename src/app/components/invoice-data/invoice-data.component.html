@@ -29,9 +29,10 @@
                     <thead>
                         <tr>
                             <th scope="col">ห้องที่</th>
-                            <th scope="col">ครั้งนี้</th>
                             <th scope="col">ครั้งก่อน</th>
+                            <th scope="col">ครั้งนี้</th>
                             <th scope="col">จำนวนหน่วย</th>
+                            <th scope="col">แก้ไข</th>
                             <th scope="col">ส่งบิล</th>
                         </tr>
                     </thead>
@@ -40,16 +41,6 @@
                             <td scope="row">
                                 <div *ngFor="let room of roomStatusData">
                                     <div class="number-room" *ngIf="room.roomId == invoice.roomId">{{room.roomNumber}}
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="col">
-                                    <div class="row">
-                                        <p class="input-style form-control">{{invoice.waterMeterNew}}</p>
-                                    </div>
-                                    <div class="row">
-                                        <p class="input-style form-control">{{invoice.powerMeterNew}}</p>
                                     </div>
                                 </div>
                             </td>
@@ -66,6 +57,16 @@
                             <td>
                                 <div class="col">
                                     <div class="row">
+                                        <p class="input-style form-control">{{invoice.waterMeterNew}}</p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="input-style form-control">{{invoice.powerMeterNew}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col">
+                                    <div class="row">
                                         <p class="input-style form-control">{{invoice.waterMeterUnit}}</p>
                                     </div>
                                     <div class="row">
@@ -74,16 +75,24 @@
                                 </div>
                             </td>
                             <td>
-                                <div *ngIf="invoice.invoiceStatus == 'ยังไม่ชำระ'" class="image mt-3" type="button"
-                                    (click)="getInvoiceById(invoice.invoiceId)" data-toggle="modal"
-                                    data-target="#modalEditInvoice">
-                                    <img src="https://img.icons8.com/color/46/26e07f/ok--v1.png" />
+                                <div class="image  mt-3" type="button" (click)="getInvoiceById(invoice.invoiceId)"
+                                    data-toggle="modal" data-target="#modalEditInvoice">
+                                    <img
+                                        src="https://img.icons8.com/external-yogi-aprelliyanto-detailed-outline-yogi-aprelliyanto/42/external-setting-digital-service-yogi-aprelliyanto-detailed-outline-yogi-aprelliyanto.png" />
                                 </div>
+
+                            </td>
+                            <td>
                                 <div *ngIf="invoice.invoiceStatus == 'ยังไม่ส่งบิล'" class="image mt-3" type="button"
                                     (click)="getInvoiceById(invoice.invoiceId)" data-toggle="modal"
                                     data-target="#modalShowInvoice">
                                     <img
                                         src="https://img.icons8.com/external-sbts2018-lineal-color-sbts2018/46/000000/external-send-social-media-sbts2018-lineal-color-sbts2018.png" />
+                                </div>
+                                <div *ngIf="invoice.invoiceStatus == 'ยังไม่ชำระ'" class="image mt-3" type="button"
+                                    (click)="getInvoiceById(invoice.invoiceId)" data-toggle="modal"
+                                    data-target="#modalShowInvoice">
+                                    <img src="https://img.icons8.com/color/46/26e07f/ok--v1.png" />
                                 </div>
                             </td>
                         </tr>
@@ -117,20 +126,20 @@
                             <td>
                                 <div class="col">
                                     <div class="row">
-                                        <p class="input-style form-control">{{invoice.waterMeterNew}}</p>
+                                        <p class="input-style form-control">{{invoice.waterMeterOld}}</p>
                                     </div>
                                     <div class="row">
-                                        <p class="input-style form-control">{{invoice.powerMeterNew}}</p>
+                                        <p class="input-style form-control">{{invoice.powerMeterOld}}</p>
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="col">
                                     <div class="row">
-                                        <p class="input-style form-control">{{invoice.waterMeterOld}}</p>
+                                        <p class="input-style form-control">{{invoice.waterMeterNew}}</p>
                                     </div>
                                     <div class="row">
-                                        <p class="input-style form-control">{{invoice.powerMeterOld}}</p>
+                                        <p class="input-style form-control">{{invoice.powerMeterNew}}</p>
                                     </div>
                                 </div>
                             </td>
@@ -144,6 +153,14 @@
                                     </div>
                                 </div>
                             </td>
+                            <!-- <td>
+                                <div class="image mt-3" type="button"
+                                    (click)="getInvoiceById(invoice.invoiceId)" data-toggle="modal"
+                                    data-target="#modalEditInvoice">
+                                    <img src="https://img.icons8.com/external-yogi-aprelliyanto-detailed-outline-yogi-aprelliyanto/42/external-setting-digital-service-yogi-aprelliyanto-detailed-outline-yogi-aprelliyanto.png" />
+                                </div>
+
+                            </td> -->
                             <td>
                                 <div *ngIf="invoice.invoiceStatus == 'ยังไม่ชำระ'" class="image mt-3" type="button"
                                     (click)="getInvoiceById(invoice.invoiceId)" data-toggle="modal"
@@ -173,7 +190,7 @@
 <div class="modal fade" id="modalInvoice" aria-hidden="true" data-backdrop="true">
     <div class="modal-dialog modal-dialog-full-width">
         <div class="modal-content modal-content-full-width" [formGroup]="formInvoice">
-            <div class="modal-header modal-header-bg">{{getRoomNumber}}</div>
+            <div class="modal-header modal-header-bg">ห้องที่ {{getRoomNumber}}</div>
             <div class="modal-body mb-5">
                 <div class="row row-cols-md-2">
                     <div class="col-sm-3 mt-3" style="height: 19rem;">
@@ -188,8 +205,8 @@
                         </div>
                         <div class="form-group col ">
                             <label for="waterMeterNew" class="text-color text-white">เลขปัจจุบัน</label>
-                            <input formControlName="waterMeterNew" class="form-control" type="number" (keyup)="calMeterWater()"
-                                [(ngModel)]="meterWater">
+                            <input formControlName="waterMeterNew" class="form-control" type="number"
+                                (keyup)="calMeterWater()" [(ngModel)]="meterWater">
                         </div>
                         <div class="form-group col">
                             <label for="waterMeterUnit" class="text-color text-white">จำนวนที่ใช้</label>
@@ -209,8 +226,8 @@
                         </div>
                         <div class="form-group col ">
                             <label for="powerMeterNew" class="text-color text-white">เลขปัจจุบัน</label>
-                            <input formControlName="powerMeterNew" class="form-control" type="number" (keyup)="calMeterPower()"
-                                [(ngModel)]="meterPower">
+                            <input formControlName="powerMeterNew" class="form-control" type="number"
+                                (keyup)="calMeterPower()" [(ngModel)]="meterPower">
                         </div>
                         <div class="form-group col">
                             <label for="powerMeterUnit" class="text-color text-white">จำนวนที่ใช้</label>
@@ -235,8 +252,9 @@
                             {{meterPowerTotlePrice}} บาท</div>
                     </div>
                 </div>
-                <button class="btn btn-success" data-dismiss="modal" (click)="onCreateInvoiceData()">ยืนยัน</button>
-                <button class="btn btn-danger" data-target="close" data-dismiss="modal"
+                <button class="btn btn-success text-white" data-dismiss="modal"
+                    (click)="onCreateInvoiceData()">ยืนยัน</button>
+                <button class="btn btn-danger text-white" data-target="close" data-dismiss="modal"
                     (click)="emptyFormInvoice()">ยกเลิก</button>
             </div>
         </div>
@@ -259,12 +277,12 @@
                             <h1 class="text-rightCol">บิลชำระค่าเช่าห้อง</h1>
                         </div>
                         <div class="col-6">
-                            <p class="text-header float-right " >{{showInvoiceNumber}}</p>
+                            <p class="text-header float-right ">{{showInvoiceNumber}}</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h2 class="text-header">{{showRoomNumber}}</h2>
+                            <h2 class="text-header">ห้องที่ {{showRoomNumber}}</h2>
                         </div>
                         <div class="col-6">
                             <p class="text-header float-right ">{{showCreationDate | date: 'dd/MM/yyyy'}}</p>
@@ -275,8 +293,8 @@
                             <thead>
                                 <tr class="text-center">
                                     <th [width]="150" scope="col" class="align-middle text-center">รายการ</th>
-                                    <th [width]="150" scope="col" class="align-middle">ครั้งนี้</th>
                                     <th [width]="150" scope="col" class="align-middle">ครั้งก่อน</th>
+                                    <th [width]="150" scope="col" class="align-middle">ครั้งนี้</th>
                                     <th [width]="170" scope="col" class="align-middle">จำนวนหน่วย</th>
                                     <th [width]="150" scope="col" class="align-middle">ราคาหน่วย</th>
                                     <th [width]="150" scope="col" class="align-middle">รวม</th>
@@ -286,11 +304,11 @@
                                 <tr>
                                     <th scope="row">ค่าน้ำ</th>
                                     <td>
-                                        <input formControlName="waterMeterNew" class="input-bill-style " type="number"
+                                        <input formControlName="waterMeterOld" class="input-bill-style " type="number"
                                             readonly>
                                     </td>
                                     <td>
-                                        <input formControlName="waterMeterOld" class="input-bill-style " type="number"
+                                        <input formControlName="waterMeterNew" class="input-bill-style " type="number"
                                             readonly>
                                     </td>
                                     <td>
@@ -298,22 +316,24 @@
                                             readonly>
                                     </td>
                                     <td>
-                                        <input formControlName="waterPrice" class="input-bill-style " type="number"
-                                            readonly>
+                                        <p class="float-right">{{this.formInvoice.value.waterPrice | number : '1.2-2'}}
+                                        </p>
+                                        <!-- <input formControlName="waterPrice" class="input-bill-style " type="number" readonly> -->
                                     </td>
                                     <td>
-                                        <input formControlName="waterTotalPrice" class="input-bill-style " type="number"
-                                            readonly>
+                                        <p class="float-right">{{this.formInvoice.value.waterTotalPrice | number :
+                                            '1.2-2'}}</p>
+                                        <!-- <input formControlName="waterTotalPrice" class="input-bill-style " type="number" readonly> -->
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">ค่าไฟ</th>
                                     <td>
-                                        <input formControlName="powerMeterNew" class="input-bill-style " type="number"
+                                        <input formControlName="powerMeterOld" class="input-bill-style " type="number"
                                             readonly>
                                     </td>
                                     <td>
-                                        <input formControlName="powerMeterOld" class="input-bill-style " type="number"
+                                        <input formControlName="powerMeterNew" class="input-bill-style " type="number"
                                             readonly>
                                     </td>
                                     <td>
@@ -321,45 +341,53 @@
                                             readonly>
                                     </td>
                                     <td>
-                                        <input formControlName="powerPrice" class="input-bill-style " type="number"
-                                            readonly>
+                                        <p class="float-right">{{this.formInvoice.value.powerPrice | number : '1.2-2'}}
+                                        </p>
+                                        <!-- <input formControlName="powerPrice" class="input-bill-style " type="number" readonly> -->
                                     </td>
                                     <td>
-                                        <input formControlName="powerTotalPrice" class="input-bill-style " type="number"
-                                            readonly>
+                                        <p class="float-right">{{this.formInvoice.value.powerTotalPrice | number :
+                                            '1.2-2'}}</p>
+                                        <!-- <input formControlName="powerTotalPrice" class="input-bill-style " type="number" readonly> -->
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">ค่าเช่าห้อง</th>
                                     <td colspan="4"></td>
                                     <td>
-                                        <input formControlName="invoiceRoomRate" class="input-bill-style " type="number"
-                                            readonly>
+                                        <p class="float-right">{{this.formInvoice.value.invoiceRoomRate | number :
+                                            '1.2-2'}}</p>
+                                        <!-- <input formControlName="invoiceRoomRate" class="input-bill-style " type="number" readonly> -->
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">ค่าส่วนกลาง</th>
                                     <td colspan="4"></td>
                                     <td>
-                                        <input formControlName="centerService" class="input-bill-style " type="number"
-                                            readonly>
+                                        <p class="float-right">{{this.formInvoice.value.centerService | number :
+                                            '1.2-2'}}</p>
+                                        <!-- <input formControlName="centerService" class="input-bill-style " type="number"  readonly> -->
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">อื่นๆ</th>
                                     <td colspan="4">
-                                        <input formControlName="otherNote" class="input-other-style" type="text">
+                                        <p class="float-left">{{this.formInvoice.value.otherNote}}</p>
                                     </td>
                                     <td>
-                                        <input formControlName="otherPrice" class="input-other-style text-center"
-                                            type="number" (keyup)="calEditInvoice()" [(ngModel)]="otherPrice">
+                                        <p class="float-right">{{this.formInvoice.value.otherPrice | number : '1.2-2'}}
+                                        </p>
+                                        <!-- <input formControlName="otherPrice" class="input-other-style text-center"
+                                            type="number" (keyup)="calEditInvoice()" [(ngModel)]="otherPrice" > -->
                                     </td>
                                 </tr>
                                 <tr>
                                     <th colspan="5">รวม</th>
                                     <td>
-                                        <input formControlName="invoiceTotal" class="input-bill-style " type="number"
-                                            [(ngModel)]="invoiceTotal">
+                                        <p class="float-right">{{this.formInvoice.value.invoiceTotal | number :
+                                            '1.2-2'}}</p>
+                                        <!-- <input formControlName="invoiceTotal" class="input-bill-style " type="number"
+                                            [(ngModel)]="invoiceTotal"> -->
                                     </td>
                                 </tr>
                             </tbody>
@@ -396,7 +424,7 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h2 class="text-rightCol">{{showRoomNumber}}</h2>
+                            <h2 class="text-rightCol">ห้องที่ {{showRoomNumber}}</h2>
                         </div>
                         <div class="col-6">
                             <p class="text-rightCol float-right m-2">{{showCreationDate | date: 'dd/MM/yyyy'}}</p>
@@ -407,8 +435,8 @@
                             <thead>
                                 <tr class="text-center">
                                     <th [width]="150" scope="col" class="align-middle text-center">รายการ</th>
-                                    <th [width]="150" scope="col" class="align-middle">ครั้งนี้</th>
                                     <th [width]="150" scope="col" class="align-middle">ครั้งก่อน</th>
+                                    <th [width]="150" scope="col" class="align-middle">ครั้งนี้</th>
                                     <th [width]="170" scope="col" class="align-middle">จำนวนหน่วย</th>
                                     <th [width]="150" scope="col" class="align-middle">ราคาหน่วย</th>
                                     <th [width]="150" scope="col" class="align-middle">รวม</th>
@@ -418,10 +446,10 @@
                                 <tr>
                                     <th scope="row">ค่าน้ำ</th>
                                     <td>
-                                        <input formControlName="waterMeterNew" class="input-bill-style " type="number">
+                                        <input formControlName="waterMeterOld" class="input-bill-style " type="number">
                                     </td>
                                     <td>
-                                        <input formControlName="waterMeterOld" class="input-bill-style " type="number">
+                                        <input formControlName="waterMeterNew" class="input-bill-style " type="number">
                                     </td>
                                     <td>
                                         <input formControlName="waterMeterUnit" class="input-bill-style " type="number">
@@ -437,10 +465,10 @@
                                 <tr>
                                     <th scope="row">ค่าไฟ</th>
                                     <td>
-                                        <input formControlName="powerMeterNew" class="input-bill-style " type="number">
+                                        <input formControlName="powerMeterOld" class="input-bill-style " type="number">
                                     </td>
                                     <td>
-                                        <input formControlName="powerMeterOld" class="input-bill-style " type="number">
+                                        <input formControlName="powerMeterNew" class="input-bill-style " type="number">
                                     </td>
                                     <td>
                                         <input formControlName="powerMeterUnit" class="input-bill-style " type="number">
@@ -475,14 +503,16 @@
                                     </td>
                                     <td>
                                         <input formControlName="otherPrice" class="input-other-style text-center"
-                                            type="number" (keyup)="calEditInvoice()" [(ngModel)]="otherPrice">
+                                            type="number">
+                                        <button class="btn btn-info " type="submit" (click)="calEditInvoice()"
+                                            hidden></button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th colspan="5">รวม</th>
                                     <td>
                                         <input formControlName="invoiceTotal" class="input-bill-style " type="number"
-                                            [(ngModel)]="invoiceTotal">
+                                            [(ngModel)]="this.formInvoice.value.invoiceTotal">
                                     </td>
                                 </tr>
                             </tbody>

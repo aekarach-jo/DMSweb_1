@@ -38,7 +38,7 @@
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
               "./node_modules/pdfmake-thai/build/pdfmake.min.js",
               "./node_modules/pdfmake-thai/build/vfs_fonts.js",
-              "./src/assets/script/user.js"
+              "./src/assets/script/func.js"
           ]
           },
           "configurations": {
@@ -46,13 +46,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "5mb",
+                  "maximumError": "10mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
                 }
               ],
               "fileReplacements": [

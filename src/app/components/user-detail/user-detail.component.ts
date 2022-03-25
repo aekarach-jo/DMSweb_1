@@ -115,31 +115,123 @@ export class UserDetailComponent implements OnInit {
   }
 
   createUserDetail() {
-    Swal.fire({
-      position: 'center',
-      text: "ยืนยันการบันทึกหรือไม่?",
-      icon: 'warning',
-      showCancelButton: true,
-      cancelButtonColor: '#d33',
-      confirmButtonColor: '#2aad19',
-      confirmButtonText: 'ยืนยัน'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.formUserDetail.value.bookingDate = new Date;
-        this.formUserDetail.value.status = "Open"
-        this.formUserDetail.value.userStatus = "In"
-        console.log(this.formUserDetail.value)
-        this.callapi.createUserDetail(this.formUserDetail.value).subscribe(create => {
-          console.log(create);
-          this.getUserDetailId = create.userDetailId
-          this.oncreateUser()
-        })
-      }
-    })
+    console.log(this.formUserDetail.value.userDetailId);
+
+    if (this.formUserDetail.value.firstName == null) {
+      this.callapi.checkUser(this.formUser.value.userName).subscribe(state => {
+        if (state.toString() == "ไอดีนี้สามารถใช้งานได้") {
+          Swal.fire({
+            position: 'center',
+            text: "ต้องการสร้างไอดีเพิ่มหรือไม่?",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+            confirmButtonColor: '#2aad19',
+            confirmButtonText: 'ยืนยัน'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: 'กรุณากรอกเบอร์โทรศัพท์',
+                input: 'text',
+                inputAttributes: {
+                  autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'ยืนยัน',
+                showLoaderOnConfirm: true,
+                allowOutsideClick: () => !Swal.isLoading()
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  console.log(result.value.toString());
+                  this.callapi.getAllUserDetail().subscribe(userData => {
+                    this.userDetailData = userData
+                    for (let i = 0; i < this.userDetailData.length; i++) {
+                      if (this.userDetailData[i].tel == result.value.toString()) {
+                        this.formUser.value.userDetailId = this.userDetailData[i].userDetailId
+                        this.formUser.value.Status = "Open"
+                        this.formUser.value.userStatus = "In"
+                        this.formUser.value.creationDateTime = new Date
+                        this.formUser.value.permission = "USER"
+                        console.log(this.formUser.value);
+                        this.callapi.createUser(this.formUser.value).subscribe(data => {
+                          console.log(data);
+                          this.emptyUserForm()
+                          this.emptyUserDetailForm()
+                        })
+                        Swal.fire({
+                          position: "center",
+                          icon: 'success',
+                          title: "สำเร็จ",
+                          showConfirmButton: false,
+                          timer: 1000
+                        })
+                        break;
+                      } else {
+                        Swal.fire({
+                          position: "center",
+                          icon: 'warning',
+                          title: "เบอร์โทรศัพท์นี้ไม่มีในระบบ",
+                          showConfirmButton: false,
+                          timer: 1600
+                        })
+                      }
+                    }
+                  })
+                }
+              })
+            }
+          })
+        } else {
+          Swal.fire({
+            position: "center",
+            icon: 'warning',
+            title: "ไอดีนี้มีในระบบแล้ว",
+            showConfirmButton: false,
+            timer: 1000
+          })
+        }
+      })
+
+
+    } else {
+      Swal.fire({
+        position: 'center',
+        text: "ยืนยันการบันทึกหรือไม่?",
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+        confirmButtonColor: '#2aad19',
+        confirmButtonText: 'ยืนยัน'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.formUserDetail.value.bookingDate = new Date;
+          this.formUserDetail.value.status = "Open"
+          this.formUserDetail.value.userStatus = "In"
+          console.log(this.formUserDetail.value)
+          this.callapi.checkUser(this.formUser.value.userName).subscribe(state => {
+            if (state.toString() == "ไอดีนี้สามารถใช้งานได้") {
+              this.callapi.createUserDetail(this.formUserDetail.value).subscribe(create => {
+                console.log(create);
+                this.formUser.value.userDetailId = create.userDetailId
+                this.oncreateUser()
+              })
+            } else {
+              Swal.fire({
+                position: "center",
+                icon: 'warning',
+                title: "ไอดีนี้มีในระบบแล้ว",
+                showConfirmButton: false,
+                timer: 1000
+              })
+            }
+          })
+
+        }
+      })
+    }
   }
 
   oncreateUser() {
-    this.formUser.value.userDetailId = this.getUserDetailId
     this.formUser.value.Status = "Open"
     this.formUser.value.userStatus = "In"
     this.formUser.value.creationDateTime = new Date
@@ -149,7 +241,6 @@ export class UserDetailComponent implements OnInit {
       this.getRoomByRoomNumber();
       console.log(data);
     })
-
     Swal.fire({
       position: "center",
       icon: 'success',

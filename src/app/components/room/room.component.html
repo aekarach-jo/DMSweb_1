@@ -1,23 +1,6 @@
 <div class="container width-height-card hiden-scroll" *ngIf="statusLogin == 'login'">
     <div class="search-filter mb-4 ml-3">
         <input class="form-control pl-2 search-filter" type="text" name="search" [(ngModel)]="searchText" placeholder=" ค้นหา..">
-        <!-- <div class="row row-cols-sm-5 div-btn-floor">
-            <div class="col"> <input class="btn btn-danger btn-floor" type="button" value="ชั้นที่ 1"
-                    (click)="getRoomByFloor('1')">
-            </div>
-            <div class="col"> <input class="btn btn-danger btn-floor" type="button" value="ชั้นที่ 2"
-                    (click)="getRoomByFloor('2')">
-            </div>
-            <div class="col"> <input class="btn btn-danger btn-floor" type="button" value="ชั้นที่ 3"
-                    (click)="getRoomByFloor('3')">
-            </div>
-            <div class="col"> <input class="btn btn-danger btn-floor" type="button" value="ชั้นที่ 4"
-                    (click)="getRoomByFloor('4')">
-            </div>
-            <div class="col"> <input class="btn btn-danger btn-floor" type="button" value="Reset"
-                    (click)="getAllRoom()">
-            </div>
-        </div> -->
     </div>
 
     <div class="row row-cols-md-5" *ngIf="roomAllData != null">
