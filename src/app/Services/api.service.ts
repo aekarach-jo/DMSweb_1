@@ -1,8 +1,10 @@
 
+  
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { checkout } from '../Models/checkout';
 import { invoice } from '../Models/invoice';
 import { payment } from '../Models/payment';
 import { report } from '../Models/report';
@@ -192,6 +194,28 @@ export class ApiService {
     return this.http.get<setting>(`${environment.apiUrl}Setting/DeleteSetting/${settingID}`)
   }
 
+
+  public getAllCheckout() {
+    return this.http.get<checkout>(`${environment.apiUrl}Checkout/GetAllCheckout`)
+  }
+  public getCheckoutById(checkoutID: string) {
+    return this.http.get<checkout>(`${environment.apiUrl}Checkout/GetCheckoutById/${checkoutID}`)
+  }
+  public getCheckoutByStatus(status: string) {
+    return this.http.get<checkout>(`${environment.apiUrl}Checkout/GetCheckoutByStatus/${status}`)
+  }
+  public getCheckoutByMonth(start: Date , end :Date) {
+    return this.http.get<checkout>(`${environment.apiUrl}Checkout/GetCheckoutByMonth/${start}/${end}`)
+  }
+  public createCheckout(checkout: checkout) {
+    return this.http.post<checkout>(`${environment.apiUrl}Checkout/CreateCheckout`, checkout)
+  }
+  public editCheckout(checkoutID: string, checkout: checkout) {
+    return this.http.put<checkout>(`${environment.apiUrl}Checkout/EditCheckout/${checkoutID}`, checkout)
+  }
+  public deleteCheckout(checkoutID: string) {
+    return this.http.get<checkout>(`${environment.apiUrl}Checkout/DeleteCheckout/${checkoutID}`)
+  }
 
 
 }

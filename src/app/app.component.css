@@ -248,7 +248,8 @@
 
 .menu{
   box-sizing: border-box;
-  padding-top: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 0.7rem;
   display: flex;
   justify-content: center;
   align-items: top;
@@ -269,7 +270,7 @@
   display: flex;
   justify-content: end;
   align-items: center;
-  width: 350px;
+  width: 410px;
 }
 .navigation ul li{
   position: relative;
@@ -297,8 +298,10 @@
   text-align: center;
   transition: 0.5s;
   color: #222327;
-  margin-right: 4px;
+  margin-right: -14px;
+  padding: 5px;
 }
+
 
 .navigation ul li:hover a .icon{
   transform: translateY(-20px);

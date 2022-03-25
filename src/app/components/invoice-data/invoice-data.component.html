@@ -411,7 +411,7 @@
 <div class="modal fade" id="modalEditInvoice" aria-hidden="true" data-backdrop="true">
     <div class="modal-dialog modal-dialog-showInvoice">
         <div class="modal-content modal-content-showInvoice">
-            <div class="modal-header modal-header-showInvoice"></div>
+            <div class="modal-header modal-header-showInvoice">แก้ไขบิล</div>
             <div class="modal-body modal-body-showInvoice">
                 <div class="hiden-scroll">
                     <div class="row">
@@ -521,8 +521,9 @@
                 </div>
             </div>
             <div class="modal-footer d-block mx-auto">
-                <button class="btn btn-primary rounded-pill" data-dismiss="modal"
-                    (click)="onEditInvoiceData()">ส่งบิล</button>
+                <button class="btn btn-success rounded-pill" data-dismiss="modal"
+                    (click)="onEditInvoiceData()">ยืนยัน</button>
+                <button class="btn btn-danger rounded-pill" data-dismiss="modal">ยกเลิก</button>
             </div>
         </div>
     </div>

@@ -296,7 +296,7 @@ export class InvoiceDataComponent implements OnInit {
       this.formInvoice.value.status = "Open"
       this.formInvoice.value.otherNote = ""
       this.formInvoice.value.otherPrice = 0
-      this.formInvoice.value.invoiceStatus = "ยังไม่ส่งบิล"
+      this.formInvoice.value.invoiceStatus = "ยังไม่ชำระ"
       this.formInvoice.value.roomNumber = this.getRoomNumber
       this.formInvoice.value.roomId = this.getRoomId
       this.formInvoice.value.creationDateTime = new Date
@@ -325,7 +325,7 @@ export class InvoiceDataComponent implements OnInit {
       Swal.fire({
         position: "center",
         icon: 'success',
-        title: "ส่งบิลแล้ว",
+        title: "สำเร็จ",
         showConfirmButton: false,
         timer: 1000
       })

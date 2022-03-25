@@ -15,6 +15,7 @@ import { ReportComponent } from './components/report/report.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { SettingComponent } from './components/setting/setting.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SettingComponent } from './components/setting/setting.component';
     ReportComponent,
     ProfileComponent,
     PaymentComponent,
-    SettingComponent
+    SettingComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

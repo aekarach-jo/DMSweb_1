@@ -8,6 +8,7 @@ import { InvoiceDataComponent } from './components/invoice-data/invoice-data.com
 import { ReportComponent } from './components/report/report.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SettingComponent } from './components/setting/setting.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'room',pathMatch: 'full' },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'manage-user', component: ManageUserComponent},
   { path: 'report', component: ReportComponent},
   { path: 'profile', component: ProfileComponent},
-  { path: 'setting', component: SettingComponent}
+  { path: 'setting', component: SettingComponent},
+  { path: 'checkout', component: CheckoutComponent}
 ]
 
 @NgModule({

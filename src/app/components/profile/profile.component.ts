@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { checkout } from 'src/app/Models/checkout';
 import { invoice } from 'src/app/Models/invoice';
 import { report } from 'src/app/Models/report';
 import { ApiService } from 'src/app/Services/api.service';
 import Swal from 'sweetalert2';
 
+declare var datePicker: any;
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +17,7 @@ import Swal from 'sweetalert2';
 export class ProfileComponent implements OnInit {
   displayedColumns: string[] = ['ห้องที่', 'รายละเอียด', 'วันที่', 'เวลา', 'เพิ่มเติม'];
 
+  formCheckout: any
   formReport: any
   formRoom: any
   formInvoice: any
@@ -43,6 +46,8 @@ export class ProfileComponent implements OnInit {
   roomStatusData: any
   reportDataByRoomId: any[] = []
   showInvoiceAllData: any[] = []
+  checkBtn: any
+  selected: Date | null;
   constructor(public router: Router, public callapi: ApiService, public fb: FormBuilder) {
     this.statusLogin = localStorage.getItem('statuslogin')
     this.permission = localStorage.getItem('permission')
@@ -95,10 +100,33 @@ export class ProfileComponent implements OnInit {
         status: [null],
         roomId: [null],
       }),
+      this.formCheckout = fb.group({
+        checkoutId: [null],
+        checkoutStatus: [null],
+        checkoutDate: [null],
+        roomNumber: [null],
+        invoiceStatus: [null],
+        userId: [null],
+        creationDateTime: [null],
+        status: [null],
+      }),
       this.formFindMonth = this.fb.group({
         monthStart: null,
         monthEnd: null,
       })
+  }
+
+  patchValue3(receiveCheckoutId: checkout) {
+    this.formCheckout.patchValue({
+      checkoutId: receiveCheckoutId.checkoutId,
+      checkoutStatus: receiveCheckoutId.checkoutStatus,
+      checkoutDate: receiveCheckoutId.checkoutDate,
+      roomNumber: receiveCheckoutId.roomNumber,
+      invoiceStatus: receiveCheckoutId.invoiceStatus,
+      userId: receiveCheckoutId.userId,
+      creationDateTime: receiveCheckoutId.creationDateTime,
+      status: receiveCheckoutId.status,
+    })
   }
 
   patchValue2(receiveInvoiceId: invoice) {
@@ -298,7 +326,6 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-
   getReportById(id: string) {
     this.callapi.getReportById(id).subscribe(data => {
       this.reportDataById = data
@@ -309,9 +336,58 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  checkPressBtn() {
+    Swal.fire({
+      position: 'center',
+      text: "ยืนยันการคืนห้องพักหรือไม่?",
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+      confirmButtonColor: '#2aad19',
+      confirmButtonText: 'ยืนยัน'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.createUserCheckout()
+      }
+    })
+  }
+
+  createUserCheckout() {
+    this.formCheckout.value.checkoutStatus = "ยื่นคำร้อง"
+    this.formCheckout.value.status = "Open"
+    this.formCheckout.value.roomNumber = this.roomNumber
+    this.formCheckout.value.invoiceStatus = this.formInvoice.value.invoiceStatus
+    this.formCheckout.value.userId = this.userId
+    this.formCheckout.value.creationDateTime = new Date
+    this.formCheckout.value.checkoutDate = this.selected
+    console.log(this.selected);
+    if (this.formCheckout.value.checkoutDate != null) {
+      console.log(this.formCheckout.value);
+      this.callapi.createCheckout(this.formCheckout.value).subscribe(dataCheckout => {
+        console.log(dataCheckout);
+        Swal.fire({
+          position: "center",
+          icon: 'success',
+          title: "สำเร็จ",
+          showConfirmButton: false,
+          timer: 1000
+        })
+      })
+    } else {
+      Swal.fire({
+        position: "center",
+        icon: 'warning',
+        title: "กรุณาเลือกวันที่",
+        showConfirmButton: false,
+        timer: 1000
+      })
+    }
+
+  }
+
 
   ngOnInit(): void {
     this.getRoomNumber()
-    
+
   }
 }

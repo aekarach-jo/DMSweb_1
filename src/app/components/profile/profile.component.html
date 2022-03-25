@@ -1,5 +1,8 @@
 <div class="container width-height-container hiden-scroll">
     <div class="col">
+        <button class="btn-header-checkout float-right" type="button" data-toggle="modal" data-target="#modalDatePicker">
+            ขอคืนห้องพัก
+        </button>
         <div class=" leftCol ml-4">
             <div class="row">
                 <div class="d-block mx-auto">
@@ -8,8 +11,8 @@
                     <p class="align-middle text-center text-header-bio">คุณ {{userDetailName}}</p>
                     <hr width="100%" size="3" color="fcfcfc">
                 </div>
-
             </div>
+            
         </div>
         <div class="row row-cols-sm-3 ">
             <div class="col hover-overlay">
@@ -296,7 +299,7 @@
 <!-- -----------------------  Modal แจ้งปัญหา  ------------------------------- -->
 <!-- ------------------------------------------------------------------- -->
 
-<div class="modal fade" id="modalTextReport" data-backdrop="true" aria-hidden="true">
+<div class="modal fade" id="modalTextReport" data-backdrop="static"  aria-hidden="true">
     <div class="modal-dialog modal-dialog-full-width">
         <div class="modal-content modal-content-full-width" [formGroup]="formReport">
             <div class="modal-header modal-header-bg"></div>
@@ -320,7 +323,7 @@
 <!-- -----------------------  Modal ส่งบิล   ------------------------------- -->
 <!-- ------------------------------------------------------------------- -->
 
-<div class="modal fade" id="modalShowInvoice" aria-hidden="true" data-backdrop="true">
+<div class="modal fade" id="modalShowInvoice" aria-hidden="true" data-backdrop="static" >
     <div class="modal-dialog modal-dialog-showInvoice">
         <div class="modal-content modal-content-showInvoice">
             <div class="modal-header modal-header-showInvoice"></div>
@@ -455,3 +458,26 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalDatePicker" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-date">
+      <div class="modal-content modal-dialog-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-header-date text-whtie" id="exampleModalLabel">กรุณาเลือกวันที่</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body align-middle d-block mx-auto">
+            <mat-card class="calendar-card">
+                <mat-calendar [(selected)]="selected"></mat-calendar>
+              </mat-card>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="checkPressBtn()">ยืนยัน</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+        </div>
+      </div>
+    </div>
+  </div>
