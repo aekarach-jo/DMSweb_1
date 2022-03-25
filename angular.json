@@ -38,7 +38,7 @@
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
               "./node_modules/pdfmake-thai/build/pdfmake.min.js",
               "./node_modules/pdfmake-thai/build/vfs_fonts.js",
-              "./src/assets/script/user.js"
+              "./src/assets/script/func.js"
           ]
           },
           "configurations": {

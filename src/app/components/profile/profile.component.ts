@@ -6,12 +6,15 @@ import { report } from 'src/app/Models/report';
 import { ApiService } from 'src/app/Services/api.service';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  displayedColumns: string[] = ['ห้องที่', 'รายละเอียด', 'วันที่', 'เวลา', 'เพิ่มเติม'];
+
   formReport: any
   formRoom: any
   formInvoice: any
@@ -19,6 +22,7 @@ export class ProfileComponent implements OnInit {
   roomNumber: any
   roomId: any
   userDetailId: any
+  userDetailName: any
   statusLogin: any
   permission: any
   dataUserName: any
@@ -28,6 +32,17 @@ export class ProfileComponent implements OnInit {
   invoicData: any
   showInvoiceNumber: any
   showCreationDate: any
+  dataSource: any
+  reportDataById: any
+  getId: any
+  showRoomNumber: any
+  invoiceAllData: any
+  getInvoiceIdData: any
+  getInvoiceId: any
+  invoiceTotal: any
+  roomStatusData: any
+  reportDataByRoomId: any[] = []
+  showInvoiceAllData: any[] = []
   constructor(public router: Router, public callapi: ApiService, public fb: FormBuilder) {
     this.statusLogin = localStorage.getItem('statuslogin')
     this.permission = localStorage.getItem('permission')
@@ -87,8 +102,6 @@ export class ProfileComponent implements OnInit {
   }
 
   patchValue2(receiveInvoiceId: invoice) {
-    console.log(receiveInvoiceId);
-
     this.formInvoice.patchValue({
       invoiceId: receiveInvoiceId.invoiceId,
       invoiceNumber: receiveInvoiceId.invoiceNumber,
@@ -148,9 +161,11 @@ export class ProfileComponent implements OnInit {
     if (num == 1) {
       this.switchPage = 1
     } else if (num == 2) {
+      this.emptyFormReport()
       this.switchPage = 2
     } else {
       this.switchPage = 3
+      this.getAllInvoice()
     }
   }
 
@@ -159,14 +174,45 @@ export class ProfileComponent implements OnInit {
     this.callapi.getUserByID(this.userId).subscribe(data => {
       this.callapi.getUserDetailById(data.userDetailId).subscribe(i => {
         this.roomNumber = i.roomNumber;
+        this.userDetailName = i.firstName
         console.log(this.roomNumber);
         this.callapi.getRoomByNumber(this.roomNumber).subscribe(roomData => {
           this.roomId = roomData.roomId;
           console.log(this.roomId);
           this.getInvoiceByFilterMonth()
+          this.getAllReport()
         })
-
       })
+    })
+  }
+
+  getAllInvoice() {
+    this.showInvoiceAllData = []
+    this.callapi.getAllInvoice().subscribe(data => {
+      this.invoiceAllData = data
+      for (let i = 0; i < this.invoiceAllData.length; i++) {
+        if (this.invoiceAllData[i].roomId == this.roomId) {
+          this.showInvoiceAllData.push(this.invoiceAllData[i])
+        }
+      }
+      console.log(this.invoiceAllData);
+    })
+  }
+
+  getInvoiceById(id: string) {
+    console.log(id);
+
+    this.callapi.getInvoiceById(id).subscribe(data => {
+      this.getInvoiceIdData = data
+      this.getInvoiceId = data.invoiceId
+      this.showInvoiceNumber = data.invoiceNumber
+      this.showCreationDate = data.creationDateTime
+      this.invoiceTotal = data.invoiceTotal
+      this.showRoomNumber = this.roomNumber
+      console.log(data);
+
+      this.patchValue(this.getInvoiceIdData)
+      console.log(this.formInvoice.value);
     })
   }
 
@@ -238,11 +284,34 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  getAllReport() {
+    this.reportDataByRoomId = []
+    this.callapi.getAllReport().subscribe(data => {
+      this.dataSource = data
+      console.log(this.dataSource);
+      for (let i = 0; i < this.dataSource.length; i++) {
+        if (this.dataSource[i].roomId == this.roomId) {
 
+          this.reportDataByRoomId.push(this.dataSource[i])
+        }
+      }
+    })
+  }
+
+
+  getReportById(id: string) {
+    this.callapi.getReportById(id).subscribe(data => {
+      this.reportDataById = data
+      this.getId = data.reportId
+      this.showRoomNumber = data.roomNumber
+      this.patchValue(this.reportDataById)
+      console.log(data);
+    })
+  }
 
 
   ngOnInit(): void {
     this.getRoomNumber()
+    
   }
-
 }

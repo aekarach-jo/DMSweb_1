@@ -39,8 +39,8 @@
 .text-color{
     color: rgb(255, 255, 255);
     font-size: 20px;
-    margin-bottom: 10px;
-    margin-left: 8px;
+    margin: 10px;
+    
 }
 .date-picker{
     background: rgba(255, 255, 255, 1);
