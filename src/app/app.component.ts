@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { user } from './Models/user';
 import { ApiService } from './Services/api.service';
 
-declare const popup : any ;
+declare const popup: any;
 
 @Component({
   selector: 'app-root',
@@ -48,14 +48,14 @@ export class AppComponent {
 
   get formValidLogin() { return this.formLogin.controls }
 
-  btnToggle() {
-    const hamburger_menu = document.querySelector(".hamburger-menu");
-    const container = document.querySelector(".container");
-    hamburger_menu.addEventListener("click", () => {
-    container.classList.toggle("active");
-    })
-  }
-  
+  // btnToggle() {
+  //   const hamburger_menu = document.querySelector(".hamburger-menu");
+  //   const container = document.querySelector(".container");
+  //   hamburger_menu.addEventListener("click", () => {
+  //   container.classList.toggle("active");
+  //   })
+  // }
+
 
 
   checkUserAndPass() {
@@ -95,7 +95,7 @@ export class AppComponent {
     }
   }
 
-  loginWithGuest(){
+  loginWithGuest() {
     this.formLogin.value.userName = "GUEST"
     this.formLogin.value.password = "GUEST"
     this.checkUserAndPass()
@@ -103,29 +103,29 @@ export class AppComponent {
 
   login() {
     this.callApi.checkUserAndPass(this.formLogin.value.userName, this.formLogin.value.password).subscribe(user => {
-        localStorage.setItem('iduser', user.userId)
-        localStorage.setItem('iduserName', user.userName)
-        localStorage.setItem('permission', user.permission)
-        localStorage.setItem('statuslogin', 'login')
-        this.statusLogin = localStorage.getItem('statuslogin')
-        this.permission = localStorage.getItem('permission')
-        this.dataUserName = localStorage.getItem('iduserName')
-        if (user.permission == 'ADMIN') {
-          console.log(user.permission);
-          this.router.navigateByUrl('/room')
-        }
-        if (user.permission == 'OWNER') {
-          console.log(user.permission);
-          this.router.navigateByUrl('/room')
-        }
-        if (user.permission == 'USER') {
-          console.log(user.permission);
-          this.router.navigateByUrl('/room')
-        }
-        if (user.permission == 'GUEST') {
-          console.log(user.permission);
-          this.router.navigateByUrl('/room')
-        }
+      localStorage.setItem('iduser', user.userId)
+      localStorage.setItem('iduserName', user.userName)
+      localStorage.setItem('permission', user.permission)
+      localStorage.setItem('statuslogin', 'login')
+      this.statusLogin = localStorage.getItem('statuslogin')
+      this.permission = localStorage.getItem('permission')
+      this.dataUserName = localStorage.getItem('iduserName')
+      if (user.permission == 'ADMIN') {
+        console.log(user.permission);
+        this.router.navigateByUrl('/room')
+      }
+      if (user.permission == 'OWNER') {
+        console.log(user.permission);
+        this.router.navigateByUrl('/room')
+      }
+      if (user.permission == 'USER') {
+        console.log(user.permission);
+        this.router.navigateByUrl('/room')
+      }
+      if (user.permission == 'GUEST') {
+        console.log(user.permission);
+        this.router.navigateByUrl('/room')
+      }
     }, error => {
       this.submitLogin = true
       this.statusUsername = true
@@ -223,19 +223,19 @@ export class AppComponent {
       this.filterByPermission = "USER";
     } else if (permission == "OWNER") {
       this.filterByPermission = "OWNER"
-    } else if(permission == "GUEST"){
+    } else if (permission == "GUEST") {
       this.filterByPermission = "GUEST"
     } else {
       this.filterByPermission = ""
     }
   }
-  
+
   // popupToShowCheckout(){
   //   let dates = new Date
 
   //   console.log(dates);
-    
-    
+
+
   //   Swal.fire({
   //     position: "center",
   //     icon: 'warning',
