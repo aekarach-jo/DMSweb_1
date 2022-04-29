@@ -17,6 +17,7 @@ export class ManageUserComponent implements OnInit {
   userData: any
   formUserDetail: any
   formUser: any
+  formRoom: any
   userDetailData: any
   getUserDetailId: userDetail
   roomStatusData: any
@@ -39,6 +40,7 @@ export class ManageUserComponent implements OnInit {
       deposit: [null],
       bookingDate: [null],
       bookingDateOfStay: [null],
+      creationDatetime: [null],
       dateIn: [null],
       dateOut: [null],
       roomNumber: [null],
@@ -54,6 +56,17 @@ export class ManageUserComponent implements OnInit {
         deletetionDateTime: [null],
         userDetailId: [null],
         Status: [null],
+      }),this.formRoom = fb.group({
+        roomId: [null],
+        roomType: [null],
+        roomNumber: [null],
+        roomRate: [null],
+        waterMeter: [null],
+        powerMeter: [null],
+        floor: [null],
+        roomStatus: [null],
+        status: [null],
+        userId: [null]
       })
   }
 
@@ -77,6 +90,7 @@ export class ManageUserComponent implements OnInit {
       deposit: receiveUserDataId.deposit,
       bookingDate: receiveUserDataId.bookingDate,
       bookingDateOfStay: receiveUserDataId.bookingDateOfStay,
+      creationDatetime: receiveUserDataId.creationDatetime,
       dateIn: receiveUserDataId.dateIn,
       dateOut: receiveUserDataId.dateOut,
       roomNumber: receiveUserDataId.roomNumber,
@@ -127,6 +141,7 @@ export class ManageUserComponent implements OnInit {
       deposit: null,
       bookingDate: null,
       bookingDateOfStay: null,
+      creationDatetime: null,
       dateIn: null,
       dateOut: null,
       roomNumber: null,
@@ -154,6 +169,14 @@ export class ManageUserComponent implements OnInit {
   onEditUserDetail(){
     console.log(this.getId);
     this.callapi.editUserDetail(this.getId, this.formUserDetail.value).subscribe(data =>{
+      this.callapi.getRoomByNumber(this.formUserDetail.value.roomNumber).subscribe(room => {
+        this.formRoom.value = room
+        this.formRoom.value.userDetailId = this.formUserDetail.value.userDetailId
+        this.formRoom.value.roomStatus = "ไม่ว่าง"
+        console.log(this.formRoom.value);
+        console.log(room.roomId);
+        this.callapi.editRoom(room.roomId, this.formRoom.value).subscribe(edit => { })
+      })
       Swal.fire({
         position: "center",
         icon: 'success',
