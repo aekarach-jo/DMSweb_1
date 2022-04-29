@@ -21,12 +21,16 @@ export class RoomComponent implements OnInit {
   reserveRoom = "จอง"
   filterFloor: any
 
-  statusLogin : any
-  permission : any
-  dataUserName : any
+  statusLogin: any
+  permission: any
+  dataUserName: any
 
-  settingData : any
-  valid: any[]=[]
+  settingData: any
+  valid: any[] = []
+
+  fan : any
+  air : any
+
   constructor(public router: Router, public callapi: ApiService, public fb: FormBuilder) {
     this.statusLogin = localStorage.getItem('statuslogin')
     this.permission = localStorage.getItem('permission')
@@ -78,9 +82,9 @@ export class RoomComponent implements OnInit {
 
   getAllRoom() {
     this.callapi.getAllRoom().subscribe(data => {
-      this.roomAllData = data; 
+      this.roomAllData = data;
       console.log(this.roomAllData);
-      
+
     })
   }
 
@@ -92,26 +96,33 @@ export class RoomComponent implements OnInit {
     })
   }
 
-  getRoomByFloor(floor : string){
-    this.callapi.getRoomByFloor(floor).subscribe(floor =>{
+  getRoomByFloor(floor: string) {
+    this.callapi.getRoomByFloor(floor).subscribe(floor => {
       this.roomAllData = floor
       console.log(floor);
     })
   }
 
   onCreateRoom() {
-    this.callapi.createRoom(this.formRoom.value).subscribe(data => {
-      console.log(data);
-      Swal.fire({
-        position: "center",
-        icon: 'success',
-        title: "สำเร็จ",
-        showConfirmButton: false,
-        timer: 1000
+    if (this.formRoom.value.roomType == "พัดลม") {
+      this.formRoom.value.roomRate = this.fan
+    }else if(this.formRoom.value.roomType == "แอร์"){
+      this.formRoom.value.roomRate = this.air
+
+    }
+      this.callapi.createRoom(this.formRoom.value).subscribe(data => {
+        console.log(data);
+        Swal.fire({
+          position: "center",
+          icon: 'success',
+          title: "สำเร็จ",
+          showConfirmButton: false,
+          timer: 1000
+        })
+        this.getAllRoom();
+        this.emptyFormRoom();
       })
-      this.getAllRoom();
-      this.emptyFormRoom();
-    })
+
   }
 
   onEditRoom(roomId: string) {
@@ -141,11 +152,11 @@ export class RoomComponent implements OnInit {
     })
   }
 
-  getAllSetting(){
-    this.callapi.getAllSetting().subscribe(data =>{
+  getAllSetting() {
+    this.callapi.getAllSetting().subscribe(data => {
       this.settingData = data
-      console.log(this.settingData);   
-      if(this.settingData.length == 0){
+      console.log(this.settingData);
+      if (this.settingData.length == 0) {
         Swal.fire({
           title: 'กรุณาตั้งค่าก่อนสร้างห้อง',
           icon: 'warning',
@@ -161,6 +172,11 @@ export class RoomComponent implements OnInit {
             this.router.navigateByUrl('/setting')
           }
         })
+      }else{
+        for (let i = 0; i < this.settingData.length; i++) {
+          this.air = this.settingData[i].roomrateTypeAir
+          this.fan = this.settingData[i].roomrateTypeFan
+        }
       }
     })
   }

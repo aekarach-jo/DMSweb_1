@@ -5,7 +5,6 @@ import Swal from 'sweetalert2';
 import { user } from './Models/user';
 import { ApiService } from './Services/api.service';
 
-declare const popup: any;
 
 @Component({
   selector: 'app-root',

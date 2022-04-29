@@ -1,7 +1,7 @@
 <div class="container width-height-container hiden-scroll">
     <p class="text-header">ตั้งค่าหอหัก</p>
-    <button *ngIf="this.showButtonCreate == true"  class="btn btn-info d-block mx-auto mt-4" type="button" (click)="onCreateSetting()">สร้าง</button>
-    <div *ngIf="this.showButtonCreate == false" class="container container-input ">
+    <!-- <button *ngIf="this.showButtonCreate == true"  class="btn btn-info d-block mx-auto mt-4" type="button" (click)="onCreateSetting()">สร้าง</button> -->
+    <div class="container container-input ">
         <form [formGroup]="formSetting"  class="form-inline box-input">
             <div class="form-group ">
                 <label class="text-style" for="waterPrice">ค่าน้ำ</label>

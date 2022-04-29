@@ -20,50 +20,51 @@
                     <div class="row row-cols-md-2 mt-2">
                         <div class="col-md-6 left-col">
                             <label for="birthday" class="text-color">วัน/เดือน/ปีเกิด</label>
-                            <input formControlName="birthday" class="form-control" type="text" >
+                            <input formControlName="birthday" class="form-control" type="text">
                         </div>
                         <div class="col-md-6 right-col">
                             <label for="tel" class="text-color">เบอร์โทรศัพท์</label>
-                            <input formControlName="tel" class="form-control" type="text" >
+                            <input formControlName="tel" class="form-control" type="text">
                         </div>
                     </div>
                     <div class="row row-cols-md-2 mt-2">
                         <div class="col-md-6 left-col">
                             <label for="email" class="text-color">อีเมล</label>
-                            <input formControlName="email" class="form-control" type="text" >
+                            <input formControlName="email" class="form-control" type="text">
                         </div>
                         <div class="col-md-6 right-col">
                             <label for="age" class="text-color">อายุ</label>
-                            <input formControlName="age" class="form-control" type="number" >
+                            <input formControlName="age" class="form-control" type="number">
                         </div>
                     </div>
                     <div class="row row-cols-md-2 mt-2">
                         <div class="col-md-6 left-col">
                             <label for="idCard" class="text-color">เลขบัตรประจำตัวประชาชน</label>
-                            <input formControlName="idCard" class="form-control" type="text" >
+                            <input formControlName="idCard" class="form-control" type="text">
                         </div>
-
-                    </div>
-                    <div class="row row-cols-md-1 mt-2">
-                        <div class="col-md-12 left-col">
-                            <label for="address" class="text-color">ที่อยู่</label>
-                            <textarea formControlName="address" class="form-control" type="text" ></textarea>
-                        </div>
-                    </div>
-                    <div class="row row-cols-md-3 mt-2">
-                        <div class="col-md-4 left-col">
-                            <label for="deposit" class="text-color">เงินมัดจำ</label>
-                            <input formControlName="deposit" class="form-control" type="number" >
-                        </div>
-                        <div class="col-md-4 right-col">
+                        <div class="col-md-6 right-col">
                             <label for="roomNumber" class="text-color">ห้องที่เช่า</label>
                             <select formControlName="roomNumber" class="form-control form-control-lg" type="text">
                                 <option></option>
                                 <option *ngFor="let item of roomStatusData">{{item.roomNumber}}</option>
                             </select>
                         </div>
-                        <div class="col-md-4 right-col">
-                            <label for="bookingDateOfStay" class="text-color">วันที่เข้าอยู่</label>
+
+                    </div>
+                    <div class="row row-cols-md-1 mt-2">
+                        <div class="col-md-12 left-col">
+                            <label for="address" class="text-color">ที่อยู่</label>
+                            <textarea formControlName="address" class="form-control" type="text"></textarea>
+                        </div>
+                    </div>
+                    <div class="row row-cols-md-2 mt-2">
+                        <div class="col-md-3 left-col">
+                            <label for="deposit" class="text-color">เงินมัดจำ</label>
+                            <input formControlName="deposit" class="form-control" type="number">
+                        </div>
+                      
+                        <div class="col-md-3 ">
+                            <label for="bookingDateOfStay" class="text-color">วันที่จอง</label><br>
                             <mat-form-field appearance="outline" class="date-picker">
                                 <input matInput [matDatepicker]="datepicker" formControlName="bookingDateOfStay">
                                 <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
@@ -108,7 +109,8 @@
                         </div>
                     </div>
                 </div>
-                <button class=" d-block mx-auto bg-info mt-4 text-white" mat-button matStepperNext type="submit">ยืนยัน</button>
+                <button class=" d-block mx-auto bg-info mt-4 text-white" mat-button matStepperNext
+                    type="submit">ยืนยัน</button>
 
             </form>
         </mat-step>

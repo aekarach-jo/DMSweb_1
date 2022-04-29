@@ -296,7 +296,7 @@ export class InvoiceDataComponent implements OnInit {
       this.formInvoice.value.status = "Open"
       this.formInvoice.value.otherNote = ""
       this.formInvoice.value.otherPrice = 0
-      this.formInvoice.value.invoiceStatus = "ยังไม่ชำระ"
+      this.formInvoice.value.invoiceStatus = "ยังไม่ส่งบิล"
       this.formInvoice.value.roomNumber = this.getRoomNumber
       this.formInvoice.value.roomId = this.getRoomId
       this.formInvoice.value.creationDateTime = new Date
@@ -317,8 +317,26 @@ export class InvoiceDataComponent implements OnInit {
     })
   }
 
+  onEditInvoiceAndAddData() {
+    this.formInvoice.value.invoiceStatus = "ยังไม่ส่งบิล"
+    console.log(this.formInvoice.value);
+    this.callapi.editInvoice(this.getInvoiceId, this.formInvoice.value).subscribe(data => {
+      console.log(data);
+      Swal.fire({
+        position: "center",
+        icon: 'success',
+        title: "สำเร็จ",
+        showConfirmButton: false,
+        timer: 1000
+      })
+      this.getInvoiceByFilterMonth()
+      this.getAllInvoice()
+      this.getRoomByStatus()
+      this.emptyFormInvoice()
+    })
+  }
   onEditInvoiceData() {
-    this.formInvoice.value.invoiceStatus = "ยังไม่ชำระ"
+    this.formInvoice.value.invoiceStatus = "ส่งบิลแล้ว"
     console.log(this.formInvoice.value);
     this.callapi.editInvoice(this.getInvoiceId, this.formInvoice.value).subscribe(data => {
       console.log(data);

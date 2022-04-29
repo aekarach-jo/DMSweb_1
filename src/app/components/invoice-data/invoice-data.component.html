@@ -89,7 +89,7 @@
                                     <img
                                         src="https://img.icons8.com/external-sbts2018-lineal-color-sbts2018/46/000000/external-send-social-media-sbts2018-lineal-color-sbts2018.png" />
                                 </div>
-                                <div *ngIf="invoice.invoiceStatus == 'ยังไม่ชำระ'" class="image mt-3" type="button"
+                                <div *ngIf="invoice.invoiceStatus == 'ส่งบิลแล้ว'" class="image mt-3" type="button"
                                     (click)="getInvoiceById(invoice.invoiceId)" data-toggle="modal"
                                     data-target="#modalShowInvoice">
                                     <img src="https://img.icons8.com/color/46/26e07f/ok--v1.png" />
@@ -162,16 +162,16 @@
 
                             </td> -->
                             <td>
-                                <div *ngIf="invoice.invoiceStatus == 'ยังไม่ชำระ'" class="image mt-3" type="button"
-                                    (click)="getInvoiceById(invoice.invoiceId)" data-toggle="modal"
-                                    data-target="#modalEditInvoice">
-                                    <img src="https://img.icons8.com/color/46/26e07f/ok--v1.png" />
-                                </div>
                                 <div *ngIf="invoice.invoiceStatus == 'ยังไม่ส่งบิล'" class="image mt-3" type="button"
                                     (click)="getInvoiceById(invoice.invoiceId)" data-toggle="modal"
                                     data-target="#modalShowInvoice">
                                     <img
                                         src="https://img.icons8.com/external-sbts2018-lineal-color-sbts2018/46/000000/external-send-social-media-sbts2018-lineal-color-sbts2018.png" />
+                                </div>
+                                <div *ngIf="invoice.invoiceStatus == 'ส่งบิลแล้ว'" class="image mt-3" type="button"
+                                    (click)="getInvoiceById(invoice.invoiceId)" data-toggle="modal"
+                                    data-target="#modalShowInvoice">
+                                    <img src="https://img.icons8.com/color/46/26e07f/ok--v1.png" />
                                 </div>
                             </td>
                         </tr>
@@ -522,7 +522,7 @@
             </div>
             <div class="modal-footer d-block mx-auto">
                 <button class="btn btn-success rounded-pill" data-dismiss="modal"
-                    (click)="onEditInvoiceData()">ยืนยัน</button>
+                    (click)="onEditInvoiceAndAddData()">ยืนยัน</button>
                 <button class="btn btn-danger rounded-pill" data-dismiss="modal">ยกเลิก</button>
             </div>
         </div>
