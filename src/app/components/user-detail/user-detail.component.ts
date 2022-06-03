@@ -275,5 +275,4 @@ export class UserDetailComponent implements OnInit {
   ngOnInit() {
     this.getRoomByStatus()
   }
-
 }
