@@ -52,18 +52,13 @@ export class SettingComponent implements OnInit {
       }
       console.log(data);
       if (this.settingAllData.length == 0) {
-        this.showButtonCreate = true
-        this.showButtonEdit = false
-      } else {
-        this.showButtonCreate = false
-        this.showButtonEdit = true
-      }
+        this.onCreateSetting()
+      } 
 
     })
   }
 
   onCreateSetting() {
-    this.showButtonCreate = false
     this.formSetting.value.creationDatetime = new Date
     this.formSetting.value.status = "Open"
     this.formSetting.value.waterPrice = 0
@@ -71,9 +66,6 @@ export class SettingComponent implements OnInit {
     this.formSetting.value.centerService = 0
     this.formSetting.value.roomrateTypeAir = 0
     this.formSetting.value.roomrateTypeFan = 0
-
-    console.log(this.formSetting.value);
-
     this.callapi.createSetting(this.formSetting.value).subscribe(data => {
       console.log(data);
 

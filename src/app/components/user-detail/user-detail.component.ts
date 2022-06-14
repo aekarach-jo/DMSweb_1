@@ -25,6 +25,7 @@ export class UserDetailComponent implements OnInit {
   userDetailData: any
   getUserDetailId: any
 
+  disabled = false;
   constructor(public callapi: ApiService, public fb: FormBuilder, public router: Router) {
     this.formUserDetail = fb.group({
       userDetailId: [null],
@@ -40,6 +41,7 @@ export class UserDetailComponent implements OnInit {
       deposit: [null, [Validators.required, Validators.pattern('[0-9]*')]],
       bookingDate: [null, [Validators.required]],
       bookingDateOfStay: [null, [Validators.required]],
+      creationDatetime: [null, [Validators.required]],
       dateIn: [null, [Validators.required]],
       dateOut: [null, [Validators.required]],
       roomNumber: [null, [Validators.required]],
@@ -100,6 +102,7 @@ export class UserDetailComponent implements OnInit {
       deposit: null,
       bookingDate: null,
       bookingDateOfStay: null,
+      creationDatetime: null,
       dateIn: null,
       dateOut: null,
       roomNumber: null,
@@ -242,7 +245,7 @@ export class UserDetailComponent implements OnInit {
         confirmButtonText: 'ยืนยัน'
       }).then((result) => {
         if (result.isConfirmed) {
-          this.formUserDetail.value.bookingDate = new Date;
+          this.formUserDetail.value.creationDatetime = new Date;
           this.formUserDetail.value.status = "Open"
           this.formUserDetail.value.userStatus = "In"
           console.log(this.formUserDetail.value)
@@ -291,9 +294,11 @@ export class UserDetailComponent implements OnInit {
   getRoomByRoomNumber() {
     this.callapi.getRoomByNumber(this.formUserDetail.value.roomNumber).subscribe(room => {
       this.formRoom.value = room
+      this.formRoom.value.userDetailId = this.formUserDetail.value.userDetailId
       this.formRoom.value.roomStatus = "ไม่ว่าง"
+      console.log(this.formRoom.value);
+      
       this.callapi.editRoom(room.roomId, this.formRoom.value).subscribe(edit => {
-        console.log(edit)
         this.emptyUserForm()
         this.emptyUserDetailForm()
       })
@@ -310,5 +315,4 @@ export class UserDetailComponent implements OnInit {
   ngOnInit() {
     this.getRoomByStatus()
   }
-
 }

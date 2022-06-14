@@ -10,10 +10,11 @@ export interface userDetail {
     idCard : string
     userStatus : string
     deposit : number
-    bookingDate : Date
-    bookingDateOfStay : Date
-    dateIn : Date
-    dateOut : Date
+    bookingDate : Date // ตอนจอง
+    bookingDateOfStay : Date // เลือกเพื่อจอง
+    dateIn : Date // ตอนเข้า คลิกที่จัดการผู้เช่า
+    dateOut : Date // ตอนลบ
+    creationDatetime : Date
     roomNumber : string
     status : string
 }
