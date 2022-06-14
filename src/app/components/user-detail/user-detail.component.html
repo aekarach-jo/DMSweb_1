@@ -24,7 +24,7 @@
                         </div>
                         <div class="col-md-6 right-col">
                             <label for="tel" class="text-color">เบอร์โทรศัพท์</label>
-                            <input formControlName="tel" class="form-control" type="text" >
+                            <input formControlName="tel" class="form-control" type="text" (keyup)="checkTelephone()">
                         </div>
                     </div>
                     <div class="row row-cols-md-2 mt-2">
@@ -76,7 +76,7 @@
                             </mat-form-field>
                         </div>
                     </div>
-                    <div class="row row-cols-md-3 mt-5">
+                    <!-- <div class="row row-cols-md-3 mt-5">
                         <div class="col-md-5 left-col">
                             <label class="text-color">อัปโหลด สำเนาบัตร</label>
                             <input type="file" class="form-control-file">
@@ -85,7 +85,7 @@
                             <label class="text-color">อัปโหลด สำเนาเอกสาร</label>
                             <input type="file" class="form-control-file">
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <label *ngIf="this.formUserDetail.value.bookingDateOfStay == null" class="float-right bg-seccondary"
                     mat-button matStepperNext>ถัดไป</label>

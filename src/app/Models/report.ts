@@ -3,7 +3,7 @@ export interface report {
     title : string
     note : string
     date : Date
-    image : string
+    image : File
     reportNumber : string
     reportStatus : string
     roomId : string

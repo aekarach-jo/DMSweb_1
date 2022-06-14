@@ -100,6 +100,8 @@ export class RoomComponent implements OnInit {
   }
 
   onCreateRoom() {
+    console.log(this.formRoom.value);
+    
     this.callapi.createRoom(this.formRoom.value).subscribe(data => {
       console.log(data);
       Swal.fire({

@@ -132,11 +132,19 @@ table {
 }
 
 .mat-header-cell {
-    background: rgba(58, 190, 223, 0.7);
+    background: #ff6b00;
     color: #fcfcfc;
     text-align: center;
+    font-size: 18px;
 }
 .mat-cell {
     color: #000000;
+    text-align: center;
+}
+
+.text-style{
+    color: #ff6b00;
+    font-weight: 600;
+    font-size : 18px;
     text-align: center;
 }

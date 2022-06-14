@@ -1,40 +1,61 @@
 <div class="body-color" *ngIf="statusLogin == 'login'">
   <nav class="navbar navbar-expand-lg navStyle border-bottom">
-    <div class=" brandStyle  " id="menu-toggle" routerLink="/room">
-      <img class="img-style" src="https://img.icons8.com/fluency/24/000000/hostel.png" />
+    <div class="brandStyle" id="menu-toggle" routerLink="/room">
+      <img
+        class="img-style"
+        src="https://img.icons8.com/fluency/24/000000/hostel.png"
+      />
       Dormitory
     </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <img src="https://img.icons8.com/plumpy/48/000000/menu-squared-2.png" />
     </button>
-    <div class="collapse navbar-collapse   " id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <!-- <li class="nav-item">
         <a class="nav-link navOption btn login-style"></a>
       </li> -->
-        <li class="nav-item mr-4" *ngIf="permission == 'ADMIN'">
-          <a routerLink="setting">
-            <span class="icon">
-              <img class="d-block mx-auto" type="button"
-                src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/48/ffffff/external-setting-basic-ui-elements-flatart-icons-outline-flatarticons.png" />
-            </span>
-          </a>
-          <!-- <a class="nav-link navOption btn btn-danger" (click)="logout()">ออกจากระบบ</a> -->
-        </li>
-        <li class="nav-item">
-          <img class="d-block mx-auto" (click)="logout()" type="button"
-            src="https://img.icons8.com/color/48/000000/shutdown--v1.png" />
-          <!-- <a class="nav-link navOption btn btn-danger" (click)="logout()">ออกจากระบบ</a> -->
-        </li>
+        <div class="row">
+          <div class="col">
+            <li class="nav-item mr-3 btn-logout" *ngIf="permission == 'ADMIN'">
+              <a routerLink="setting">
+                <span class="icon">
+                  <img
+                    class="mt-1"
+                    type="button"
+                    src="https://img.icons8.com/fluency-systems-filled/40/edit.png"
+                  />
+                </span>
+              </a>
+              <!-- <a class="nav-link navOption btn btn-danger" (click)="logout()">ออกจากระบบ</a> -->
+            </li>
+          </div>
+          <div class="col">
+            <li class="nav-item btn-logout">
+              <img
+                class=""
+                (click)="logout()"
+                type="button"
+                src="https://img.icons8.com/cotton/48/shutdown--v1.png"
+              />
+              <!-- <a class="nav-link navOption btn btn-danger" (click)="logout()">ออกจากระบบ</a> -->
+            </li>
+          </div>
+        </div>
       </ul>
     </div>
   </nav>
 
-
-
   <div class="menu">
-    <div class="navigation ">
+    <div class="navigation">
       <ul class="ul-mar">
         <li class="list" *ngIf="permission == 'ADMIN' || permission == 'USER'">
           <a routerLink="room">
@@ -48,7 +69,8 @@
           <a routerLink="invoice-data">
             <span class="icon empty">
               <img
-                src="https://img.icons8.com/external-soft-fill-juicy-fish/48/000000/external-data-data-visualisation-soft-fill-soft-fill-juicy-fish-4.png" />
+                src="https://img.icons8.com/external-soft-fill-juicy-fish/48/000000/external-data-data-visualisation-soft-fill-soft-fill-juicy-fish-4.png"
+              />
             </span>
             <span class="text empty pl-2">METER</span>
           </a>
@@ -58,7 +80,8 @@
           <a routerLink="invoice-data">
             <span class="icon empty">
               <img
-                src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/48/external-pay-currency-and-money-itim2101-lineal-color-itim2101.png" />
+                src="https://img.icons8.com/external-itim2101-lineal-color-itim2101/48/external-pay-currency-and-money-itim2101-lineal-color-itim2101.png"
+              />
             </span>
             <span class="text empty pl-3">Payment</span>
           </a>
@@ -68,7 +91,8 @@
           <a routerLink="user-detail">
             <span class="icon">
               <img
-                src="https://img.icons8.com/external-flat-geotatah/64/000000/external-register-training-management-system-flat-flat-geotatah.png" />
+                src="https://img.icons8.com/external-flat-geotatah/64/000000/external-register-training-management-system-flat-flat-geotatah.png"
+              />
             </span>
             <span class="text pl-2">REGISTER</span>
           </a>
@@ -77,8 +101,10 @@
           <a routerLink="manage-user">
             <span class="icon empty">
               <img
-                src="https://img.icons8.com/external-febrian-hidayat-fill-lineal-febrian-hidayat/48/000000/external-manage-business-and-management-febrian-hidayat-fill-lineal-febrian-hidayat.png" />
-            </span> <span class="text empty pl-3">Manage USER</span>
+                src="https://img.icons8.com/external-febrian-hidayat-fill-lineal-febrian-hidayat/48/000000/external-manage-business-and-management-febrian-hidayat-fill-lineal-febrian-hidayat.png"
+              />
+            </span>
+            <span class="text empty pl-3">Manage USER</span>
           </a>
           <!-- <div class="indicator"></div> -->
         </li>
@@ -86,8 +112,10 @@
           <a routerLink="report">
             <span class="icon empty">
               <img
-                src="https://img.icons8.com/external-flatart-icons-flat-flatarticons/48/000000/external-report-world-cancer-awareness-flatart-icons-flat-flatarticons.png" />
-            </span> <span class="text empty pl-3">Report</span>
+                src="https://img.icons8.com/external-flatart-icons-flat-flatarticons/48/000000/external-report-world-cancer-awareness-flatart-icons-flat-flatarticons.png"
+              />
+            </span>
+            <span class="text empty pl-3">Report</span>
           </a>
           <!-- <div class="indicator"></div> -->
         </li>
@@ -95,16 +123,19 @@
           <a routerLink="checkout">
             <span class="icon empty">
               <img
-                src="https://img.icons8.com/external-flaticons-flat-flat-icons/48/external-checkout-hospitality-services-flaticons-flat-flat-icons.png" />
-            </span> <span class="text empty pl-3">Checkout</span>
+                src="https://img.icons8.com/external-flaticons-flat-flat-icons/48/external-checkout-hospitality-services-flaticons-flat-flat-icons.png"
+              />
+            </span>
+            <span class="text empty pl-3">Checkout</span>
           </a>
           <!-- <div class="indicator"></div> -->
         </li>
-        <li class="list" *ngIf=" permission == 'USER'">
+        <li class="list" *ngIf="permission == 'USER'">
           <a routerLink="profile">
             <span class="icon empty">
               <img src="https://img.icons8.com/color/55/000000/user.png" />
-            </span> <span class="text empty pl-3">Profile</span>
+            </span>
+            <span class="text empty pl-3">Profile</span>
           </a>
           <!-- <div class="indicator"></div> -->
         </li>
@@ -114,20 +145,36 @@
   <router-outlet></router-outlet>
 </div>
 
-
-<div class="body-color" *ngIf="statusLogin == 'logout' || statusLogin == null ">
+<div class="body-color" *ngIf="statusLogin == 'logout' || statusLogin == null">
   <!-- ********************************   Login   *********************************** -->
   <div class="container container-login">
     <div class="myCard">
       <div class="row">
         <div class="col-md-6">
           <div class="myLeftCtn">
-            <form [formGroup]="formLogin" (ngSubmit)="checkUserAndPass()" class="myForm text-center">
+            <form
+              [formGroup]="formLogin"
+              (ngSubmit)="checkUserAndPass()"
+              class="myForm text-center"
+            >
               <header>LOGIN</header>
               <div class="form-group">
-                <input formControlName="userName" class="myInput" type="text" placeholder="Username" id="userName"
-                  [ngClass]="{'is-invalid': submitLogin}" (ngModelChange)="onChange()" required>
-                <div class="invalid-feedback" *ngIf="statusUsername == false && formValidLogin.userName.errors">
+                <input
+                  formControlName="userName"
+                  class="myInput"
+                  type="text"
+                  placeholder="Username"
+                  id="userName"
+                  [ngClass]="{ 'is-invalid': submitLogin }"
+                  (ngModelChange)="onChange()"
+                  required
+                />
+                <div
+                  class="invalid-feedback"
+                  *ngIf="
+                    statusUsername == false && formValidLogin.userName.errors
+                  "
+                >
                   กรุณากรอกชื่อบัญชี
                 </div>
                 <div class="invalid-feedback" *ngIf="statusUsername == true">
@@ -135,12 +182,21 @@
                 </div>
               </div>
               <div class="form-group mb-4 mt-2">
-                <input formControlName="password" class="myInput" type="password" placeholder="password" id="password"
-                  (ngModelChange)="onChange()" required>
+                <input
+                  formControlName="password"
+                  class="myInput"
+                  type="password"
+                  placeholder="password"
+                  id="password"
+                  (ngModelChange)="onChange()"
+                  required
+                />
               </div>
-              <input type="submit" class="butt mb-5" value="LOGIN"><br>
+              <input type="submit" class="butt mb-5" value="LOGIN" /><br />
               <!-- <a type="button" class="mt-1" (click)="onSwitchPage()">Create new account</a> -->
-              <a type="button" class="mt-1" (click)="loginWithGuest()">Login with guest</a>
+              <a type="button" class="mt-1" (click)="loginWithGuest()"
+                >Login with guest</a
+              >
             </form>
           </div>
         </div>
@@ -148,9 +204,12 @@
           <div class="myRightCtn">
             <div class="box">
               <header>Dormitory</header>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur eaque, ipsum aut autem
-                pariatur ut cupiditate possimus voluptatum delectus iste.</p>
-              <input type="button" class="butt_out" value="Learn More">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
+                eaque, ipsum aut autem pariatur ut cupiditate possimus
+                voluptatum delectus iste.
+              </p>
+              <input type="button" class="butt_out" value="Learn More" />
             </div>
           </div>
         </div>
@@ -158,27 +217,47 @@
     </div>
   </div>
 
-
   <!-- ********************************   Register   *********************************** -->
 
-  <div class="container" *ngIf="this.showRegisterPage == 1  && this.checkAdminIsEmpty == 0">
+  <div
+    class="container"
+    *ngIf="this.showRegisterPage == 1 && this.checkAdminIsEmpty == 0"
+  >
     <div class="myCard">
       <div class="row">
         <div class="col-md-6">
           <div class="myLeftCtn">
-            <form [formGroup]="formUser" (ngSubmit)="oncreateUser()" class="myForm text-center">
+            <form
+              [formGroup]="formUser"
+              (ngSubmit)="oncreateUser()"
+              class="myForm text-center"
+            >
               <header>Create new account</header>
               <div class="form-group mb-2">
                 <i for="userName" class="fas fa-user"></i>
-                <input formControlName="userName" class="myInput" type="text" placeholder="username" id="userName"
-                  required>
+                <input
+                  formControlName="userName"
+                  class="myInput"
+                  type="text"
+                  placeholder="username"
+                  id="userName"
+                  required
+                />
               </div>
               <div class="form-group mb-5">
                 <i for="password" class="fas fa-envalope"></i>
-                <input formControlName="password" class="myInput" type="password" placeholder="password" id="password"
-                  required>
+                <input
+                  formControlName="password"
+                  class="myInput"
+                  type="password"
+                  placeholder="password"
+                  id="password"
+                  required
+                />
               </div>
-              <button type="submit" class="butt mb-4" value="CREATE ACCOUNT">Register</button>
+              <button type="submit" class="butt mb-4" value="CREATE ACCOUNT">
+                Register
+              </button>
               <!-- <a type="button" class="mb-2" (click)="onSwitchPage()">Login</a> -->
             </form>
           </div>
@@ -187,9 +266,12 @@
           <div class="myRightCtn">
             <div class="box">
               <header>Dormitory</header>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur eaque, ipsum aut autem
-                pariatur ut cupiditate possimus voluptatum delectus iste.</p>
-              <input type="button" class="butt_out" value="Learn More">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
+                eaque, ipsum aut autem pariatur ut cupiditate possimus
+                voluptatum delectus iste.
+              </p>
+              <input type="button" class="butt_out" value="Learn More" />
             </div>
           </div>
         </div>

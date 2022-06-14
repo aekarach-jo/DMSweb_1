@@ -2,7 +2,7 @@
     <h1 class="header-title">ข้อมูลผู้เช่า</h1>
     <mat-form-field appearance="standard" style="width: 180px;">
         <mat-label class="text-white">ค้นหา</mat-label>
-        <input matInput class="text-white" (keyup)="applyFilter($event)" #input>
+        <input matInput class="text-style" (keyup)="applyFilter($event)" #input>
     </mat-form-field>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

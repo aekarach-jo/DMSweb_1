@@ -110,13 +110,53 @@ export class UserDetailComponent implements OnInit {
   getAllUserDetail() {
     this.callapi.getAllUserDetail().subscribe(data => {
       this.userDetailData = data
+      // for (let tel = 0; tel < this.userDetailData.length; tel++) {
+      //   if(this.userDetailData.value.tel == this.formUserDetail.value){
+
+      //   }
+
+      // }
       console.log(data)
     })
   }
 
+  checkTelephone() {
+
+      this.callapi.getAllUserDetail().subscribe(data => {
+        this.userDetailData = data
+        console.log(data)
+        for (let index = 0; index < this.userDetailData.length; index++) {
+          console.log(this.userDetailData[index].tel);
+          console.log(this.formUserDetail.value.tel);
+
+          if (this.userDetailData[index].tel == this.formUserDetail.value.tel) {
+            Swal.fire({
+              icon: 'warning',
+              position: 'center',
+              title: this.formUserDetail.value.tel + ' มีผู้ใช้งานแล้ว',
+              input: 'text',
+              inputAttributes: {
+                autocapitalize: 'off'
+              },
+              // timer: 1500
+            }).then((res) => {
+              console.log(res.value.toString());
+
+              this.formUserDetail.patchValue({tel : res.value.toString()})
+              
+              // this.formUserDetail.value.
+            })
+          } else {
+
+          }
+        }
+      })
+  }
+
+
   createUserDetail() {
     console.log(this.formUserDetail.value.userDetailId);
-
+    this.checkTelephone()
     if (this.formUserDetail.value.firstName == null) {
       this.callapi.checkUser(this.formUser.value.userName).subscribe(state => {
         if (state.toString() == "ไอดีนี้สามารถใช้งานได้") {
@@ -191,8 +231,6 @@ export class UserDetailComponent implements OnInit {
           })
         }
       })
-
-
     } else {
       Swal.fire({
         position: 'center',

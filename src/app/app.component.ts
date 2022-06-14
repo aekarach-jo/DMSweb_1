@@ -139,12 +139,35 @@ export class AppComponent {
   }
 
   logout() {
-    localStorage.setItem('statuslogin', 'logout')
-    localStorage.removeItem('iduser')
-    localStorage.removeItem('permission')
-    localStorage.removeItem('user')
-    localStorage.removeItem('iduserName')
-    window.location.reload()
+    Swal.fire({
+      position: 'center',
+      text: "ยืนยันหรือไม่?",
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+      confirmButtonColor: '#2aad19',
+      confirmButtonText: 'ยืนยัน'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          icon: 'success',
+          position: 'center',
+          title: 'สำเร็จ',
+          showCloseButton: false,
+          timer: 800
+        }).then((res) => {
+          localStorage.setItem('statuslogin', 'logout')
+          localStorage.removeItem('iduser')
+          localStorage.removeItem('permission')
+          localStorage.removeItem('user')
+          localStorage.removeItem('iduserName')
+          window.location.reload()
+        })
+
+      }
+
+    })
+
   }
 
   patchValue(receiveUser: user) {

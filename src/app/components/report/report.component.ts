@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Element } from '@angular/compiler';
+import { asNativeElements, Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { report } from 'src/app/Models/report';
 import { ApiService } from 'src/app/Services/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-report',
@@ -12,7 +14,7 @@ import { ApiService } from 'src/app/Services/api.service';
 })
 export class ReportComponent implements OnInit {
   dataSource: any
-  displayedColumns: string[] = ['ห้องที่','รายละเอียด','วันที่','เวลา', 'เพิ่มเติม', 'ย้ายไปข้อมูลรวม'];
+  displayedColumns: string[] = ['ห้องที่', 'รายละเอียด', 'วันที่', 'เวลา', 'เพิ่มเติม', 'ย้ายไปข้อมูลรวม'];
   formReport: any
   formRoom: any
   reportData: any
@@ -70,6 +72,7 @@ export class ReportComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    
   }
 
   getAllReport() {
@@ -83,7 +86,7 @@ export class ReportComponent implements OnInit {
   // getReportByStatus(){
   //   this.callapi.getReportByStatus("รอยืนยัน").subscribe(data =>{
   //     console.log(data);
-      
+
   //     this.dataSource = data
   //   })
   // }
@@ -98,18 +101,40 @@ export class ReportComponent implements OnInit {
     })
   }
 
-  onDelete(id : string){
-    this.callapi.deleteReport(id).subscribe(data => {
-      this.getAllReport();
+  onDelete(id: string) {
+    Swal.fire({
+      position: 'center',
+      text: "ยืนยันการลบหรือไม่?",
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+      confirmButtonColor: '#2aad19',
+      confirmButtonText: 'ยืนยัน'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.callapi.deleteReport(id).subscribe(data => {
+          Swal.fire({
+            position: "center",
+            icon: 'success',
+            title: "ลบแล้ว",
+            showConfirmButton: false,
+            timer: 1000
+          }).then(() => {
+            this.getAllReport();
+          })
+        })
+      }
     })
   }
 
   onChangeStatus() {
     this.formReport.value.reportStatus = "ยืนยันแล้ว"
-    this.callapi.editReport(this.getId , this.formReport.value).subscribe(data => {
+    this.callapi.editReport(this.getId, this.formReport.value).subscribe(data => {
+      
       this.dataSource = data
       console.log("แก้ไขเรียบร้อย");
       this.getAllReport();
+      document.getElementById('closeModal').click()     
     })
   }
 

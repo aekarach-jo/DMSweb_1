@@ -118,7 +118,10 @@ table {
 }
 
 .mat-header-cell {
-    background: rgb(214, 255, 201);
+    background: #ff6b00;
+    color: #fcfcfc;
+    text-align: center;
+    font-size: 18px;
 }
 
 

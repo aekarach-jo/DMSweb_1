@@ -1,6 +1,4 @@
 
-  
-
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -144,7 +142,9 @@ export class ApiService {
   public getReportByStatus(status: string) {
     return this.http.get<report>(`${environment.apiUrl}Report/GetReportByStatus/${status}`)
   }
-  public createReport(report: report) {
+  public createReport(report: any) {
+    console.log(report);
+    
     return this.http.post<report>(`${environment.apiUrl}Report/CreateReport`, report)
   }
   public editReport(reportID: string, report: report) {
