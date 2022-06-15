@@ -19,7 +19,7 @@
                 <!-- <a *ngIf="item.roomStatus == emptyRoom" type="text" class="text-center " style="margin-left: 3.5rem; font-weight: 900;">ว่าง</a>
                 <a *ngIf="item.roomStatus == busyRoom" type="text" class="text-center " style="margin-left: 3.5rem; font-weight: 900;">ไม่ว่าง</a> -->
                 <div *ngIf="permission == 'ADMIN'">
-                    <button class="d-block mx-auto btn btn-warning font-in-card" data-toggle="modal" type="button" data-target="#modalEditRoom"
+                    <button class="d-block mx-auto btn font-in-card" data-toggle="modal" type="button" data-target="#modalEditRoom"
                         (click)="getRoomById(item.roomId)">แก้ไข</button>
                     <!-- <button class="float-right font-in-card" (click)="getRoomById(item.roomId)"
                         *ngIf="item.roomStatus == busyRoom">ไม่ว่าง</button>

@@ -142,7 +142,9 @@
       </ul>
     </div>
   </div>
-  <router-outlet></router-outlet>
+  <div class="d-full-screen">
+    <router-outlet></router-outlet>
+  </div>
 </div>
 
 <div class="body-color" *ngIf="statusLogin == 'logout' || statusLogin == null">
