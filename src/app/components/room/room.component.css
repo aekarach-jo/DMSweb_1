@@ -159,10 +159,13 @@
 }
 
 .search-filter{
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
     min-width: 5rem;
-    width: 12rem;
+    width: 9rem;
     background-color: rgba(0, 0, 0, 0);
-    color: #fcfcfc;
+    color: #dd773c;
     box-shadow: 0 0 0.2em 1px #ffffff; 
     border-radius: 20px;
 }
