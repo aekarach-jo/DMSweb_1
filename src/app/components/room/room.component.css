@@ -53,6 +53,7 @@
     box-shadow: 0 0 0.6em 1px #b8b0b0;
 }
 
+
 .card-header-style-1{
     height: 20px; vertical-align: top;
     text-align: center;
@@ -89,14 +90,15 @@
 }
 
 
+
 .icon-in-room{
     background-color: rgba(255, 255, 255,0.8);
     border-radius: 10px;
 }
+
 .font-in-card{
     font-size: 14px;
     font-weight: 700;
-    /* border-radius: 15px; */
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
     border-bottom-left-radius: 18px;
@@ -104,6 +106,20 @@
     height: 20px;
     background-color: rgba(170, 170, 170, 0.2);
     color: rgb(158, 158, 158);
+    margin-top: 15px;
+    box-shadow: 0 0 0.5em 0.5px #dff5f7;
+    padding-bottom: 24px;
+}
+.font-in-card:hover{
+    font-size: 14px;
+    font-weight: 700;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    height: 10px;
+    background-color: rgba(221, 206, 0, 0.2);
+    color: rgb(5, 5, 5);
     margin-top: 15px;
     box-shadow: 0 0 0.5em 0.5px #dff5f7;
     padding-bottom: 24px;
@@ -163,11 +179,12 @@
     font-size: 15px;
     font-weight: 600;
     min-width: 5rem;
-    width: 9rem;
-    background-color: rgba(0, 0, 0, 0);
-    color: #dd773c;
+    width: 8.5rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #636363;
     box-shadow: 0 0 0.2em 1px #ffffff; 
     border-radius: 20px;
+    border: none;
 }
 
 .font-color{

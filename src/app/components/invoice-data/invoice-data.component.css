@@ -1,4 +1,3 @@
-
 .width-height-container {
     position: relative;
     align-items: center;
@@ -7,12 +6,12 @@
     width: auto;
     padding: 20px;
     overflow-x: hidden;
-     /* background-image: linear-gradient(-135deg, #b2cfd1 0%, #405670 74%); */
-     box-shadow: 0 0 0.5em 1px #fcfcfc; 
-     border-radius: 20px;
+    /* background-image: linear-gradient(-135deg, #ff6b00 0%, #ff6b00 74%); */
+    box-shadow: 0 0 0.5em 1px #fcfcfc;
+    border-radius: 20px;
 }
 
-@media  screen and (max-width:420px) {
+@media screen and (max-width:420px) {
     .width-height-container {
         position: relative;
         align-items: center;
@@ -21,9 +20,9 @@
         width: auto;
         padding: 20px;
         overflow-x: hidden;
-         /* background-image: linear-gradient(-135deg, #b2cfd1 0%, #405670 74%); */
-     box-shadow: 0 0 0.5em 1px #fcfcfc; 
-     border-radius: 20px;
+        /* background-image: linear-gradient(-135deg, #b2cfd1 0%, #405670 74%); */
+        box-shadow: 0 0 0.5em 1px #fcfcfc;
+        border-radius: 20px;
     }
 }
 
@@ -32,14 +31,14 @@
 }
 
 
-.font-color{
+.font-color {
     color: #fff;
     font-size: 15px;
     font-weight: 500;
     margin: 8px;
 }
 
-.card-room{
+.card-room {
     padding: 0;
     align-items: center;
     margin-left: 1rem;
@@ -55,26 +54,27 @@
     box-shadow: 0 0 0.6em 1px #b8b0b0;
 }
 
-.card-header-style{
+.card-header-style {
     margin-left: 18px;
     width: 70px;
-    height: 20px; 
+    height: 20px;
     vertical-align: top;
     text-align: center;
     font-weight: 700;
     padding-top: 0px;
     box-shadow: 0 0 0.5em 0.5px #fff2b7;
     background-color: rgba(76, 192, 128, 0.8);
-    color: rgba(255, 255, 255,1);
+    color: rgba(255, 255, 255, 1);
     border-radius: 25px;
 }
 
-.icon-in-room{
+.icon-in-room {
     margin-left: -10px;
-    background-color: rgba(255, 255, 255,0.8);
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
 }
-.font-in-card{
+
+.font-in-card {
     font-size: 14px;
     border-radius: 15px;
     height: 20px;
@@ -86,33 +86,44 @@
 }
 
 
-table {
+/* table {
     width: 100%;
+} */
+
+.table-invoice-css {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    /* position: relative; */
+    /* width: auto; */
+    color: #fff;
+
 }
-  
-.text-color{
+
+.text-color {
     color: rgb(255, 255, 255);
     font-size: 20px;
     margin-bottom: 10px;
     margin-left: 8px;
 }
 
-.input-in-table-water{
-    background-color: rgb(215, 252, 253); 
-    width: 140px;
-}
-.input-in-table-power{
-    background-color: rgb(253, 215, 215); 
+.input-in-table-water {
+    background-color: rgb(215, 252, 253);
     width: 140px;
 }
 
-@media  screen and (max-width:420px) {
-    .input-in-table-water{
-        background-color: rgb(215, 252, 253); 
+.input-in-table-power {
+    background-color: rgb(253, 215, 215);
+    width: 140px;
+}
+
+@media screen and (max-width:420px) {
+    .input-in-table-water {
+        background-color: rgb(215, 252, 253);
         width: 50px;
     }
-    .input-in-table-power{
-        background-color: rgb(253, 215, 215); 
+
+    .input-in-table-power {
+        background-color: rgb(253, 215, 215);
         width: 50px;
     }
 }
@@ -126,11 +137,12 @@ table {
 
 
 .modal-dialog-full-width {
-    
+
     min-height: 50%;
     min-width: 50%;
     position: relative;
 }
+
 .modal-content-full-width {
     /* min-height: 100%; */
     /* border-radius: 10px; */
@@ -146,6 +158,7 @@ table {
     overflow: hidden;
     backdrop-filter: blur(7px);
 }
+
 .modal-header-bg {
     background-color: #313131;
     color: antiquewhite;
@@ -157,7 +170,7 @@ table {
 }
 
 .modal-content-showInvoice {
-    background-color: #e7e7e7 ;
+    background-color: #e7e7e7;
     color: #313131;
     border-radius: 10px;
     position: relative;
@@ -169,6 +182,7 @@ table {
     overflow: hidden;
     backdrop-filter: blur(7px);
 }
+
 .modal-header-showInvoice {
     position: relative;
     height: 40px;
@@ -179,16 +193,17 @@ table {
 
 }
 
-.modal-body-showInvoice{
+.modal-body-showInvoice {
     padding: 2rem;
 }
 
-.bg-stepper{
+.bg-stepper {
     background-color: rgba(0, 0, 0, 0);
 }
 
-.input-style{
-    background-color: rgba(0, 0, 0,0);;
+.input-style {
+    background-color: rgba(0, 0, 0, 0);
+    ;
     width: 80px;
     margin-bottom: 5px;
     padding-left: 15px;
@@ -199,7 +214,8 @@ table {
     justify-content: center;
     position: relative;
 }
-.input-bill-style{
+
+.input-bill-style {
     border-color: rgba(0, 0, 0, 0);
     text-align: center;
     width: 100px;
@@ -209,7 +225,8 @@ table {
     color: rgb(0, 0, 0);
     position: relative;
 }
-.input-other-style{
+
+.input-other-style {
     border-color: rgba(0, 0, 0, 0);
     width: 100%;
     height: 40px;
@@ -220,27 +237,27 @@ table {
     position: relative;
 }
 
-.number-room{
+.number-room {
     position: relative;
     vertical-align: middle;
     font-size: 15px;
     top: 15px;
-    left: 15px;    
+    left: 15px;
 
 }
-.text-header{
+
+.text-header {
     position: relative;
     color: #000000;
     font-size: 20px;
     font-weight: 350;
 }
 
-.text-color{
+.text-color {
     color: rgb(0, 0, 0);
     font-size: 20px;
     margin-bottom: 10px;
     margin-left: 8px;
 }
-@media  screen and (max-width:420px) {
-    
-}
+
+@media screen and (max-width:420px) {}
