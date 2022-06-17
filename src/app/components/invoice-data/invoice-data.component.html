@@ -3,7 +3,7 @@
         <mat-step [stepControl]="formInvoice" errorMessage="Name is required.">
             <form [formGroup]="formInvoice">
                 <ng-template matStepLabel>
-                    <p class="text-white mt-2" type="button" (click)="getAllInvoice()">จดมิเตอร์</p>
+                    <p class="tab-css" type="button" (click)="getAllInvoice()">จดมิเตอร์</p>
                 </ng-template>
                 <div class="row row-cols-md-5">
                     <div *ngFor="let item of roomStatusData" class="col mb-5 ">
@@ -22,7 +22,7 @@
         </mat-step>
         <mat-step>
             <ng-template matStepLabel>
-                <p class="text-white mt-2" type="button" (click)="getInvoiceByFilterMonth()">รายการเดือนนี้</p>
+                <p class="tab-css" type="button" (click)="getInvoiceByFilterMonth()">เดือนนี้</p>
             </ng-template>
             <div class="table-responsive">
                 <table class="table table-invoice-css">
@@ -102,7 +102,7 @@
         </mat-step>
         <mat-step>
             <ng-template matStepLabel>
-                <p class="text-white mt-2" type="button" (click)="getAllInvoice()">รายการทั้งหมด</p>
+                <p class="tab-css" type="button" (click)="getAllInvoice()">ทั้งหมด</p>
             </ng-template>
             <div class="table-responsive">
                 <table class="table table-invoice-css ">
@@ -187,16 +187,15 @@
 <!-- -----------------------  Modal จดมิเตอร์  ------------------------------- -->
 <!-- ------------------------------------------------------------------- -->
 
-<div class="modal fade" id="modalInvoice" aria-hidden="true" data-backdrop="true">
-    <div class="modal-dialog modal-dialog-full-width">
-        <div class="modal-content modal-content-full-width" [formGroup]="formInvoice">
+<div class="modal fade" id="modalInvoice" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-full-width ">
+        <div class="modal-content modal-content-full-width hiden-scroll" [formGroup]="formInvoice">
             <div class="modal-header modal-header-bg">ห้องที่ {{getRoomNumber}}</div>
-            <div class="modal-body mb-5">
+            <div class="modal-body mb-5 ">
                 <div class="row row-cols-md-2">
                     <div class="col-sm-3 mt-3" style="height: 19rem;">
                         <div class="form-group col " style="text-align: center;">
-                            <span class="material-icons"
-                                style="font-size: 5rem; color: rgb(71, 187, 255); ">opacity</span>
+                            <span class="material-icons material-icon-w-css">opacity</span>
                         </div>
                         <div class="form-group col ">
                             <label for="waterMeterOld" class="text-color text-white">เลขก่อนหน้า</label>
@@ -217,7 +216,7 @@
                     </div>
                     <div class="col-sm-3 mt-3" style="height: 17rem;">
                         <div class="form-group col " style="text-align: center;">
-                            <span class="material-icons" style="font-size: 5rem; color: rgb(202, 62, 62); ">bolt</span>
+                            <span class="material-icons material-icon-p-css">bolt</span>
                         </div>
                         <div class="form-group col ">
                             <label for="powerMeterOld" class="text-color text-white">เลขก่อนหน้า</label>
@@ -240,14 +239,14 @@
             <div class="modal-footer ">
                 <div class="form-group col">
                     <div class="row">
-                        <div class="col" class="text-color text-white">น้ำ {{meterWaterPrice}}.-/หน่วย</div>
+                        <div class="col" class="text-color text-white">น้ำ {{meterWaterPrice}}/หน่วย</div>
                         <div class="col" class="text-color text-white">
                             {{meterWaterTotlePrice}} บาท</div>
                     </div>
                 </div>
                 <div class="form-group col">
                     <div class="row">
-                        <div class="col" class="text-color text-white">ไฟ {{meterPowerPrice}}.-/หน่วย</div>
+                        <div class="col" class="text-color text-white">ไฟ {{meterPowerPrice}}/หน่วย</div>
                         <div class="col" class="text-color text-white">
                             {{meterPowerTotlePrice}} บาท</div>
                     </div>
@@ -517,6 +516,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <small id="emailHelp" class="form-text text-muted">*เมื่อกรอกเสร็จให้กด Enter</small>
                     </form>
                 </div>
             </div>

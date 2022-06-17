@@ -138,16 +138,10 @@
 
 .modal-dialog-full-width {
 
-    min-height: 50%;
-    min-width: 50%;
     position: relative;
 }
 
 .modal-content-full-width {
-    /* min-height: 100%; */
-    /* border-radius: 10px; */
-    /* background-color: #e7e7e7 */
-
     border-radius: 10px;
     position: relative;
     box-shadow: 0 25px 45px rgba(0, 0, 0, 1);
@@ -155,13 +149,31 @@
     background: rgba(255, 255, 255, 0.1);
     border-right: 1px solid rgba(255, 255, 255, 0.1);
     /* border-bottom: 1px solid rgba(255, 255, 255, 0.25); */
-    overflow: hidden;
+    overflow-x: hidden;
     backdrop-filter: blur(7px);
 }
 
+@media screen and (max-width:450px) {
+    .modal-content-full-width {
+        position: relative;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 25px 45px rgba(0, 0, 0, 1);
+        border: 1px solid rgba(255, 255, 255, 1);
+        background: rgba(255, 215, 178, 0.4);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+        overflow-x: hidden;
+        backdrop-filter: blur(7px);
+    }
+}
+
 .modal-header-bg {
-    background-color: #313131;
+    background-color: #ff6b00;
     color: antiquewhite;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
 }
 
 .modal-dialog-showInvoice {
@@ -263,12 +275,41 @@
     margin-left: 8px;
 }
 
-.water-bg-css{
+.water-bg-css {
     background-color: rgba(97, 255, 247, 0.4);
 }
 
-.power-bg-css{
+.power-bg-css {
     background-color: rgba(255, 173, 97, 0.4);
 }
 
-@media screen and (max-width:420px) {}
+.material-icon-w-css {
+    font-size: 5rem;
+    color: rgb(71, 187, 255);
+}
+
+.material-icon-p-css {
+    font-size: 5rem;
+    color: rgb(202, 62, 62);
+}
+
+@media screen and (max-width:420px) {
+    .material-icon-w-css {
+        font-size: 5rem;
+        color: rgb(71, 187, 255);
+    }
+
+    .material-icon-p-css {
+        position: relative;
+        top: 1.5rem;
+        font-size: 5rem;
+        color: rgb(202, 62, 62);
+    }
+}
+
+.tab-css{
+    text-align: center;
+    font-weight: 700;
+    font-size: 12px;
+    color: #000000;
+}
