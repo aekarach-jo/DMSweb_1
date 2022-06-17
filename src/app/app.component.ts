@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -55,7 +55,20 @@ export class AppComponent {
   //   })
   // }
 
+  elem=document.documentElement
+  onClickFullScreen(){
+    if(this.elem.requestFullscreen){
+      this.elem.requestFullscreen();
+    }
+    document.fullscreenElement
+    console.log(document.fullscreenElement);
+  }
 
+  onClickCloseScreen(){
+    if(document.exitFullscreen){
+      document.exitFullscreen();
+    }
+  }
 
   checkUserAndPass() {
     if (this.formLogin.value.userName == "") {
