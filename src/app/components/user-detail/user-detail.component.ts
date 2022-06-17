@@ -200,6 +200,7 @@ export class UserDetailComponent implements OnInit {
                           console.log(data);
                           this.emptyUserForm()
                           this.emptyUserDetailForm()
+                          location.reload()
                         })
                         Swal.fire({
                           position: "center",

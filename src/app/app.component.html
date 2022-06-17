@@ -2,34 +2,34 @@
   <nav class="navbar navbar-expand-lg navStyle border-bottom">
     <div class="brandStyle" id="menu-toggle" routerLink="/room">
       <img class="img-style" src="https://img.icons8.com/fluency/24/000000/hostel.png" />
-      Dormitory
+      ห้องพักบุญสร้าง
     </div>
-    <button class="btn btn-info rounded-pill" id="btnFullScreen" (click)="onClickFullScreen()">Full</button>
-    <button class="btn btn-info rounded-pill" id="btnFullScreen" (click)="onClickCloseScreen()">exit</button>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <img src="https://img.icons8.com/plumpy/48/000000/menu-squared-2.png" />
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-        <!-- <li class="nav-item">
-        <a class="nav-link navOption btn login-style"></a>
-      </li> -->
         <div class="row">
-          <div class="col">
+          <div class="col-4">
             <li class="nav-item mr-3 btn-logout" *ngIf="permission == 'ADMIN'">
               <a routerLink="setting">
                 <span class="icon">
                   <img class="mt-1" type="button" src="https://img.icons8.com/fluency-systems-filled/40/edit.png" />
                 </span>
               </a>
-              <!-- <a class="nav-link navOption btn btn-danger" (click)="logout()">ออกจากระบบ</a> -->
             </li>
           </div>
-          <div class="col">
+          <div class="col-4">
+            <li class="nav-item btn-logout">
+              <img *ngIf="status == false" type="button" src="https://img.icons8.com/ios-filled/40/expand--v1.png"
+              (click)="onClickFullScreen(false)">
+            <img *ngIf="status == true" type="button" src="https://img.icons8.com/ios-glyphs/40/collapse.png"
+              (click)="onClickCloseFullScreen(true)">            </li>
+          </div>
+          <div class="col-4">
             <li class="nav-item btn-logout">
               <img class="" (click)="logout()" type="button" src="https://img.icons8.com/cotton/48/shutdown--v1.png" />
-              <!-- <a class="nav-link navOption btn btn-danger" (click)="logout()">ออกจากระบบ</a> -->
             </li>
           </div>
         </div>
@@ -56,7 +56,6 @@
             </span>
             <span class="text empty pl-2">METER</span>
           </a>
-          <!-- <div class="indicator"></div> -->
         </li>
         <li class="list" *ngIf="permission == 'ADMIN'">
           <a routerLink="invoice-data">
@@ -66,7 +65,6 @@
             </span>
             <span class="text empty pl-3">Payment</span>
           </a>
-          <!-- <div class="indicator"></div> -->
         </li>
         <li class="list" *ngIf="permission == 'ADMIN'">
           <a routerLink="user-detail">
@@ -85,7 +83,6 @@
             </span>
             <span class="text empty pl-3">Manage USER</span>
           </a>
-          <!-- <div class="indicator"></div> -->
         </li>
         <li class="list" *ngIf="permission == 'ADMIN'">
           <a routerLink="report">
@@ -95,7 +92,6 @@
             </span>
             <span class="text empty pl-3">Report</span>
           </a>
-          <!-- <div class="indicator"></div> -->
         </li>
         <li class="list" *ngIf="permission == 'ADMIN'">
           <a routerLink="checkout">
@@ -105,7 +101,6 @@
             </span>
             <span class="text empty pl-3">Checkout</span>
           </a>
-          <!-- <div class="indicator"></div> -->
         </li>
         <li class="list" *ngIf="permission == 'USER'">
           <a routerLink="profile">
@@ -114,7 +109,6 @@
             </span>
             <span class="text empty pl-3">Profile</span>
           </a>
-          <!-- <div class="indicator"></div> -->
         </li>
       </ul>
     </div>
@@ -129,17 +123,17 @@
   <div class="container container-login">
     <div class="myCard">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-sm-5">
           <div class="myLeftCtn">
             <form [formGroup]="formLogin" (ngSubmit)="checkUserAndPass()" class="myForm text-center">
               <header>LOGIN</header>
               <div class="form-group">
-                <input formControlName="userName" class="myInput" type="text" placeholder="Username" id="userName"
+                <input formControlName="userName" class="myInput" type="text" placeholder="username" id="userName"
                   [ngClass]="{ 'is-invalid': submitLogin }" (ngModelChange)="onChange()" required />
                 <div class="invalid-feedback" *ngIf="
                     statusUsername == false && formValidLogin.userName.errors
                   ">
-                  กรุณากรอกชื่อบัญชี
+                  กรุณากรอกชื่อผู้ใช้
                 </div>
                 <div class="invalid-feedback" *ngIf="statusUsername == true">
                   บัญชีผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง
@@ -151,11 +145,11 @@
               </div>
               <input type="submit" class="butt mb-5" value="LOGIN" /><br />
               <!-- <a type="button" class="mt-1" (click)="onSwitchPage()">Create new account</a> -->
-              <a type="button" class="mt-1" (click)="loginWithGuest()">Login with guest</a>
+              <p type="button" class="mt-1 link-to-guest" (click)="loginWithGuest()">Login with guest</p>
             </form>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-7">
           <div class="myRightCtn">
             <div class="box">
               <header>Dormitory</header>
@@ -164,7 +158,6 @@
                 eaque, ipsum aut autem pariatur ut cupiditate possimus
                 voluptatum delectus iste.
               </p>
-              <input type="button" class="butt_out" value="Learn More" />
             </div>
           </div>
         </div>
@@ -194,7 +187,6 @@
               <button type="submit" class="butt mb-4" value="CREATE ACCOUNT">
                 Register
               </button>
-              <!-- <a type="button" class="mb-2" (click)="onSwitchPage()">Login</a> -->
             </form>
           </div>
         </div>
@@ -207,7 +199,6 @@
                 eaque, ipsum aut autem pariatur ut cupiditate possimus
                 voluptatum delectus iste.
               </p>
-              <input type="button" class="butt_out" value="Learn More" />
             </div>
           </div>
         </div>

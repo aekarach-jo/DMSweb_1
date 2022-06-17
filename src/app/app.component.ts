@@ -24,6 +24,8 @@ export class AppComponent {
   versionForHtml: any
   dataUserName: any
   checkAdminIsEmpty: any
+
+  status : boolean = false
   constructor(public router: Router, public fb: FormBuilder, public callApi: ApiService) {
     this.statusLogin = localStorage.getItem('statuslogin')
     this.permission = localStorage.getItem('permission')
@@ -47,26 +49,21 @@ export class AppComponent {
 
   get formValidLogin() { return this.formLogin.controls }
 
-  // btnToggle() {
-  //   const hamburger_menu = document.querySelector(".hamburger-menu");
-  //   const container = document.querySelector(".container");
-  //   hamburger_menu.addEventListener("click", () => {
-  //   container.classList.toggle("active");
-  //   })
-  // }
 
   elem=document.documentElement
-  onClickFullScreen(){
-    if(this.elem.requestFullscreen){
+  onClickFullScreen(statusClick){
+    this.status = statusClick
+    if(this.elem.requestFullscreen || statusClick == true){
       this.elem.requestFullscreen();
+      this.status = true
     }
-    document.fullscreenElement
-    console.log(document.fullscreenElement);
   }
 
-  onClickCloseScreen(){
-    if(document.exitFullscreen){
+  onClickCloseFullScreen(statusClick){
+    this.status = statusClick
+    if(document.exitFullscreen || statusClick == false){
       document.exitFullscreen();
+      this.status = false
     }
   }
 
@@ -86,7 +83,6 @@ export class AppComponent {
         if (data.toString() == 'ไอดีนี้มีในระบบ') {
           if (this.formLogin.value.password != null) {
             this.callApi.getUserByUsername(this.formLogin.value.userName).subscribe(user => {
-              console.log(user);
               if (user.password == this.formLogin.value.password) {
                 this.login()
                 this.submitLogin = false
