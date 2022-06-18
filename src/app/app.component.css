@@ -44,11 +44,10 @@
 
 @media screen and (max-width: 420px) {
   .container-login {
-    position: absolute;
-    width: 45vh;
+    position: fixed;
     margin-right: 0;
     margin-left: 0;
-    top: 32%;
+    top: 27%;
   }
 }
 
