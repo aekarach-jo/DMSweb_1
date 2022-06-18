@@ -34,7 +34,6 @@
     color: #f8f9ff;
     background-color: #ff6b00;
     box-shadow: 0px 0px 20px 0px rgba(255, 81, 0, 1);
-
     height: 3rem;
     padding-top: 10px;
     border-top-left-radius: 20px;
@@ -47,7 +46,7 @@
     position: fixed;
     margin-right: 0;
     margin-left: 0;
-    top: 27%;
+    top: 26%;
   }
 }
 
@@ -128,7 +127,7 @@
 
 .myRightCtn header {
   color: #fff;
-  font-size: 3vw;
+  font-size: 2vw;
   margin: 3vw;
 }
 

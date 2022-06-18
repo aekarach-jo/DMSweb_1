@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class ReportComponent implements OnInit {
   dataSource: any
-  displayedColumns: string[] = ['ห้องที่', 'รายละเอียด', 'วันที่', 'เวลา', 'เพิ่มเติม', 'ย้ายไปข้อมูลรวม'];
+  displayedColumns: string[] = ['ห้องที่', 'วันที่', 'เวลา', 'รายละเอียด', 'เพิ่มเติม', 'ลบ'];
   formReport: any
   formRoom: any
   reportData: any
@@ -72,7 +72,7 @@ export class ReportComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    
+
   }
 
   getAllReport() {
@@ -130,11 +130,11 @@ export class ReportComponent implements OnInit {
   onChangeStatus() {
     this.formReport.value.reportStatus = "ยืนยันแล้ว"
     this.callapi.editReport(this.getId, this.formReport.value).subscribe(data => {
-      
+
       this.dataSource = data
       console.log("แก้ไขเรียบร้อย");
       this.getAllReport();
-      document.getElementById('closeModal').click()     
+      document.getElementById('closeModal').click()
     })
   }
 
