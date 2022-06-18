@@ -162,6 +162,7 @@ export class AppComponent {
           position: 'center',
           title: 'สำเร็จ',
           showCloseButton: false,
+          showConfirmButton: false,
           timer: 800
         }).then((res) => {
           localStorage.setItem('statuslogin', 'logout')

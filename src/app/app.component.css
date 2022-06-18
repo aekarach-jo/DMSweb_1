@@ -25,7 +25,22 @@
 
 }
 
+@media screen and (max-width: 420px) {
+  .text-title {
+    text-align: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 600;
+    color: #f8f9ff;
+    background-color: #ff6b00;
+    box-shadow: 0px 0px 20px 0px rgba(255, 81, 0, 1);
 
+    height: 3rem;
+    padding-top: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+}
 
 @media screen and (max-width: 420px) {
   .container-login {
@@ -75,11 +90,12 @@
 @media all and (max-width: 420px) {
   .myLeftCtn {
     position: relative;
+    border-radius: 0px;
     background: #fff;
-    border-radius: 25px;
     height: auto;
     padding: 25px;
-    padding-left: 50px;
+    box-shadow: 0px 0px 20px 0px rgba(255, 81, 0, 1);
+
   }
 }
 
@@ -96,7 +112,8 @@
     font-size: 40px;
     font-weight: 700;
     margin-bottom: 3rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  }
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
 }
 
 .row {
@@ -105,14 +122,14 @@
 
 .myCard {
   position: relative;
-  background: rgba(255, 115, 0, 0 );
+  background: rgba(255, 115, 0, 0);
   height: 100%;
   border-radius: 25px;
 }
 
 .myRightCtn header {
   color: #fff;
-  font-size: 4vw;
+  font-size: 3vw;
   margin: 3vw;
 }
 
@@ -120,21 +137,26 @@
   .myRightCtn {
     position: relative;
     background: linear-gradient(90deg, #ff6b00, #ff6b00);
-    border-radius: 25px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
     height: 80%;
-    padding: 15px;
+    padding: 25px;
     color: rgba(255, 255, 255, 1);
     font-size: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 0px;
   }
 }
 
 @media all and (max-width: 420px) {
   .myRightCtn header {
     color: #fff;
-    font-size: 6vw;
+    font-size: 7vw;
+    margin-top: 4rem;
     margin: 3vw;
   }
 }
@@ -150,7 +172,7 @@
 @media screen and (max-width:420px) {
   .box {
     position: relative;
-    padding-top: 18px;
+    padding-top: 3rem;
     margin: 20px;
     margin-bottom: 10px;
   }
@@ -198,6 +220,21 @@
   color: #944f00;
   font-size: 15px;
   font-weight: 700;
+}
+
+@media screen and (max-width:420px) {
+  .link-to-guest {
+    color: #ff9306;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .link-to-guest:hover {
+    color: #944f00;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
 }
 
 .myForm {
@@ -252,6 +289,7 @@
 .myRightCtn .butt_out {
   background: linear-gradient(45deg, #ffffff, #ff8901);
 }
+
 .myRightCtn .butt_out:hover {
   background: linear-gradient(45deg, #ffffff, #ff8901);
 }
