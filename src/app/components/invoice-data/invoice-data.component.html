@@ -20,8 +20,8 @@
                 </div>
             </form>
         </mat-step>
-        <mat-step >
-            <ng-template matStepLabel >
+        <mat-step>
+            <ng-template matStepLabel>
                 <p class="tab-css" type="button" (click)="getInvoiceByFilterMonth()">เดือนนี้</p>
             </ng-template>
             <div class="table-responsive">
@@ -77,7 +77,7 @@
                             <td>
                                 <div class="image  mt-3" type="button" (click)="getInvoiceById(invoice.invoiceId)"
                                     data-toggle="modal" data-target="#modalEditInvoice">
-                                    <img
+                                    <img class="d-block mx-auto"
                                         src="https://img.icons8.com/external-flaticons-flat-flat-icons/50/external-edit-100-most-used-icons-flaticons-flat-flat-icons-2.png" />
                                 </div>
 
@@ -86,13 +86,14 @@
                                 <div *ngIf="invoice.invoiceStatus == 'ยังไม่ส่งบิล'" class="image mt-3" type="button"
                                     (click)="getInvoiceById(invoice.invoiceId)" data-toggle="modal"
                                     data-target="#modalShowInvoice">
-                                    <img
+                                    <img class="d-block mx-auto"
                                         src="https://img.icons8.com/external-sbts2018-lineal-color-sbts2018/46/000000/external-send-social-media-sbts2018-lineal-color-sbts2018.png" />
                                 </div>
                                 <div *ngIf="invoice.invoiceStatus == 'ส่งบิลแล้ว'" class="image mt-3" type="button"
                                     (click)="getInvoiceById(invoice.invoiceId)" data-toggle="modal"
                                     data-target="#modalShowInvoice">
-                                    <img src="https://img.icons8.com/color/46/26e07f/ok--v1.png" />
+                                    <img class="d-block mx-auto"
+                                        src="https://img.icons8.com/color/46/26e07f/ok--v1.png" />
                                 </div>
                             </td>
                         </tr>
@@ -108,11 +109,11 @@
                 <table class="table table-invoice-css ">
                     <thead>
                         <tr>
-                            <th scope="col">ห้องที่</th>
-                            <th scope="col">ครั้งนี้</th>
-                            <th scope="col">ครั้งก่อน</th>
-                            <th scope="col">จำนวนหน่วย</th>
-                            <th scope="col">ส่งบิล</th>
+                            <th scope="col" class="width-head">ห้องที่</th>
+                            <th scope="col" class="width-head">ครั้งนี้</th>
+                            <th scope="col" class="width-head">ครั้งก่อน</th>
+                            <th scope="col" class="width-head">จำนวนหน่วย</th>
+                            <th scope="col" class="width-head">ส่งบิล</th>
                         </tr>
                     </thead>
                     <tbody *ngFor="let invoice of invoiceAllData">
@@ -165,13 +166,14 @@
                                 <div *ngIf="invoice.invoiceStatus == 'ยังไม่ส่งบิล'" class="image mt-3" type="button"
                                     (click)="getInvoiceById(invoice.invoiceId)" data-toggle="modal"
                                     data-target="#modalShowInvoice">
-                                    <img
+                                    <img class="d-block mx-auto"
                                         src="https://img.icons8.com/external-sbts2018-lineal-color-sbts2018/46/000000/external-send-social-media-sbts2018-lineal-color-sbts2018.png" />
                                 </div>
                                 <div *ngIf="invoice.invoiceStatus == 'ส่งบิลแล้ว'" class="image mt-3" type="button"
                                     (click)="getInvoiceById(invoice.invoiceId)" data-toggle="modal"
                                     data-target="#modalShowInvoice">
-                                    <img src="https://img.icons8.com/color/46/26e07f/ok--v1.png" />
+                                    <img class="d-block mx-auto"
+                                        src="https://img.icons8.com/color/46/26e07f/ok--v1.png" />
                                 </div>
                             </td>
                         </tr>
@@ -430,15 +432,15 @@
                         </div>
                     </div>
                     <form [formGroup]="formInvoice">
-                        <table class="table table-responsive table-bordered text-color">
-                            <thead>
-                                <tr class="text-center">
+                        <table class="table table-responsive table-bordered ">
+                            <thead class=" text-center">
+                                <tr>
                                     <th [width]="150" scope="col" class="align-middle text-center">รายการ</th>
-                                    <th [width]="150" scope="col" class="align-middle">ครั้งก่อน</th>
-                                    <th [width]="150" scope="col" class="align-middle">ครั้งนี้</th>
-                                    <th [width]="170" scope="col" class="align-middle">จำนวนหน่วย</th>
-                                    <th [width]="150" scope="col" class="align-middle">ราคาหน่วย</th>
-                                    <th [width]="150" scope="col" class="align-middle">รวม</th>
+                                    <th [width]="150" scope="col" class="align-middle text-center">ครั้งก่อน</th>
+                                    <th [width]="150" scope="col" class="align-middle text-center">ครั้งนี้</th>
+                                    <th [width]="170" scope="col" class="align-middle text-center">จำนวนหน่วย</th>
+                                    <th [width]="150" scope="col" class="align-middle text-center">ราคาหน่วย</th>
+                                    <th [width]="150" scope="col" class="align-middle text-center">รวม</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center">

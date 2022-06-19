@@ -1,3 +1,4 @@
+import { identifierName } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -264,19 +265,25 @@ export class ProfileComponent implements OnInit {
         this.formFindMonth.value.monthStart.toUTCString(),
         this.formFindMonth.value.monthEnd.toUTCString()).subscribe((data) => {
           this.showInvoiceFilterMonth = data
-          console.log(data);
           for (let i = 0; i < this.showInvoiceFilterMonth.length; i++) {
             if (this.roomId == this.showInvoiceFilterMonth[i].roomId) {
               this.invoicData = this.showInvoiceFilterMonth[i]
               this.showInvoiceNumber = this.showInvoiceFilterMonth[i].invoiceNumber
               this.showCreationDate = this.showInvoiceFilterMonth[i].creationDateTime
-              this.patchValue2(this.invoicData)
-              console.log(this.invoicData);
+              console.log(this.showInvoiceFilterMonth[i]);
+              if(this.showInvoiceFilterMonth[i].invoiceStatus == "ยังไม่ส่งบิล"){
+                this.emptyFormReport()
+                  Swal.fire({
+                    icon: 'warning',
+                    title: 'ยังไม่มีบิลสำหรับเดือนนี้',
+                    position: 'center',
+                    showCancelButton: false
+                  })
+              }else if(this.showInvoiceFilterMonth[i].invoiceStatus == "ส่งบิลแล้ว") {
+                this.patchValue2(this.invoicData)
+              }
             }
           }
-          console.log(this.showInvoiceFilterMonth);
-
-          // console.log(this.invoice[0].pop());
         })
     }
   }
@@ -317,7 +324,7 @@ export class ProfileComponent implements OnInit {
   onSelectFile(fileInput: any) {
     this.selectedFile = <File>fileInput.target.files[0];
     console.log(this.selectedFile);
-    
+
   }
 
   onCreateReport2() {

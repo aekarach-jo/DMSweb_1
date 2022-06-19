@@ -30,114 +30,116 @@
         </div>
 
 
-
-        <form class="col-lg-10 rightCol hiden-scroll d-block mx-auto " *ngIf="switchPage == 1">
-            <div class="p-3">
-                <div class="row">
-                    <div class="col-8">
-                        <h1 class="text-rightCol">บิลชำระค่าเช่าห้อง</h1>
+        <!-- <h1 *ngIf="this.formInvoice.value.invoiceStatus == 'ยังไม่ส่งบิล'">ยังไม่มีมีบิลสำหรับเดือนนี้</h1> -->
+        <div >
+            <form  class="col-lg-10 rightCol hiden-scroll d-block mx-auto " *ngIf="switchPage == 1">
+                <div class="p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <h1 class="text-rightCol">บิลชำระค่าเช่าห้อง</h1>
+                        </div>
+                        <div class="col-4">
+                            <p class="text-header-invoice float-right mt-1">{{showInvoiceNumber}}</p>
+                        </div>
                     </div>
-                    <div class="col-4">
-                        <p class="text-header-invoice float-right mt-1">{{showInvoiceNumber}}</p>
+                    <div class="row">
+                        <div class="col-6">
+                            <h2 class="text-header-invoice">ห้องที่ {{roomNumber}}</h2>
+                        </div>
+                        <div class="col-6">
+                            <p class="text-header-invoice float-right  mt-1">{{showCreationDate | date: 'dd/MM/yyyy'}}</p>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-6">
-                        <h2 class="text-header-invoice">ห้องที่ {{roomNumber}}</h2>
-                    </div>
-                    <div class="col-6">
-                        <p class="text-header-invoice float-right  mt-1">{{showCreationDate | date: 'dd/MM/yyyy'}}</p>
-                    </div>
-                </div>
-            </div>
-            <form [formGroup]="formInvoice">
-                <table class="table table-responsive table-bordered text-color-invoice">
-                    <thead>
-                        <tr class="text-center">
-                            <th [width]="150" scope="col" class="align-middle text-center">รายการ</th>
-                            <th [width]="150" scope="col" class="align-middle">ครั้งก่อน</th>
-                            <th [width]="150" scope="col" class="align-middle">ครั้งนี้</th>
-                            <th [width]="170" scope="col" class="align-middle">จำนวนหน่วย</th>
-                            <th [width]="150" scope="col" class="align-middle">ราคาหน่วย</th>
-                            <th [width]="150" scope="col" class="align-middle">รวม</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        <tr>
-                            <th scope="row">ค่าน้ำ</th>
-                            <td>
-                                <p class="float-right">{{this.formInvoice.value.waterMeterOld}}</p>
-                            </td>
-                            <td>
-                                <p class="float-right">{{this.formInvoice.value.waterMeterNew}}</p>
-                            </td>
-                            <td>
-                                <p class="float-right">{{this.formInvoice.value.waterMeterUnit}}</p>
-                            </td>
-                            <td>
-                                <p class="float-right">{{this.formInvoice.value.waterPrice | number : '1.2-2'}}</p>
-                            </td>
-                            <td>
-                                <p class="float-right">{{this.formInvoice.value.waterTotalPrice | number : '1.2-2'}}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">ค่าไฟ</th>
-                            <td>
-                                <p class="float-right">{{this.formInvoice.value.powerMeterOld}}</p>
-                            </td>
-                            <td>
-                                <p class="float-right">{{this.formInvoice.value.powerMeterNew}}</p>
-                            </td>
-                            <td>
-                                <p class="float-right">{{this.formInvoice.value.powerMeterUnit}}</p>
-                            </td>
-                            <td>
-                                <p class="float-right">{{this.formInvoice.value.powerPrice | number : '1.2-2'}}</p>
-                            </td>
-                            <td>
-                                <p class="float-right">{{this.formInvoice.value.powerTotalPrice | number : '1.2-2'}}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">ค่าเช่าห้อง</th>
-                            <td colspan="4"></td>
-                            <td>
-                                <p class="float-right">{{this.formInvoice.value.invoiceRoomRate | number : '1.2-2'}}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">ค่าส่วนกลาง</th>
-                            <td colspan="4"></td>
-                            <td>
-                                <p class="float-right">{{this.formInvoice.value.centerService | number : '1.2-2'}}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">อื่นๆ</th>
-                            <td colspan="4">
-                                <p class="float-left">{{this.formInvoice.value.otherNote}}</p>
-                            </td>
-                            <td>
-                                <p class="float-right">{{this.formInvoice.value.otherPrice | number : '1.2-2'}}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th colspan="5">รวม</th>
-                            <td>
-                                <p class="float-right">{{this.formInvoice.value.invoiceTotal | number : '1.2-2'}}</p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <form [formGroup]="formInvoice">
+                    <table class="table table-responsive table-bordered text-color-invoice">
+                        <thead>
+                            <tr class="text-center">
+                                <th [width]="150" scope="col" class="align-middle text-center">รายการ</th>
+                                <th [width]="150" scope="col" class="align-middle">ครั้งก่อน</th>
+                                <th [width]="150" scope="col" class="align-middle">ครั้งนี้</th>
+                                <th [width]="170" scope="col" class="align-middle">จำนวนหน่วย</th>
+                                <th [width]="150" scope="col" class="align-middle">ราคาหน่วย</th>
+                                <th [width]="150" scope="col" class="align-middle">รวม</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <tr >
+                                <th scope="row">ค่าน้ำ</th>
+                                <td>
+                                    <p class="float-right">{{this.formInvoice.value.waterMeterOld}}</p>
+                                </td>
+                                <td>
+                                    <p class="float-right">{{this.formInvoice.value.waterMeterNew}}</p>
+                                </td>
+                                <td>
+                                    <p class="float-right">{{this.formInvoice.value.waterMeterUnit}}</p>
+                                </td>
+                                <td>
+                                    <p class="float-right">{{this.formInvoice.value.waterPrice | number : '1.2-2'}}</p>
+                                </td>
+                                <td>
+                                    <p class="float-right">{{this.formInvoice.value.waterTotalPrice | number : '1.2-2'}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">ค่าไฟ</th>
+                                <td>
+                                    <p class="float-right">{{this.formInvoice.value.powerMeterOld}}</p>
+                                </td>
+                                <td>
+                                    <p class="float-right">{{this.formInvoice.value.powerMeterNew}}</p>
+                                </td>
+                                <td>
+                                    <p class="float-right">{{this.formInvoice.value.powerMeterUnit}}</p>
+                                </td>
+                                <td>
+                                    <p class="float-right">{{this.formInvoice.value.powerPrice | number : '1.2-2'}}</p>
+                                </td>
+                                <td>
+                                    <p class="float-right">{{this.formInvoice.value.powerTotalPrice | number : '1.2-2'}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">ค่าเช่าห้อง</th>
+                                <td colspan="4"></td>
+                                <td>
+                                    <p class="float-right">{{this.formInvoice.value.invoiceRoomRate | number : '1.2-2'}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">ค่าส่วนกลาง</th>
+                                <td colspan="4"></td>
+                                <td>
+                                    <p class="float-right">{{this.formInvoice.value.centerService | number : '1.2-2'}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">อื่นๆ</th>
+                                <td colspan="4">
+                                    <p class="float-left">{{this.formInvoice.value.otherNote}}</p>
+                                </td>
+                                <td>
+                                    <p class="float-right">{{this.formInvoice.value.otherPrice | number : '1.2-2'}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th colspan="5">รวม</th>
+                                <td>
+                                    <p class="float-right">{{this.formInvoice.value.invoiceTotal | number : '1.2-2'}}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+                <div *ngIf="this.formInvoice.value.invoiceStatus == 'ยังไม่ชำระ'" class=" btn-status-left">
+                    {{this.formInvoice.value.invoiceStatus}}</div>
+                <div *ngIf="this.formInvoice.value.invoiceStatus == 'ชำระแล้ว'" class=" btn-status-left">
+                    {{this.formInvoice.value.invoiceStatus}}</div>
+                <div class=" btn-status-right" type="button">ชำระค่าเช่า</div>
             </form>
-            <div *ngIf="this.formInvoice.value.invoiceStatus == 'ยังไม่ชำระ'" class=" btn-status-left">
-                {{this.formInvoice.value.invoiceStatus}}</div>
-            <div *ngIf="this.formInvoice.value.invoiceStatus == 'ชำระแล้ว'" class=" btn-status-left">
-                {{this.formInvoice.value.invoiceStatus}}</div>
-            <div class=" btn-status-right" type="button">ชำระค่าเช่า</div>
-        </form>
-        <form [formGroup]="formReport" class="col-lg-10 rightCol m-3 p-3  d-block mx-auto" *ngIf="switchPage == 2">
+        </div>
+        <form [formGroup]="formReport" class="col-lg-10 rightCol-report m-3 p-3  d-block mx-auto" *ngIf="switchPage == 2">
             <h1 class="text-dark">แจ้งซ่อม</h1>
             <select formControlName="title" class="form-control mb-3 title-size" type="text">
                 <option value="อินเทอร์เน็ต">อินเทอร์เน็ต</option>
@@ -156,7 +158,7 @@
                 <input type="file" formControlName="image" (change)="onSelectFile($event)">
             </div>
 
-            <button class="btn btn-outline-light btn-send  d-block mx-auto mt-5"
+            <button class="btn btn-warning btn-send  d-block mx-auto mt-5"
                 (click)="onCreateReport2()">ส่ง</button>
         </form>
 
@@ -206,8 +208,6 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <!-- <div *ngIf="invoice.invoiceStatus == 'ชำระแล้ว'"
-                                            class="align-middle text-center"> -->
                                         <!-- ดึง status ของ payment ไม่ใช่ invoice -->
                                         <div *ngIf="invoice.invoiceStatus == 'ยังไม่ชำระ'"
                                             class="align-middle text-center">

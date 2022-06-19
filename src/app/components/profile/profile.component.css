@@ -83,7 +83,7 @@
     position: relative;
     align-items: center;
     justify-content: center;
-    height: 390px;
+    height: 420px;
     width: auto;
     padding: 20px;
     overflow-x: hidden;
@@ -472,7 +472,7 @@
 }
 
 .text-area-css{
-    width: 20rem;
+    width: 22rem;
     height: 10rem;
 }
 
