@@ -288,6 +288,7 @@ export class ProfileComponent implements OnInit {
       icon: 'warning',
       showCancelButton: true,
       cancelButtonColor: '#d33',
+      cancelButtonText: 'ยกเลิก',
       confirmButtonColor: '#2aad19',
       confirmButtonText: 'ยืนยัน'
     }).then((result) => {
@@ -328,6 +329,7 @@ export class ProfileComponent implements OnInit {
       showCancelButton: true,
       cancelButtonColor: '#d33',
       confirmButtonColor: '#2aad19',
+      cancelButtonText: 'ยกเลิก',
       confirmButtonText: 'ยืนยัน'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -395,6 +397,7 @@ export class ProfileComponent implements OnInit {
       icon: 'warning',
       showCancelButton: true,
       cancelButtonColor: '#d33',
+      cancelButtonText: 'ยกเลิก',
       confirmButtonColor: '#2aad19',
       confirmButtonText: 'ยืนยัน'
     }).then((result) => {

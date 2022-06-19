@@ -63,6 +63,7 @@ export class CheckoutComponent implements OnInit {
       icon: 'warning',
       showCancelButton: true,
       cancelButtonColor: '#d33',
+      cancelButtonText: 'ยกเลิก',
       confirmButtonColor: '#2aad19',
       confirmButtonText: 'ยืนยัน'
     }).then((result) => {
@@ -115,6 +116,7 @@ export class CheckoutComponent implements OnInit {
       icon: 'warning',
       showCancelButton: true,
       cancelButtonColor: '#d33',
+      cancelButtonText: 'ยกเลิก',
       confirmButtonColor: '#2aad19',
       confirmButtonText: 'ยืนยัน'
     }).then((result) => {

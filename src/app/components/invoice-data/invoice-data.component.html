@@ -20,20 +20,20 @@
                 </div>
             </form>
         </mat-step>
-        <mat-step>
-            <ng-template matStepLabel>
+        <mat-step >
+            <ng-template matStepLabel >
                 <p class="tab-css" type="button" (click)="getInvoiceByFilterMonth()">เดือนนี้</p>
             </ng-template>
             <div class="table-responsive">
                 <table class="table table-invoice-css">
                     <thead>
                         <tr>
-                            <th scope="col">ห้องที่</th>
-                            <th scope="col">ครั้งก่อน</th>
-                            <th scope="col">ครั้งนี้</th>
-                            <th scope="col">จำนวนหน่วย</th>
-                            <th scope="col">แก้ไข</th>
-                            <th scope="col">ส่งบิล</th>
+                            <th scope="col" class="width-head">ห้องที่</th>
+                            <th scope="col" class="width-head">ครั้งก่อน</th>
+                            <th scope="col" class="width-head">ครั้งนี้</th>
+                            <th scope="col" class="width-head">จำนวนหน่วย</th>
+                            <th scope="col" class="width-head">แก้ไข</th>
+                            <th scope="col" class="width-head">ส่งบิล</th>
                         </tr>
                     </thead>
                     <tbody *ngFor="let invoice of showInvoiceFilterMonth">

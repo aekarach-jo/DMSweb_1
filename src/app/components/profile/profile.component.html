@@ -2,6 +2,7 @@
     <div class="col">
         <button class="btn-header-checkout float-right" type="button" data-toggle="modal"
             data-target="#modalDatePicker">
+            <img class="img-header-checkout" src="https://img.icons8.com/stickers/30/remove-bookmark.png">
             ขอคืนห้องพัก
         </button>
         <div class=" leftCol ml-4">
@@ -30,21 +31,23 @@
 
 
 
-        <form class="col-lg-10 rightCol hiden-scroll m-3 d-block mx-auto " *ngIf="switchPage == 1">
-            <div class="row">
-                <div class="col-8">
-                    <h1 class="text-rightCol">บิลชำระค่าเช่าห้อง</h1>
+        <form class="col-lg-10 rightCol hiden-scroll d-block mx-auto " *ngIf="switchPage == 1">
+            <div class="p-3">
+                <div class="row">
+                    <div class="col-8">
+                        <h1 class="text-rightCol">บิลชำระค่าเช่าห้อง</h1>
+                    </div>
+                    <div class="col-4">
+                        <p class="text-header-invoice float-right mt-1">{{showInvoiceNumber}}</p>
+                    </div>
                 </div>
-                <div class="col-4">
-                    <p class="text-header-invoice float-right ">{{showInvoiceNumber}}</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6">
-                    <h2 class="text-header-invoice">ห้องที่ {{roomNumber}}</h2>
-                </div>
-                <div class="col-6">
-                    <p class="text-header-invoice float-right ">{{showCreationDate | date: 'dd/MM/yyyy'}}</p>
+                <div class="row">
+                    <div class="col-6">
+                        <h2 class="text-header-invoice">ห้องที่ {{roomNumber}}</h2>
+                    </div>
+                    <div class="col-6">
+                        <p class="text-header-invoice float-right  mt-1">{{showCreationDate | date: 'dd/MM/yyyy'}}</p>
+                    </div>
                 </div>
             </div>
             <form [formGroup]="formInvoice">
@@ -64,52 +67,36 @@
                             <th scope="row">ค่าน้ำ</th>
                             <td>
                                 <p class="float-right">{{this.formInvoice.value.waterMeterOld}}</p>
-                                <!-- <input formControlName="waterMeterOld" class="input-bill-style " type="number"
-                                    readonly> -->
                             </td>
                             <td>
                                 <p class="float-right">{{this.formInvoice.value.waterMeterNew}}</p>
-                                <!-- <input formControlName="waterMeterNew" class="input-bill-style " type="number"
-                                    readonly> -->
                             </td>
                             <td>
                                 <p class="float-right">{{this.formInvoice.value.waterMeterUnit}}</p>
-                                <!-- <input formControlName="waterMeterUnit" class="input-bill-style " type="number"
-                                    readonly> -->
                             </td>
                             <td>
                                 <p class="float-right">{{this.formInvoice.value.waterPrice | number : '1.2-2'}}</p>
-                                <!-- <input formControlName="waterPrice" class="input-bill-style " type="number" readonly> -->
                             </td>
                             <td>
                                 <p class="float-right">{{this.formInvoice.value.waterTotalPrice | number : '1.2-2'}}</p>
-                                <!-- <input formControlName="waterTotalPrice" class="input-bill-style " type="number" readonly> -->
                             </td>
                         </tr>
                         <tr>
                             <th scope="row">ค่าไฟ</th>
                             <td>
                                 <p class="float-right">{{this.formInvoice.value.powerMeterOld}}</p>
-                                <!-- <input formControlName="powerMeterOld" class="input-bill-style " type="number"
-                                    readonly> -->
                             </td>
                             <td>
                                 <p class="float-right">{{this.formInvoice.value.powerMeterNew}}</p>
-                                <!-- <input formControlName="powerMeterNew" class="input-bill-style " type="number"
-                                    readonly> -->
                             </td>
                             <td>
                                 <p class="float-right">{{this.formInvoice.value.powerMeterUnit}}</p>
-                                <!-- <input formControlName="powerMeterUnit" class="input-bill-style " type="number"
-                                    readonly> -->
                             </td>
                             <td>
                                 <p class="float-right">{{this.formInvoice.value.powerPrice | number : '1.2-2'}}</p>
-                                <!-- <input formControlName="powerPrice" class="input-bill-style " type="number" readonly> -->
                             </td>
                             <td>
                                 <p class="float-right">{{this.formInvoice.value.powerTotalPrice | number : '1.2-2'}}</p>
-                                <!-- <input formControlName="powerTotalPrice" class="input-bill-style " type="number" readonly> -->
                             </td>
                         </tr>
                         <tr>
@@ -117,7 +104,6 @@
                             <td colspan="4"></td>
                             <td>
                                 <p class="float-right">{{this.formInvoice.value.invoiceRoomRate | number : '1.2-2'}}</p>
-                                <!-- <input formControlName="invoiceRoomRate" class="input-bill-style " type="number" readonly> -->
                             </td>
                         </tr>
                         <tr>
@@ -125,7 +111,6 @@
                             <td colspan="4"></td>
                             <td>
                                 <p class="float-right">{{this.formInvoice.value.centerService | number : '1.2-2'}}</p>
-                                <!-- <input formControlName="centerService" class="input-bill-style " type="number"  readonly> -->
                             </td>
                         </tr>
                         <tr>
@@ -135,30 +120,25 @@
                             </td>
                             <td>
                                 <p class="float-right">{{this.formInvoice.value.otherPrice | number : '1.2-2'}}</p>
-                                <!-- <input formControlName="otherPrice" class="input-other-style text-center"
-                                    type="number" (keyup)="calEditInvoice()" [(ngModel)]="otherPrice" > -->
                             </td>
                         </tr>
                         <tr>
                             <th colspan="5">รวม</th>
                             <td>
                                 <p class="float-right">{{this.formInvoice.value.invoiceTotal | number : '1.2-2'}}</p>
-                                <!-- <input formControlName="invoiceTotal" class="input-bill-style " type="number"
-                                    [(ngModel)]="invoiceTotal"> -->
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </form>
-            <!-- <div class=" btn-status">ชำระแล้ว</div> -->
             <div *ngIf="this.formInvoice.value.invoiceStatus == 'ยังไม่ชำระ'" class=" btn-status-left">
                 {{this.formInvoice.value.invoiceStatus}}</div>
             <div *ngIf="this.formInvoice.value.invoiceStatus == 'ชำระแล้ว'" class=" btn-status-left">
                 {{this.formInvoice.value.invoiceStatus}}</div>
             <div class=" btn-status-right" type="button">ชำระค่าเช่า</div>
         </form>
-        <form [formGroup]="formReport" class="col-lg-10 rightCol m-3  d-block mx-auto" *ngIf="switchPage == 2">
-            <h1 class="text-white">แจ้งซ่อม</h1>
+        <form [formGroup]="formReport" class="col-lg-10 rightCol m-3 p-3  d-block mx-auto" *ngIf="switchPage == 2">
+            <h1 class="text-dark">แจ้งซ่อม</h1>
             <select formControlName="title" class="form-control mb-3 title-size" type="text">
                 <option value="อินเทอร์เน็ต">อินเทอร์เน็ต</option>
                 <option value="ไฟดับ">ไฟดับ</option>
@@ -167,17 +147,17 @@
                 <option value="การชำระค่าห้องพัก">การชำระค่าห้องพัก</option>
                 <option value="อื่นๆ">อื่นๆ</option>
             </select>
-            <textarea formControlName="note" class="form-control" cols="" rows="6" type="text"
-                placeholder="ข้อความ...">
+            <textarea formControlName="note" class="form-control text-area-css" type="text" placeholder="ข้อความ...">
             </textarea>
             <div>
                 <label for="image">
                     Tile Image
                 </label>
-                <input type="file" formControlName="image" (change)="onSelectFile($event)" >
+                <input type="file" formControlName="image" (change)="onSelectFile($event)">
             </div>
 
-            <button class="btn btn-outline-light btn-send  d-block mx-auto mt-5" (click)="onCreateReport2()">ส่ง</button>
+            <button class="btn btn-outline-light btn-send  d-block mx-auto mt-5"
+                (click)="onCreateReport2()">ส่ง</button>
         </form>
 
 
@@ -185,10 +165,10 @@
             <mat-stepper #stepper class="bg-stepper">
                 <mat-step>
                     <ng-template matStepLabel>
-                        <p class="text-white mt-2" type="button" (click)="getAllInvoice()">การชำระค่าเช่า</p>
+                        <p class="text-dark mt-2" type="button" (click)="getAllInvoice()">การชำระค่าเช่า</p>
                     </ng-template>
                     <div class="table-responsive">
-                        <table class="table text-white">
+                        <table class="table text-dark">
                             <thead>
                                 <tr>
                                     <th class="align-middle text-center" scope="col">รายละเอียด</th>
@@ -229,7 +209,8 @@
                                         <!-- <div *ngIf="invoice.invoiceStatus == 'ชำระแล้ว'"
                                             class="align-middle text-center"> -->
                                         <!-- ดึง status ของ payment ไม่ใช่ invoice -->
-                                        <div *ngIf="invoice.invoiceStatus == 'ยังไม่ชำระ'" class="align-middle text-center"> 
+                                        <div *ngIf="invoice.invoiceStatus == 'ยังไม่ชำระ'"
+                                            class="align-middle text-center">
                                             <img src="https://img.icons8.com/office/32/000000/checkmark--v1.png" />
                                         </div>
                                         <div *ngIf="invoice.invoiceStatus == 'ยังไม่ชำระ'"
@@ -246,11 +227,11 @@
                 </mat-step>
                 <mat-step>
                     <ng-template matStepLabel>
-                        <p class="text-white mt-2" type="button" (click)="getAllReport()">การแจ้งปัญหา</p>
+                        <p class="text-dark mt-2" type="button" (click)="getAllReport()">การแจ้งปัญหา</p>
                     </ng-template>
                     <div>
                         <div class="table-responsive">
-                            <table class="table text-white">
+                            <table class="table text-dark">
                                 <thead>
                                     <tr>
                                         <th class="align-middle text-center" scope="col">รายละเอียด</th>
@@ -473,11 +454,11 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="modalDatePicker" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalDatePicker" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-date">
         <div class="modal-content modal-dialog-content">
             <div class="modal-header">
-                <h5 class="modal-title text-header-date text-whtie" id="exampleModalLabel">กรุณาเลือกวันที่</h5>
+                <h5 class="modal-title text-header-date text-whtie ">กรุณาเลือกวันที่</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

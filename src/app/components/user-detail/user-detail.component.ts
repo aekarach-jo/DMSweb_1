@@ -169,6 +169,7 @@ export class UserDetailComponent implements OnInit {
             icon: 'warning',
             showCancelButton: true,
             cancelButtonColor: '#d33',
+            cancelButtonText: 'ยกเลิก',
             confirmButtonColor: '#2aad19',
             confirmButtonText: 'ยืนยัน'
           }).then((result) => {
@@ -180,6 +181,7 @@ export class UserDetailComponent implements OnInit {
                   autocapitalize: 'off'
                 },
                 showCancelButton: true,
+                cancelButtonText: 'ยกเลิก',
                 confirmButtonText: 'ยืนยัน',
                 showLoaderOnConfirm: true,
                 allowOutsideClick: () => !Swal.isLoading()
@@ -242,6 +244,7 @@ export class UserDetailComponent implements OnInit {
         icon: 'warning',
         showCancelButton: true,
         cancelButtonColor: '#d33',
+        cancelButtonText: 'ยกเลิก',
         confirmButtonColor: '#2aad19',
         confirmButtonText: 'ยืนยัน'
       }).then((result) => {
