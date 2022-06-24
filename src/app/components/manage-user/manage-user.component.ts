@@ -179,7 +179,7 @@ export class ManageUserComponent implements OnInit {
         this.formRoom.value.roomStatus = "ไม่ว่าง"
         console.log(this.formRoom.value);
         console.log(room.roomId);
-        this.callapi.editRoom(room.roomId, this.formRoom.value).subscribe(edit => {
+        this.callapi.editRoom(this.formRoom.value.roomId, this.formRoom.value).subscribe(edit => {
           console.log(edit);
           
          })

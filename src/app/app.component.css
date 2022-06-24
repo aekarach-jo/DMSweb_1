@@ -479,3 +479,16 @@
   }
 
 }
+
+.btn_fullSc{
+  position: relative;
+  display: none;
+}
+
+@media screen and (max-width:420px) {
+  .btn_fullSc{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

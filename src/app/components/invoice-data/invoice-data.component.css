@@ -257,7 +257,7 @@
 .input-bill-style {
     border-color: rgba(0, 0, 0, 0);
     text-align: center;
-    width: 100px;
+width: 100px;
     font-size: 20px;
     margin-bottom: 5px;
     border-radius: 10px;
