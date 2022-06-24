@@ -114,8 +114,6 @@ export class InvoiceDataComponent implements OnInit {
   // }
 
   patchValue(receiveInvoiceId: invoice) {
-    console.log(receiveInvoiceId);
-
     this.formInvoice.patchValue({
       invoiceId: receiveInvoiceId.invoiceId,
       invoiceNumber: receiveInvoiceId.invoiceNumber,
@@ -191,8 +189,6 @@ export class InvoiceDataComponent implements OnInit {
       this.getRoomNumber = roomData.roomNumber
       this.getRoomId = roomData.roomId
       this.getRoomRate = roomData.roomType
-      console.log(this.getRoomRate);
-
       if (this.invoiceAllData.length == 0) {
         this.formInvoice.value.waterMeterOld = roomData.waterMeter
         this.formInvoice.value.powerMeterOld = roomData.powerMeter
@@ -221,7 +217,6 @@ export class InvoiceDataComponent implements OnInit {
 
   getInvoiceByFilterMonth() {
     let date = new Date();
-    console.log(date);
     this.formFindMonth.value.monthStart = new Date();
     this.formFindMonth.value.monthEnd = new Date();
     this.formFindMonth.value.monthStart.setDate(1);
@@ -239,8 +234,6 @@ export class InvoiceDataComponent implements OnInit {
         this.formFindMonth.value.monthEnd.toUTCString()).subscribe((data) => {
           this.invoice[0] = data
           this.showInvoiceFilterMonth = data
-          console.log(this.invoice[0]);
-          // console.log(this.invoice[0].pop());
         })
     }
   }
@@ -248,7 +241,6 @@ export class InvoiceDataComponent implements OnInit {
   getAllInvoice() {
     this.callapi.getAllInvoice().subscribe(data => {
       this.invoiceAllData = data
-      console.log(this.invoiceAllData);
     })
   }
 
@@ -265,7 +257,6 @@ export class InvoiceDataComponent implements OnInit {
         }
       }
       this.patchValue(this.getInvoiceIdData)
-      console.log(this.formInvoice.value);
     })
   }
 
@@ -300,7 +291,6 @@ export class InvoiceDataComponent implements OnInit {
       this.formInvoice.value.roomNumber = this.getRoomNumber
       this.formInvoice.value.roomId = this.getRoomId
       this.formInvoice.value.creationDateTime = new Date
-      console.log(this.formInvoice.value);
       this.callapi.createInvoice(this.formInvoice.value).subscribe(data => {
         Swal.fire({
           position: "center",
@@ -319,9 +309,7 @@ export class InvoiceDataComponent implements OnInit {
 
   onEditInvoiceAndAddData() {
     this.formInvoice.value.invoiceStatus = "ยังไม่ส่งบิล"
-    console.log(this.formInvoice.value);
     this.callapi.editInvoice(this.getInvoiceId, this.formInvoice.value).subscribe(data => {
-      console.log(data);
       Swal.fire({
         position: "center",
         icon: 'success',
@@ -337,9 +325,7 @@ export class InvoiceDataComponent implements OnInit {
   }
   onEditInvoiceData() {
     this.formInvoice.value.invoiceStatus = "ส่งบิลแล้ว"
-    console.log(this.formInvoice.value);
     this.callapi.editInvoice(this.getInvoiceId, this.formInvoice.value).subscribe(data => {
-      console.log(data);
       Swal.fire({
         position: "center",
         icon: 'success',

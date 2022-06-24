@@ -79,17 +79,8 @@ export class ReportComponent implements OnInit {
     this.callapi.getAllReport().subscribe(data => {
       this.reportData = data
       this.dataSource = new MatTableDataSource(this.reportData);
-      console.log(data);
     })
   }
-
-  // getReportByStatus(){
-  //   this.callapi.getReportByStatus("รอยืนยัน").subscribe(data =>{
-  //     console.log(data);
-
-  //     this.dataSource = data
-  //   })
-  // }
 
   getReportById(id: string) {
     this.callapi.getReportById(id).subscribe(data => {
@@ -97,7 +88,6 @@ export class ReportComponent implements OnInit {
       this.getId = data.reportId
       this.showRoomNumber = data.roomNumber
       this.patchValue(this.reportDataById)
-      console.log(data);
     })
   }
 
@@ -133,7 +123,6 @@ export class ReportComponent implements OnInit {
     this.callapi.editReport(this.getId, this.formReport.value).subscribe(data => {
 
       this.dataSource = data
-      console.log("แก้ไขเรียบร้อย");
       this.getAllReport();
       document.getElementById('closeModal').click()
     })

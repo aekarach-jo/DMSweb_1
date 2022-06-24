@@ -153,8 +153,6 @@ export class ManageUserComponent implements OnInit {
     this.callapi.getAllUserDetail().subscribe(data => {
       this.userDetailData = data;
       this.dataSource = new MatTableDataSource(this.userDetailData);
-
-      console.log(this.dataSource);
     })
   }
 
@@ -167,21 +165,12 @@ export class ManageUserComponent implements OnInit {
   }
 
   onEditUserDetail(){
-    console.log(this.getId);
-    console.log(this.formUserDetail.value);
-    
     this.callapi.editUserDetail(this.getId, this.formUserDetail.value).subscribe(data =>{
-      console.log(data);
-
       this.callapi.getRoomByNumber(this.formUserDetail.value.roomNumber).subscribe(room => {
         this.formRoom.value = room
         this.formRoom.value.userDetailId = this.formUserDetail.value.userDetailId
         this.formRoom.value.roomStatus = "ไม่ว่าง"
-        console.log(this.formRoom.value);
-        console.log(room.roomId);
-        this.callapi.editRoom(this.formRoom.value.roomId, this.formRoom.value).subscribe(edit => {
-          console.log(edit);
-          
+        this.callapi.editRoom(this.formRoom.value.roomId, this.formRoom.value).subscribe(edit => {          
          })
       })
       Swal.fire({

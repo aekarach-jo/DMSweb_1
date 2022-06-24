@@ -119,19 +119,15 @@ export class AppComponent {
       this.permission = localStorage.getItem('permission')
       this.dataUserName = localStorage.getItem('iduserName')
       if (user.permission == 'ADMIN') {
-        console.log(user.permission);
         this.router.navigateByUrl('/room')
       }
       if (user.permission == 'OWNER') {
-        console.log(user.permission);
         this.router.navigateByUrl('/room')
       }
       if (user.permission == 'USER') {
-        console.log(user.permission);
         this.router.navigateByUrl('/room')
       }
       if (user.permission == 'GUEST') {
-        console.log(user.permission);
         this.router.navigateByUrl('/room')
       }
     }, error => {
@@ -225,7 +221,6 @@ export class AppComponent {
 
   getUserById(id: string) {
     this.callApi.getUserByID(id).subscribe(user => {
-      console.log(user);
     })
   }
 
@@ -235,7 +230,6 @@ export class AppComponent {
     this.formUser.value.permission = "ADMIN"
     this.formUser.value.creationDateTime = new Date
     this.callApi.createUser(this.formUser.value).subscribe(data => {
-      console.log(data);
       Swal.fire({
         position: "center",
         icon: 'success',

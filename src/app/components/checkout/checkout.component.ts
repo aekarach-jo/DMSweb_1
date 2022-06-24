@@ -44,7 +44,6 @@ export class CheckoutComponent implements OnInit {
   getAllCheckout() {
     this.callapi.getAllCheckout().subscribe(dataCheckout => {
       this.dataSource = dataCheckout
-      console.log(this.dataSource);
     })
   }
 
@@ -72,13 +71,10 @@ export class CheckoutComponent implements OnInit {
           this.callapi.getRoomByNumber(this.formCheckout.value.roomNumber).subscribe(room => {
             this.callapi.getUserByID(this.formCheckout.value.userId).subscribe(user => {
               this.callapi.getUserDetailById(user.userDetailId).subscribe(userData => {
-
                 room.roomStatus = "ว่าง"
-                console.log(room.roomId);
                 userData.userStatus = "Out"
                 userData.dateOut = new Date
                 this.formCheckout.value.checkoutStatus = 'สำเร็จแล้ว'
-
                 this.callapi.editRoom(room.roomId, room).subscribe(status => { })
                 this.callapi.deleteUser(user.userId).subscribe(status => { })
                 this.callapi.editUserDetail(userData.userDetailId, userData).subscribe(status => { })

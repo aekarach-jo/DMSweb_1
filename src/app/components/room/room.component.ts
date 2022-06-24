@@ -83,7 +83,6 @@ export class RoomComponent implements OnInit {
   getAllRoom() {
     this.callapi.getAllRoom().subscribe(data => {
       this.roomAllData = data;
-      console.log(this.roomAllData);
 
     })
   }
@@ -91,7 +90,6 @@ export class RoomComponent implements OnInit {
   getRoomById(roomId: string) {
     this.callapi.getRoomById(roomId).subscribe(data => {
       this.getDataRoomById = data;
-      console.log(this.getDataRoomById);
       this.patchValue(this.getDataRoomById);
     })
   }
@@ -99,7 +97,6 @@ export class RoomComponent implements OnInit {
   getRoomByFloor(floor: string) {
     this.callapi.getRoomByFloor(floor).subscribe(floor => {
       this.roomAllData = floor
-      console.log(floor);
     })
   }
 
@@ -111,7 +108,6 @@ export class RoomComponent implements OnInit {
 
     }
       this.callapi.createRoom(this.formRoom.value).subscribe(data => {
-        console.log(data);
         Swal.fire({
           position: "center",
           icon: 'success',
@@ -155,7 +151,6 @@ export class RoomComponent implements OnInit {
   getAllSetting() {
     this.callapi.getAllSetting().subscribe(data => {
       this.settingData = data
-      console.log(this.settingData);
       if (this.settingData.length == 0) {
         Swal.fire({
           title: 'กรุณาตั้งค่าก่อนสร้างห้อง',

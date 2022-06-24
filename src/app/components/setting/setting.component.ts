@@ -45,12 +45,10 @@ export class SettingComponent implements OnInit {
   getAllSetting() {
     this.callapi.getAllSetting().subscribe(data => {
       this.settingAllData = data
-      console.log(this.settingAllData.length);
       
       if(this.settingAllData.length != 0 ){
         this.patchValue(this.settingAllData[0])
       }
-      console.log(data);
       if (this.settingAllData.length == 0) {
         this.onCreateSetting()
       } 
@@ -67,7 +65,6 @@ export class SettingComponent implements OnInit {
     this.formSetting.value.roomrateTypeAir = 0
     this.formSetting.value.roomrateTypeFan = 0
     this.callapi.createSetting(this.formSetting.value).subscribe(data => {
-      console.log(data);
 
       this.getAllSetting();
     })
@@ -77,9 +74,7 @@ export class SettingComponent implements OnInit {
     this.formSetting.value.status = "Open"
     this.formSetting.value.creationDatetime = new Date
     this.formSetting.value.settingId = "S000"
-    console.log(this.formSetting.value);
     this.callapi.editSetting(this.formSetting.value.settingId, this.formSetting.value).subscribe(data => {
-      console.log(data);
       Swal.fire({
         position: "center",
         icon: 'success',

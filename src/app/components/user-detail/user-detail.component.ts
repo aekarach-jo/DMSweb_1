@@ -119,46 +119,39 @@ export class UserDetailComponent implements OnInit {
       //   }
 
       // }
-      console.log(data)
     })
   }
 
   checkTelephone() {
 
-      this.callapi.getAllUserDetail().subscribe(data => {
-        this.userDetailData = data
-        console.log(data)
-        for (let index = 0; index < this.userDetailData.length; index++) {
-          console.log(this.userDetailData[index].tel);
-          console.log(this.formUserDetail.value.tel);
+    this.callapi.getAllUserDetail().subscribe(data => {
+      this.userDetailData = data
+      for (let index = 0; index < this.userDetailData.length; index++) {
+        if (this.userDetailData[index].tel == this.formUserDetail.value.tel) {
+          Swal.fire({
+            icon: 'warning',
+            position: 'center',
+            title: this.formUserDetail.value.tel + ' มีผู้ใช้งานแล้ว',
+            input: 'text',
+            inputAttributes: {
+              autocapitalize: 'off'
+            },
+            // timer: 1500
+          }).then((res) => {
 
-          if (this.userDetailData[index].tel == this.formUserDetail.value.tel) {
-            Swal.fire({
-              icon: 'warning',
-              position: 'center',
-              title: this.formUserDetail.value.tel + ' มีผู้ใช้งานแล้ว',
-              input: 'text',
-              inputAttributes: {
-                autocapitalize: 'off'
-              },
-              // timer: 1500
-            }).then((res) => {
-              console.log(res.value.toString());
+            this.formUserDetail.patchValue({ tel: res.value.toString() })
 
-              this.formUserDetail.patchValue({tel : res.value.toString()})
-              
-              // this.formUserDetail.value.
-            })
-          } else {
+            // this.formUserDetail.value.
+          })
+        } else {
 
-          }
         }
-      })
+      }
+    })
   }
 
 
   createUserDetail() {
-    console.log(this.formUserDetail.value.userDetailId);
     this.checkTelephone()
     if (this.formUserDetail.value.firstName == null) {
       this.callapi.checkUser(this.formUser.value.userName).subscribe(state => {
@@ -187,7 +180,6 @@ export class UserDetailComponent implements OnInit {
                 allowOutsideClick: () => !Swal.isLoading()
               }).then((result) => {
                 if (result.isConfirmed) {
-                  console.log(result.value.toString());
                   this.callapi.getAllUserDetail().subscribe(userData => {
                     this.userDetailData = userData
                     for (let i = 0; i < this.userDetailData.length; i++) {
@@ -197,9 +189,7 @@ export class UserDetailComponent implements OnInit {
                         this.formUser.value.userStatus = "In"
                         this.formUser.value.creationDateTime = new Date
                         this.formUser.value.permission = "USER"
-                        console.log(this.formUser.value);
                         this.callapi.createUser(this.formUser.value).subscribe(data => {
-                          console.log(data);
                           this.emptyUserForm()
                           this.emptyUserDetailForm()
                           location.reload()
@@ -252,11 +242,9 @@ export class UserDetailComponent implements OnInit {
           this.formUserDetail.value.creationDatetime = new Date;
           this.formUserDetail.value.status = "Open"
           this.formUserDetail.value.userStatus = "In"
-          console.log(this.formUserDetail.value)
           this.callapi.checkUser(this.formUser.value.userName).subscribe(state => {
             if (state.toString() == "ไอดีนี้สามารถใช้งานได้") {
               this.callapi.createUserDetail(this.formUserDetail.value).subscribe(create => {
-                console.log(create);
                 this.formUser.value.userDetailId = create.userDetailId
                 this.oncreateUser()
               })
@@ -281,10 +269,8 @@ export class UserDetailComponent implements OnInit {
     this.formUser.value.userStatus = "In"
     this.formUser.value.creationDateTime = new Date
     this.formUser.value.permission = "USER"
-    console.log(this.formUser.value);
     this.callapi.createUser(this.formUser.value).subscribe(data => {
       this.getRoomByRoomNumber();
-      console.log(data);
     })
     Swal.fire({
       position: "center",
@@ -300,8 +286,6 @@ export class UserDetailComponent implements OnInit {
       this.formRoom.value = room
       this.formRoom.value.userDetailId = this.formUserDetail.value.userDetailId
       this.formRoom.value.roomStatus = "ไม่ว่าง"
-      console.log(this.formRoom.value);
-      
       this.callapi.editRoom(room.roomId, this.formRoom.value).subscribe(edit => {
         this.emptyUserForm()
         this.emptyUserDetailForm()

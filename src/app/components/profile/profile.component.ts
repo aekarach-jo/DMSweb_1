@@ -200,15 +200,12 @@ export class ProfileComponent implements OnInit {
   }
 
   getRoomNumber() {
-    console.log(this.userId);
     this.callapi.getUserByID(this.userId).subscribe(data => {
       this.callapi.getUserDetailById(data.userDetailId).subscribe(i => {
         this.roomNumber = i.roomNumber;
         this.userDetailName = i.firstName
-        console.log(this.roomNumber);
         this.callapi.getRoomByNumber(this.roomNumber).subscribe(roomData => {
           this.roomId = roomData.roomId;
-          console.log(this.roomId);
           this.getInvoiceByFilterMonth()
           this.getAllReport()
         })
@@ -225,13 +222,10 @@ export class ProfileComponent implements OnInit {
           this.showInvoiceAllData.push(this.invoiceAllData[i])
         }
       }
-      console.log(this.invoiceAllData);
     })
   }
 
   getInvoiceById(id: string) {
-    console.log(id);
-
     this.callapi.getInvoiceById(id).subscribe(data => {
       this.getInvoiceIdData = data
       this.getInvoiceId = data.invoiceId
@@ -239,16 +233,12 @@ export class ProfileComponent implements OnInit {
       this.showCreationDate = data.creationDateTime
       this.invoiceTotal = data.invoiceTotal
       this.showRoomNumber = this.roomNumber
-      console.log(data);
-
       this.patchValue(this.getInvoiceIdData)
-      console.log(this.formInvoice.value);
     })
   }
 
   getInvoiceByFilterMonth() {
     let date = new Date();
-    console.log(date);
     this.formFindMonth.value.monthStart = new Date();
     this.formFindMonth.value.monthEnd = new Date();
     this.formFindMonth.value.monthStart.setDate(1);
@@ -270,16 +260,15 @@ export class ProfileComponent implements OnInit {
               this.invoicData = this.showInvoiceFilterMonth[i]
               this.showInvoiceNumber = this.showInvoiceFilterMonth[i].invoiceNumber
               this.showCreationDate = this.showInvoiceFilterMonth[i].creationDateTime
-              console.log(this.showInvoiceFilterMonth[i]);
-              if(this.showInvoiceFilterMonth[i].invoiceStatus == "ยังไม่ส่งบิล"){
+              if (this.showInvoiceFilterMonth[i].invoiceStatus == "ยังไม่ส่งบิล") {
                 this.emptyFormReport()
-                  Swal.fire({
-                    icon: 'warning',
-                    title: 'ยังไม่มีบิลสำหรับเดือนนี้',
-                    position: 'center',
-                    showCancelButton: false
-                  })
-              }else if(this.showInvoiceFilterMonth[i].invoiceStatus == "ส่งบิลแล้ว") {
+                Swal.fire({
+                  icon: 'warning',
+                  title: 'ยังไม่มีบิลสำหรับเดือนนี้',
+                  position: 'center',
+                  showCancelButton: false
+                })
+              } else if (this.showInvoiceFilterMonth[i].invoiceStatus == "ส่งบิลแล้ว") {
                 this.patchValue2(this.invoicData)
               }
             }
@@ -305,7 +294,6 @@ export class ProfileComponent implements OnInit {
         this.formReport.value.roomId = this.roomId
         this.formReport.value.reportStatus = "รอยืนยัน"
         this.formReport.value.image = ""
-        console.log(this.formReport.value);
         this.callapi.createReport(this.formReport.value).subscribe(data => {
           Swal.fire({
             position: "center",
@@ -314,7 +302,6 @@ export class ProfileComponent implements OnInit {
             showConfirmButton: false,
             timer: 1000
           })
-          console.log(data);
           this.emptyFormReport()
         })
       }
@@ -323,8 +310,6 @@ export class ProfileComponent implements OnInit {
 
   onSelectFile(fileInput: any) {
     this.selectedFile = <File>fileInput.target.files[0];
-    console.log(this.selectedFile);
-
   }
 
   onCreateReport2() {
@@ -366,7 +351,6 @@ export class ProfileComponent implements OnInit {
             showConfirmButton: false,
             timer: 1000
           })
-          console.log(data);
           this.emptyFormReport()
         })
       }
@@ -377,7 +361,6 @@ export class ProfileComponent implements OnInit {
     this.reportDataByRoomId = []
     this.callapi.getAllReport().subscribe(data => {
       this.dataSource = data
-      console.log(this.dataSource);
       for (let i = 0; i < this.dataSource.length; i++) {
         if (this.dataSource[i].roomId == this.roomId) {
 
@@ -393,7 +376,6 @@ export class ProfileComponent implements OnInit {
       this.getId = data.reportId
       this.showRoomNumber = data.roomNumber
       this.patchValue(this.reportDataById)
-      console.log(data);
     })
   }
 
@@ -422,11 +404,8 @@ export class ProfileComponent implements OnInit {
     this.formCheckout.value.userId = this.userId
     this.formCheckout.value.creationDateTime = new Date
     this.formCheckout.value.checkoutDate = this.selected
-    console.log(this.selected);
     if (this.formCheckout.value.checkoutDate != null) {
-      console.log(this.formCheckout.value);
       this.callapi.createCheckout(this.formCheckout.value).subscribe(dataCheckout => {
-        console.log(dataCheckout);
         Swal.fire({
           position: "center",
           icon: 'success',
