@@ -59,10 +59,11 @@
 }
 @media  screen and (max-width:420px) {
     .container-input{
+        display: grid;
         position: relative;
         align-items: center;
         justify-content: center;
-        width: 70%;
+        width: 100%;
         height: 50%;
     }
 }

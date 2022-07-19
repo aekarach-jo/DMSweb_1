@@ -25,7 +25,7 @@ export class AppComponent {
   dataUserName: any
   checkAdminIsEmpty: any
 
-  status : boolean = false
+  status: boolean = false
   constructor(public router: Router, public fb: FormBuilder, public callApi: ApiService) {
     this.statusLogin = localStorage.getItem('statuslogin')
     this.permission = localStorage.getItem('permission')
@@ -50,18 +50,18 @@ export class AppComponent {
   get formValidLogin() { return this.formLogin.controls }
 
 
-  elem=document.documentElement
-  onClickFullScreen(statusClick){
+  elem = document.documentElement
+  onClickFullScreen(statusClick) {
     this.status = statusClick
-    if(this.elem.requestFullscreen || statusClick == true){
+    if (this.elem.requestFullscreen || statusClick == true) {
       this.elem.requestFullscreen();
       this.status = true
     }
   }
 
-  onClickCloseFullScreen(statusClick){
+  onClickCloseFullScreen(statusClick) {
     this.status = statusClick
-    if(document.exitFullscreen || statusClick == false){
+    if (document.exitFullscreen || statusClick == false) {
       document.exitFullscreen();
       this.status = false
     }
