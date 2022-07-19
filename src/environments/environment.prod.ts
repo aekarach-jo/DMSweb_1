@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
+  // production: true,
   apiUrl : "https://dms-web-api.azurewebsites.net/api/"
 };

@@ -101,19 +101,21 @@
 }
 
 .text-leftCol {
+    border: #000000;
     position: relative;
-    color: #fcfcfc;
-    font-size: 20px;
+    color: #be5c00;
+    font-size: 16px;
     font-weight: 300;
     text-align: center;
     margin: 8px;
     width: 80px;
 }
 
+
 .text-leftCol-history {
     position: relative;
-    color: #fcfcfc;
-    font-size: 20px;
+    color: #be5c00;
+    font-size: 16px;
     font-weight: 300;
     text-align: center;
     margin: 8px;
@@ -123,12 +125,12 @@
 @media screen and (max-width:420px) {
     .text-leftCol-history {
         position: relative;
-        color: #fcfcfc;
-        font-size: 20px;
+        color: #be5c00;
+        font-size: 16px;
         font-weight: 300;
         text-align: center;
         margin: 8px;
-        width: 80px;
+        width: 90px;
     }
 }
 
@@ -198,6 +200,12 @@
     padding: 8px;
 }
 
+.btn-status-right:hover {
+    transition: all .5s;
+    box-shadow: 0px 0px 5px 5px rgba(110, 187, 91, 0.5);
+
+}
+
 @media screen and (max-width:420px) {
     .btn-status-right {
         color: #fcfcfc;
@@ -233,7 +241,7 @@
 
 .text-header-bio {
     position: relative;
-    color: #ffffff;
+    color: #be5c00;
     font-size: 21px;
     font-weight: 400;
 }
@@ -472,7 +480,7 @@
     font-weight: 400;
 }
 
-.text-area-css{
+.text-area-css {
     width: 22rem;
     height: 10rem;
 }

@@ -16,6 +16,19 @@ export class SettingComponent implements OnInit {
   settingAllData: any
   showButtonCreate: boolean = true
   showButtonEdit: boolean = true
+
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
   constructor(public router: Router, public callapi: ApiService, public fb: FormBuilder) {
     this.formSetting = fb.group({
       settingId: [null],
@@ -45,13 +58,13 @@ export class SettingComponent implements OnInit {
   getAllSetting() {
     this.callapi.getAllSetting().subscribe(data => {
       this.settingAllData = data
-      
-      if(this.settingAllData.length != 0 ){
+
+      if (this.settingAllData.length != 0) {
         this.patchValue(this.settingAllData[0])
       }
       if (this.settingAllData.length == 0) {
         this.onCreateSetting()
-      } 
+      }
 
     })
   }
@@ -75,12 +88,9 @@ export class SettingComponent implements OnInit {
     this.formSetting.value.creationDatetime = new Date
     this.formSetting.value.settingId = "S000"
     this.callapi.editSetting(this.formSetting.value.settingId, this.formSetting.value).subscribe(data => {
-      Swal.fire({
-        position: "center",
+      this.Toast.fire({
         icon: 'success',
-        title: "สำเร็จ",
-        showConfirmButton: false,
-        timer: 1000
+        title: 'สำเร็จ'
       })
     })
   }

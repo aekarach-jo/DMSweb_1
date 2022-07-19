@@ -15,6 +15,19 @@ export class CheckoutComponent implements OnInit {
   dataSource: any
   formCheckout: any
   checkoutDataById: any
+
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
   constructor(public callapi: ApiService, public fb: FormBuilder, public router: Router) {
     this.formCheckout = fb.group({
       checkoutId: [null],
@@ -80,12 +93,9 @@ export class CheckoutComponent implements OnInit {
                 this.callapi.editUserDetail(userData.userDetailId, userData).subscribe(status => { })
                 this.callapi.editCheckout(this.formCheckout.value.checkoutId, this.formCheckout.value).subscribe(status => {
                   this.getAllCheckout()
-                  Swal.fire({
-                    position: "center",
+                  this.Toast.fire({
                     icon: 'success',
-                    title: "สำเร็จ",
-                    showConfirmButton: false,
-                    timer: 1000
+                    title: 'สำเร็จ'
                   })
                 })
               })

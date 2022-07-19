@@ -63,6 +63,19 @@ export class InvoiceDataComponent implements OnInit {
   otherPrice: number
   invoiceTotal: number
 
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
+
   constructor(public callapi: ApiService, public fb: FormBuilder, public router: Router, public dialog: MatDialog) {
     this.statusLogin = localStorage.getItem('statuslogin')
     this.permission = localStorage.getItem('permission')
@@ -292,12 +305,9 @@ export class InvoiceDataComponent implements OnInit {
       this.formInvoice.value.roomId = this.getRoomId
       this.formInvoice.value.creationDateTime = new Date
       this.callapi.createInvoice(this.formInvoice.value).subscribe(data => {
-        Swal.fire({
-          position: "center",
+        this.Toast.fire({
           icon: 'success',
-          title: "บันทึกแล้ว",
-          showConfirmButton: false,
-          timer: 1000
+          title: 'บันทึกแล้ว'
         })
         this.getAllInvoice()
         this.getRoomByStatus()
@@ -310,12 +320,9 @@ export class InvoiceDataComponent implements OnInit {
   onEditInvoiceAndAddData() {
     this.formInvoice.value.invoiceStatus = "ยังไม่ส่งบิล"
     this.callapi.editInvoice(this.getInvoiceId, this.formInvoice.value).subscribe(data => {
-      Swal.fire({
-        position: "center",
+      this.Toast.fire({
         icon: 'success',
-        title: "สำเร็จ",
-        showConfirmButton: false,
-        timer: 1000
+        title: 'สำเร็จ'
       })
       this.getInvoiceByFilterMonth()
       this.getAllInvoice()
@@ -326,12 +333,9 @@ export class InvoiceDataComponent implements OnInit {
   onEditInvoiceData() {
     this.formInvoice.value.invoiceStatus = "ส่งบิลแล้ว"
     this.callapi.editInvoice(this.getInvoiceId, this.formInvoice.value).subscribe(data => {
-      Swal.fire({
-        position: "center",
+      this.Toast.fire({
         icon: 'success',
-        title: "สำเร็จ",
-        showConfirmButton: false,
-        timer: 1000
+        title: 'สำเร็จ'
       })
       this.getInvoiceByFilterMonth()
       this.getAllInvoice()

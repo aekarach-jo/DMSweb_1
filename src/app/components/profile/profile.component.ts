@@ -50,6 +50,19 @@ export class ProfileComponent implements OnInit {
   showInvoiceAllData: any[] = []
   checkBtn: any
   selected: Date | null;
+
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
   constructor(public router: Router, public callapi: ApiService, public fb: FormBuilder) {
     this.statusLogin = localStorage.getItem('statuslogin')
     this.permission = localStorage.getItem('permission')
@@ -277,42 +290,41 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  onCreateReport() {
-    Swal.fire({
-      position: 'center',
-      text: "ยืนยันหรือไม่?",
-      icon: 'warning',
-      showCancelButton: true,
-      cancelButtonColor: '#d33',
-      cancelButtonText: 'ยกเลิก',
-      confirmButtonColor: '#2aad19',
-      confirmButtonText: 'ยืนยัน'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.formReport.value.roomNumber = this.roomNumber
-        this.formReport.value.date = new Date;
-        this.formReport.value.roomId = this.roomId
-        this.formReport.value.reportStatus = "รอยืนยัน"
-        this.formReport.value.image = ""
-        this.callapi.createReport(this.formReport.value).subscribe(data => {
-          Swal.fire({
-            position: "center",
-            icon: 'success',
-            title: "สำเร็จ",
-            showConfirmButton: false,
-            timer: 1000
-          })
-          this.emptyFormReport()
-        })
-      }
-    })
-  }
+  // onCreateReport2() {
+  //   Swal.fire({
+  //     position: 'center',
+  //     text: "ยืนยันหรือไม่?",
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     cancelButtonColor: '#d33',
+  //     cancelButtonText: 'ยกเลิก',
+  //     confirmButtonColor: '#2aad19',
+  //     confirmButtonText: 'ยืนยัน'
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       this.formReport.value.roomNumber = this.roomNumber
+  //       this.formReport.value.date = new Date;
+  //       this.formReport.value.roomId = this.roomId
+  //       this.formReport.value.reportStatus = "รอยืนยัน"
+  //       this.formReport.value.image = ""
+  //       this.callapi.createReport(this.formReport.value).subscribe(data => {
+  //         this.Toast.fire({
+  //           icon: 'success',
+  //           title: 'สำเร็จ'
+  //         })
+  //         this.emptyFormReport()
+  //       })
+  //     }
+  //   })
+  // }
 
   onSelectFile(fileInput: any) {
     this.selectedFile = <File>fileInput.target.files[0];
+    console.log(this.selectedFile);
+
   }
 
-  onCreateReport2() {
+  onUploadImage() {
     const formData = new FormData();
     Swal.fire({
       position: 'center',
@@ -325,35 +337,34 @@ export class ProfileComponent implements OnInit {
       confirmButtonText: 'ยืนยัน'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.formReport.value.roomNumber = this.roomNumber
-        this.formReport.value.date = new Date;
-        this.formReport.value.roomId = this.roomId
-        this.formReport.value.reportStatus = "รอยืนยัน"
-        this.formReport.value.image = this.selectedFile
-        // this.formReport.value.image = ""
-
-        // console.log(this.formReport.value);
-        // formData.append('reportId', this.formReport.value.reportId)
-        // formData.append('roomNumber', this.formReport.value.roomNumber)
-        // formData.append('reportNumber', this.formReport.value.reportNumber)
-        // formData.append('date', this.formReport.value.date)
-        // formData.append('title', this.formReport.value.title)
-        // formData.append('note', this.formReport.value.note)
-        // formData.append('roomId', this.formReport.value.roomId)
-        // formData.append('reportStatus', this.formReport.value.reportStatus)
-        // formData.append('image', this.formReport.value.image)
-        // console.log(formData);
-        this.callapi.createReport(this.formReport.value).subscribe(data => {
-          Swal.fire({
-            position: "center",
-            icon: 'success',
-            title: "สำเร็จ",
-            showConfirmButton: false,
-            timer: 1000
+        formData.append('uploadImage', this.selectedFile)
+        try {
+          this.callapi.uploadReport(formData).subscribe(pathImage => {
+            console.log(pathImage);
+            this.onCreateReport(pathImage)
           })
-          this.emptyFormReport()
-        })
+        } catch (err) {
+          console.log(err);
+        }
       }
+    })
+  }
+
+  onCreateReport(pathImage: any) {
+    console.log(pathImage.dbPath);
+    this.formReport.value.roomNumber = this.roomNumber
+    this.formReport.value.date = new Date;
+    this.formReport.value.roomId = this.roomId
+    this.formReport.value.reportStatus = "รอยืนยัน"
+    this.formReport.value.image = pathImage.dbPath.toString()
+
+    console.log(this.formReport.value);
+    this.callapi.createReport(this.formReport.value).subscribe(data => {
+      this.Toast.fire({
+        icon: 'success',
+        title: 'สำเร็จ'
+      })
+      this.emptyFormReport()
     })
   }
 
@@ -406,12 +417,9 @@ export class ProfileComponent implements OnInit {
     this.formCheckout.value.checkoutDate = this.selected
     if (this.formCheckout.value.checkoutDate != null) {
       this.callapi.createCheckout(this.formCheckout.value).subscribe(dataCheckout => {
-        Swal.fire({
-          position: "center",
+        this.Toast.fire({
           icon: 'success',
-          title: "สำเร็จ",
-          showConfirmButton: false,
-          timer: 1000
+          title: 'สำเร็จ'
         })
       })
     } else {

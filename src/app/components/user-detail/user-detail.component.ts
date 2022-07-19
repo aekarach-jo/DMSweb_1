@@ -26,6 +26,19 @@ export class UserDetailComponent implements OnInit {
   getUserDetailId: any
 
   disabled = false;
+
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
   constructor(public callapi: ApiService, public fb: FormBuilder, public router: Router) {
     this.formUserDetail = fb.group({
       userDetailId: [null],
@@ -194,12 +207,9 @@ export class UserDetailComponent implements OnInit {
                           this.emptyUserDetailForm()
                           location.reload()
                         })
-                        Swal.fire({
-                          position: "center",
+                        this.Toast.fire({
                           icon: 'success',
-                          title: "สำเร็จ",
-                          showConfirmButton: false,
-                          timer: 1000
+                          title: 'สำเร็จ'
                         })
                         break;
                       } else {
@@ -272,12 +282,9 @@ export class UserDetailComponent implements OnInit {
     this.callapi.createUser(this.formUser.value).subscribe(data => {
       this.getRoomByRoomNumber();
     })
-    Swal.fire({
-      position: "center",
+    this.Toast.fire({
       icon: 'success',
-      title: "สำเร็จ",
-      showConfirmButton: false,
-      timer: 1000
+      title: 'สำเร็จ'
     })
   }
 

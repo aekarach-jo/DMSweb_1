@@ -1,6 +1,7 @@
 <div class="container width-height-card hiden-scroll" *ngIf="statusLogin == 'login'">
     <div class="search-filter mb-4 ml-3">
-        <input class="form-control pl-2 search-filter" type="text" name="search" [(ngModel)]="searchText" placeholder=" ค้นหา..">
+        <input class="form-control pl-2 search-filter" type="text" name="search" [(ngModel)]="searchText"
+            placeholder=" ค้นหา..">
     </div>
 
     <div class="row row-cols-md-5" *ngIf="roomAllData != null">
@@ -16,17 +17,10 @@
                     <img class="material-icons icon-in-room"
                         src="https://img.icons8.com/ios-filled/100/000000/door-opened.png" />
                 </div>
-                <!-- <a *ngIf="item.roomStatus == emptyRoom" type="text" class="text-center " style="margin-left: 3.5rem; font-weight: 900;">ว่าง</a>
-                <a *ngIf="item.roomStatus == busyRoom" type="text" class="text-center " style="margin-left: 3.5rem; font-weight: 900;">ไม่ว่าง</a> -->
                 <div *ngIf="permission == 'ADMIN'">
-                    <button class="d-block mx-auto btn font-in-card" data-toggle="modal" type="button" data-target="#modalEditRoom"
-                        (click)="getRoomById(item.roomId)">แก้ไข</button>
-                    <!-- <button class="float-right font-in-card" (click)="getRoomById(item.roomId)"
-                        *ngIf="item.roomStatus == busyRoom">ไม่ว่าง</button>
-                    <button class="float-right font-in-card" data-toggle="modal" data-target="#modalRegisterUser"
-                        (click)="getRoomById(item.roomId)" *ngIf="item.roomStatus == emptyRoom">เพิ่ม</button> -->
+                    <button class="d-block mx-auto btn font-in-card" data-toggle="modal" type="button"
+                        data-target="#modalEditRoom" (click)="getRoomById(item.roomId)">แก้ไข</button>
                 </div>
-
             </div>
         </div>
         <!-- เพิ่มห้อง -->
@@ -77,20 +71,28 @@
                     <div class="row">
                         <div class="col-md-6 d-block">
                             <label for="waterMeter" class="font-color font-color-water">มิเตอร์น้ำ</label>
-                            <input formControlName="waterMeter" class="form-control meter-style float-right" type="number">
+                            <input formControlName="waterMeter" class="form-control meter-style float-right"
+                                type="number">
                         </div>
                         <div class="col-md-6 d-block">
                             <label for="powerMeter" class="font-color font-color-power ">มิเตอร์ไฟ</label>
-                            <input formControlName="powerMeter" class="form-control meter-style float-right " type="number">
+                            <input formControlName="powerMeter" class="form-control meter-style float-right "
+                                type="number">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer-style ">
+                <div class="col ">
+                    <button class="btn btn-secondary btn-style-delete " type="submit"
+                        (click)="onDeleteRoom(this.getDataRoomById.roomId , this.getDataRoomById.roomNumber)" data-dismiss="modal">
+                        ลบ</button>
+                </div>
                 <button class="btn btn-success btn-style-success" type="submit"
-                    (click)="onEditRoom(this.getDataRoomById.roomId)" data-dismiss="modal">ยืนยัน</button>
-                <button class="btn btn-danger btn-style-cancel" data-dismiss="modal"
-                    (click)="emptyFormRoom()">ยกเลิก</button>
+                    (click)="onEditRoom(this.getDataRoomById.roomId)" data-dismiss="modal">
+                    ยืนยัน</button>
+                <button class="btn btn-danger btn-style-cancel" data-dismiss="modal" (click)="emptyFormRoom()">ยกเลิก
+                </button>
             </div>
         </div>
     </div>
@@ -132,11 +134,13 @@
                     <div class="row row-cols-md-2">
                         <div class="col-6">
                             <label for="waterMeter" class="font-color font-color-water">มิเตอร์น้ำ</label>
-                            <input formControlName="waterMeter" class="form-control meter-style float-right" type="text">
+                            <input formControlName="waterMeter" class="form-control meter-style float-right"
+                                type="text">
                         </div>
                         <div class="col-6">
                             <label for="powerMeter" class="font-color font-color-power">มิเตอร์ไฟ</label>
-                            <input formControlName="powerMeter" class="form-control meter-style float-right" type="text">
+                            <input formControlName="powerMeter" class="form-control meter-style float-right"
+                                type="text">
                         </div>
                     </div>
                 </div>

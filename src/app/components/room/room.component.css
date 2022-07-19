@@ -166,6 +166,12 @@
     margin-right: 18px;
     margin-top: 10px;
 }
+.btn-style-delete{
+    width: 4.5rem;
+    height: 2.5rem;
+    margin-right: 18px;
+    margin-top: 10px;
+}
 .btn-style-cancel{
     width: 4.5rem;
     height: 2.5rem;
@@ -212,4 +218,12 @@
         margin-bottom: 5px;
         width: 8rem;
     }
+}
+
+.modal-footer-style{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: .75rem;
 }

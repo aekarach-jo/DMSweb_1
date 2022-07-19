@@ -15,16 +15,16 @@
                 </div>
             </div>
         </div>
-        <div class="row row-cols-sm-3 ">
+        <div class="row row-cols-sm-3 mb-4">
             <div class="col hover-overlay">
-                <p class="text-leftCol d-block mx-auto  float-right " type="button" (click)="switchPages(1)">ใบแจ้งหนี้
+                <p class="text-leftCol mx-auto  float-right " type="button" (click)="switchPages(1)">ใบแจ้งหนี้
                 </p>
             </div>
             <div class="col hover-overlay">
-                <p class="text-leftCol d-block mx-auto " type="button" (click)="switchPages(2)">แจ้งซ่อม</p>
+                <p class="text-leftCol mx-auto " type="button" (click)="switchPages(2)">แจ้งซ่อม</p>
             </div>
             <div class="col hover-overlay">
-                <p class="text-leftCol-history d-block mx-auto float-left " type="button" (click)="switchPages(3)">
+                <p class="text-leftCol-history mx-auto float-left " type="button" (click)="switchPages(3)">
                     ประวัติทั้งหมด</p>
             </div>
         </div>
@@ -155,11 +155,11 @@
                 <label for="image">
                     Tile Image
                 </label>
-                <input type="file" formControlName="image" (change)="onSelectFile($event)">
+                <input type="file" formControlName="image"  accept="image/*" (change)="onSelectFile($event)">
             </div>
 
             <button class="btn btn-warning btn-send  d-block mx-auto mt-5"
-                (click)="onCreateReport2()">ส่ง</button>
+                (click)="onUploadImage()">ส่ง</button>
         </form>
 
 

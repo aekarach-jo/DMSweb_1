@@ -24,6 +24,19 @@ export class ReportComponent implements OnInit {
   dataUserName: any
   getId: any
   showRoomNumber: any
+
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
   constructor(public callapi: ApiService, public fb: FormBuilder, public router: Router) {
     this.statusLogin = localStorage.getItem('statuslogin')
     this.permission = localStorage.getItem('permission')
@@ -70,12 +83,16 @@ export class ReportComponent implements OnInit {
   }
 
   applyFilter(event: Event) {
+    let formSearch = []
+    for (let i = 0; i < this.reportData.length; i++) {
+      formSearch.push(this.reportData[i].roomNumber)
+    }
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
   }
 
   getAllReport() {
+    let formSearch = []
     this.callapi.getAllReport().subscribe(data => {
       this.reportData = data
       this.dataSource = new MatTableDataSource(this.reportData);
@@ -104,12 +121,9 @@ export class ReportComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.callapi.deleteReport(id).subscribe(data => {
-          Swal.fire({
-            position: "center",
+          this.Toast.fire({
             icon: 'success',
-            title: "ลบแล้ว",
-            showConfirmButton: false,
-            timer: 1000
+            title: 'สำเร็จ'
           }).then(() => {
             this.getAllReport();
           })

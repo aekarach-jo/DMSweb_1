@@ -28,8 +28,21 @@ export class RoomComponent implements OnInit {
   settingData: any
   valid: any[] = []
 
-  fan : any
-  air : any
+  fan: any
+  air: any
+
+
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
 
   constructor(public router: Router, public callapi: ApiService, public fb: FormBuilder) {
     this.statusLogin = localStorage.getItem('statuslogin')
@@ -48,6 +61,7 @@ export class RoomComponent implements OnInit {
       userId: [null]
     })
   }
+
 
 
   patchValue(receiveRoomId: room) {
@@ -101,50 +115,55 @@ export class RoomComponent implements OnInit {
   }
 
   onCreateRoom() {
+
     if (this.formRoom.value.roomType == "พัดลม") {
       this.formRoom.value.roomRate = this.fan
-    }else if(this.formRoom.value.roomType == "แอร์"){
+    } else if (this.formRoom.value.roomType == "แอร์") {
       this.formRoom.value.roomRate = this.air
 
     }
-      this.callapi.createRoom(this.formRoom.value).subscribe(data => {
-        Swal.fire({
-          position: "center",
-          icon: 'success',
-          title: "สำเร็จ",
-          showConfirmButton: false,
-          timer: 1000
-        })
-        this.getAllRoom();
-        this.emptyFormRoom();
+    this.callapi.createRoom(this.formRoom.value).subscribe(data => {
+      this.Toast.fire({
+        icon: 'success',
+        title: 'สำเร็จ'
       })
+      this.getAllRoom();
+      this.emptyFormRoom();
+    })
 
   }
 
   onEditRoom(roomId: string) {
     this.callapi.editRoom(roomId, this.formRoom.value).subscribe(data => {
-      Swal.fire({
-        position: "center",
+      this.Toast.fire({
         icon: 'success',
-        title: "สำเร็จ",
-        showConfirmButton: false,
-        timer: 1000
+        title: 'แก้ไข้แล้ว'
       })
       this.emptyFormRoom();
       this.getAllRoom();
     })
   }
 
-  onDeleteRoom(roomId: string) {
-    this.callapi.deleteRoom(roomId).subscribe(data => {
-      Swal.fire({
-        position: "center",
-        icon: 'success',
-        title: "ลบห้องสำเร็จ",
-        showConfirmButton: false,
-        timer: 1000
-      })
-      this.getAllRoom();
+  onDeleteRoom(roomId: string, roomNumber: string) {
+    Swal.fire({
+      position: 'center',
+      text: "ต้องการลบห้อง " + roomNumber + " หรือไม่",
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'ยกเลิก',
+      confirmButtonColor: '#2aad19',
+      confirmButtonText: 'ยืนยัน'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.callapi.deleteRoom(roomId).subscribe(data => {
+          this.Toast.fire({
+            icon: 'success',
+            title: 'ลบแล้ว'
+          })
+          this.getAllRoom();
+        })
+      }
     })
   }
 
@@ -167,7 +186,7 @@ export class RoomComponent implements OnInit {
             this.router.navigateByUrl('/setting')
           }
         })
-      }else{
+      } else {
         for (let i = 0; i < this.settingData.length; i++) {
           this.air = this.settingData[i].roomrateTypeAir
           this.fan = this.settingData[i].roomrateTypeFan

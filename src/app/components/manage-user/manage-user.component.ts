@@ -25,6 +25,19 @@ export class ManageUserComponent implements OnInit {
   dataSource: any
   getUserDetaialID: any
   getId:any
+
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
   constructor(public callapi: ApiService, public fb: FormBuilder, public router: Router) {
     this.formUserDetail = fb.group({
       userDetailId: [null],
@@ -173,12 +186,9 @@ export class ManageUserComponent implements OnInit {
         this.callapi.editRoom(this.formRoom.value.roomId, this.formRoom.value).subscribe(edit => {          
          })
       })
-      Swal.fire({
-        position: "center",
+      this.Toast.fire({
         icon: 'success',
-        title: "แก้ไขแล้ว",
-        showConfirmButton: false,
-        timer: 1000
+        title: 'แก้ไขแล้ว'
       })
       this.getAllUserDetail()
     })
@@ -198,12 +208,9 @@ export class ManageUserComponent implements OnInit {
       if (result.isConfirmed) {
         this.callapi.deleteUserByUserDetail(id).subscribe(i => {
           this.callapi.deleteUserDetail(id).subscribe(data => {
-            Swal.fire({
-              position: "center",
+            this.Toast.fire({
               icon: 'success',
-              title: "ลบแล้ว",
-              showConfirmButton: false,
-              timer: 1000
+              title: 'ลบแล้ว'
             })
             this.getAllUserDetail();
           })
