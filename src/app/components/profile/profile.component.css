@@ -2,7 +2,7 @@
     position: relative;
     align-items: center;
     justify-content: center;
-    height: 750px;
+    max-height: calc(100vh - 172px);
     width: auto;
     padding: 20px;
     overflow-x: hidden;
@@ -17,6 +17,7 @@
         align-items: center;
         justify-content: center;
         width: auto;
+        height: 100vh;
         overflow-x: hidden;
         padding: 0px;
         box-shadow: 0 0 0.5em 1px #fcfcfc;

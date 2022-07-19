@@ -326,6 +326,13 @@
 
   }
 }
+@media screen and (max-width:860px) {
+  #navbarSupportedContent {
+    background-color: #ffffff;
+    border-radius: 26px;
+
+  }
+}
 
 .brandStyle {
   font-size: 24px;
@@ -468,14 +475,19 @@
 
 .btn-logout {
   margin-right: 10px;
+  margin-left: 0;
 }
 
 @media screen and (max-width:420px) {
   .btn-logout {
     text-align: center;
-    /* display: block;
     margin-left: 0;
-    margin-right: 0; */
+  }
+
+}
+@media screen and (max-width:860px) {
+  .btn-logout {
+    /* margin-left: 5rem; */
   }
 
 }
@@ -501,6 +513,12 @@
     display: block;
   }
 }
+@media screen and (max-width:860px) {
+  .hidden{
+    display: block;
+  }
+}
+
 .image-hover:hover{
   transition: all .4s;
   box-shadow: 0px 0px 5px 5px rgba(255, 255, 255, 0.5);

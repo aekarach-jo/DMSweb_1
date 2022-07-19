@@ -4,7 +4,7 @@
     position: relative;
     align-items: center;
     justify-content: center;
-    height: 720px;
+    max-height: calc(100vh - 172px);
     width: auto;
     padding: 20px;
     overflow-x: hidden;
