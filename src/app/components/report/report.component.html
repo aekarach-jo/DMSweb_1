@@ -84,7 +84,7 @@
                     <textarea formControlName="note" cols="20" rows="10" class="p-3" readonly></textarea>
                 </div>
                 <div *ngIf="this.formReport.value.image != ''" class="container " style="text-align: center; margin-top: 1rem;">
-                    <img [src]="this.formReport.value.image" width="300" height="300" style="object-fit: cover;">
+                    <img (click)="onShowImage()" [src]="this.formReport.value.image" width="300" height="300" style="object-fit: cover;">
                 </div>
             </div>
             <div class="modal-footer modal-footer-style">

@@ -113,6 +113,16 @@ export class ReportComponent implements OnInit {
     })
   }
 
+  onShowImage(){
+    Swal.fire({
+      imageUrl: this.reportDataById.image,
+      imageWidth: 500,
+      imageHeight: 500,
+      imageAlt: 'Custom image',
+      confirmButtonText : 'ปิด'
+    })
+  }
+
   onDelete(id: string) {
     Swal.fire({
       position: 'center',
