@@ -83,8 +83,8 @@
                 <div class="card p-2">
                     <textarea formControlName="note" cols="20" rows="10" class="p-3" readonly></textarea>
                 </div>
-                <div *ngIf="this.formReport.value.image != ''" class="container " style="text-align: center; margin-top: 1rem;">
-                    <img (click)="onShowImage()" [src]="this.formReport.value.image" width="300" height="300" style="object-fit: cover;">
+                <div *ngIf="this.formReport.value.image != ''" class="container p-0" style="text-align: center; margin-top: 1rem;">
+                    <img (click)="onShowImage()" [src]="this.formReport.value.image" style="object-fit: cover; width:336px; height: 300px; border-radius: 10px;">
                 </div>
             </div>
             <div class="modal-footer modal-footer-style">
