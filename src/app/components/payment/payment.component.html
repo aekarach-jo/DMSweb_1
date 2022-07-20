@@ -1,1 +1,12 @@
-<p>payment works!</p>
+<!-- <input type="file" accept="file_type | audio/* | video/* | image/* | media_type"> -->
+<form [formGroup]="uploadForm"  style="min-height: calc(100vh - 75px);">
+    <!-- Select File -->
+    <input type="file" accept="image/*" (change)="showPreview($event)" />
+    <!-- Image Preview -->
+    <div class="imagePreview" *ngIf="imageURL && imageURL !== ''">
+        <img [src]="imageURL" [alt]="uploadForm.value.name" width="300" height="300">
+    </div>
+    <!-- Assign Image Alt -->
+    <button type="submit">Submit</button>
+</form>
+

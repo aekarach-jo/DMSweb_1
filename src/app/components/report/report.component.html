@@ -83,6 +83,9 @@
                 <div class="card p-2">
                     <textarea formControlName="note" cols="20" rows="10" class="p-3" readonly></textarea>
                 </div>
+                <div *ngIf="this.formReport.value.image != ''" class="container " style="text-align: center; margin-top: 1rem;">
+                    <img [src]="this.formReport.value.image" width="300" height="300" style="object-fit: cover;">
+                </div>
             </div>
             <div class="modal-footer modal-footer-style">
                 <button (click)="onChangeStatus()" *ngIf="formReport.value.reportStatus != 'ยืนยันแล้ว'"

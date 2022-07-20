@@ -18,6 +18,15 @@ export class ApiService {
 
   constructor(public http: HttpClient) { }
 
+  public imagePath(imagePath : any){
+    return `${environment.apiImage}/${imagePath}`
+  }
+
+  public uploadImage(image : any){
+    return this.http.post<report>(`${environment.apiUrl}Upload/UploadImage`, image)
+  }
+
+
   public getAllUser() {
     return this.http.get<user>(`${environment.apiUrl}User/GetAllUser`)
   }
@@ -152,10 +161,7 @@ export class ApiService {
   public deleteReport(reportID: string) {
     return this.http.get<report>(`${environment.apiUrl}Report/DeleteReport/${reportID}`)
   }
-  public uploadReport(image : any){
-    return this.http.post<report>(`${environment.apiUrl}Report/Upload`, image)
-  }
-
+ 
 
 
   public getAllPayment() {

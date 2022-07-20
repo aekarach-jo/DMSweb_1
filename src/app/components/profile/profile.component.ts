@@ -1,6 +1,6 @@
 import { identifierName } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { checkout } from 'src/app/Models/checkout';
 import { invoice } from 'src/app/Models/invoice';
@@ -18,6 +18,9 @@ declare var datePicker: any;
 export class ProfileComponent implements OnInit {
   displayedColumns: string[] = ['ห้องที่', 'รายละเอียด', 'วันที่', 'เวลา', 'เพิ่มเติม'];
 
+  uploadForm: FormGroup
+  imageURL: any
+  previewImage: any
   selectedFile: File = null
   formCheckout: any
   formReport: any
@@ -128,6 +131,9 @@ export class ProfileComponent implements OnInit {
       this.formFindMonth = this.fb.group({
         monthStart: null,
         monthEnd: null,
+      }),
+      this.uploadForm = this.fb.group({
+        image: [null]
       })
   }
 
@@ -290,38 +296,19 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  // onCreateReport2() {
-  //   Swal.fire({
-  //     position: 'center',
-  //     text: "ยืนยันหรือไม่?",
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     cancelButtonColor: '#d33',
-  //     cancelButtonText: 'ยกเลิก',
-  //     confirmButtonColor: '#2aad19',
-  //     confirmButtonText: 'ยืนยัน'
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       this.formReport.value.roomNumber = this.roomNumber
-  //       this.formReport.value.date = new Date;
-  //       this.formReport.value.roomId = this.roomId
-  //       this.formReport.value.reportStatus = "รอยืนยัน"
-  //       this.formReport.value.image = ""
-  //       this.callapi.createReport(this.formReport.value).subscribe(data => {
-  //         this.Toast.fire({
-  //           icon: 'success',
-  //           title: 'สำเร็จ'
-  //         })
-  //         this.emptyFormReport()
-  //       })
-  //     }
-  //   })
-  // }
+  onSelectFile(event) {
+    const file = (event.target as HTMLInputElement).files[0];
 
-  onSelectFile(fileInput: any) {
-    this.selectedFile = <File>fileInput.target.files[0];
-    console.log(this.selectedFile);
-
+    this.uploadForm.patchValue({
+      image: file
+    });
+    this.uploadForm.get('image').updateValueAndValidity()
+    // File Preview
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageURL = reader.result as string;
+    }
+    reader.readAsDataURL(file)
   }
 
   onUploadImage() {
@@ -337,32 +324,45 @@ export class ProfileComponent implements OnInit {
       confirmButtonText: 'ยืนยัน'
     }).then((result) => {
       if (result.isConfirmed) {
-        formData.append('uploadImage', this.selectedFile)
-        try {
-          this.callapi.uploadReport(formData).subscribe(pathImage => {
+        console.log(this.uploadForm.value.image);
+        if (this.uploadForm.value.image != null) {
+          formData.append('uploadImage', this.uploadForm.value.image)
+          this.callapi.uploadImage(formData).subscribe(pathImage => {
             console.log(pathImage);
             this.onCreateReport(pathImage)
           })
-        } catch (err) {
-          console.log(err);
+        } else {
+          let fake = null
+          this.onCreateReport(fake)
+
         }
       }
     })
   }
 
   onCreateReport(pathImage: any) {
-    console.log(pathImage.dbPath);
+    console.log(pathImage);
     this.formReport.value.roomNumber = this.roomNumber
     this.formReport.value.date = new Date;
     this.formReport.value.roomId = this.roomId
     this.formReport.value.reportStatus = "รอยืนยัน"
-    this.formReport.value.image = pathImage.dbPath.toString()
+
+    if (pathImage != null) {
+      this.formReport.value.image = pathImage.dbPath.toString()
+    } else {
+      this.formReport.value.image = ""
+    }
 
     console.log(this.formReport.value);
     this.callapi.createReport(this.formReport.value).subscribe(data => {
+      console.log(data);
+      
       this.Toast.fire({
         icon: 'success',
         title: 'สำเร็จ'
+      })
+      this.uploadForm.patchValue({
+        image: [null]
       })
       this.emptyFormReport()
     })
@@ -383,6 +383,11 @@ export class ProfileComponent implements OnInit {
 
   getReportById(id: string) {
     this.callapi.getReportById(id).subscribe(data => {
+      if(data.image != ""){
+        data.image  = this.callapi.imagePath(data.image)
+      }else{
+        data.image  = ""
+      }
       this.reportDataById = data
       this.getId = data.reportId
       this.showRoomNumber = data.roomNumber

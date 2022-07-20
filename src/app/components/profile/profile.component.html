@@ -31,8 +31,8 @@
 
 
         <!-- <h1 *ngIf="this.formInvoice.value.invoiceStatus == 'ยังไม่ส่งบิล'">ยังไม่มีมีบิลสำหรับเดือนนี้</h1> -->
-        <div >
-            <form  class="col-lg-10 rightCol hiden-scroll d-block mx-auto " *ngIf="switchPage == 1">
+        <div>
+            <form class="col-lg-10 rightCol hiden-scroll d-block mx-auto " *ngIf="switchPage == 1">
                 <div class="p-3">
                     <div class="row">
                         <div class="col-8">
@@ -47,7 +47,8 @@
                             <h2 class="text-header-invoice">ห้องที่ {{roomNumber}}</h2>
                         </div>
                         <div class="col-6">
-                            <p class="text-header-invoice float-right  mt-1">{{showCreationDate | date: 'dd/MM/yyyy'}}</p>
+                            <p class="text-header-invoice float-right  mt-1">{{showCreationDate | date: 'dd/MM/yyyy'}}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -64,7 +65,7 @@
                             </tr>
                         </thead>
                         <tbody class="text-center">
-                            <tr >
+                            <tr>
                                 <th scope="row">ค่าน้ำ</th>
                                 <td>
                                     <p class="float-right">{{this.formInvoice.value.waterMeterOld}}</p>
@@ -79,7 +80,8 @@
                                     <p class="float-right">{{this.formInvoice.value.waterPrice | number : '1.2-2'}}</p>
                                 </td>
                                 <td>
-                                    <p class="float-right">{{this.formInvoice.value.waterTotalPrice | number : '1.2-2'}}</p>
+                                    <p class="float-right">{{this.formInvoice.value.waterTotalPrice | number : '1.2-2'}}
+                                    </p>
                                 </td>
                             </tr>
                             <tr>
@@ -97,21 +99,24 @@
                                     <p class="float-right">{{this.formInvoice.value.powerPrice | number : '1.2-2'}}</p>
                                 </td>
                                 <td>
-                                    <p class="float-right">{{this.formInvoice.value.powerTotalPrice | number : '1.2-2'}}</p>
+                                    <p class="float-right">{{this.formInvoice.value.powerTotalPrice | number : '1.2-2'}}
+                                    </p>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">ค่าเช่าห้อง</th>
                                 <td colspan="4"></td>
                                 <td>
-                                    <p class="float-right">{{this.formInvoice.value.invoiceRoomRate | number : '1.2-2'}}</p>
+                                    <p class="float-right">{{this.formInvoice.value.invoiceRoomRate | number : '1.2-2'}}
+                                    </p>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">ค่าส่วนกลาง</th>
                                 <td colspan="4"></td>
                                 <td>
-                                    <p class="float-right">{{this.formInvoice.value.centerService | number : '1.2-2'}}</p>
+                                    <p class="float-right">{{this.formInvoice.value.centerService | number : '1.2-2'}}
+                                    </p>
                                 </td>
                             </tr>
                             <tr>
@@ -126,7 +131,8 @@
                             <tr>
                                 <th colspan="5">รวม</th>
                                 <td>
-                                    <p class="float-right">{{this.formInvoice.value.invoiceTotal | number : '1.2-2'}}</p>
+                                    <p class="float-right">{{this.formInvoice.value.invoiceTotal | number : '1.2-2'}}
+                                    </p>
                                 </td>
                             </tr>
                         </tbody>
@@ -139,27 +145,38 @@
                 <div class=" btn-status-right" type="button">ชำระค่าเช่า</div>
             </form>
         </div>
-        <form [formGroup]="formReport" class="col-lg-10 rightCol-report m-3 p-3  d-block mx-auto" *ngIf="switchPage == 2">
-            <h1 class="text-dark">แจ้งซ่อม</h1>
-            <select formControlName="title" class="form-control mb-3 title-size" type="text">
-                <option value="อินเทอร์เน็ต">อินเทอร์เน็ต</option>
-                <option value="ไฟดับ">ไฟดับ</option>
-                <option value="น้ำไม่ไหล">น้ำไม่ไหล</option>
-                <option value="อุปกรณ์ภายในห้องชำรุด">อุปกรณ์ภายในห้องชำรุด</option>
-                <option value="การชำระค่าห้องพัก">การชำระค่าห้องพัก</option>
-                <option value="อื่นๆ">อื่นๆ</option>
-            </select>
-            <textarea formControlName="note" class="form-control text-area-css" type="text" placeholder="ข้อความ...">
+        <form [formGroup]="formReport" class="col-lg-10 rightCol-report m-3 p-3  d-block mx-auto"
+            *ngIf="switchPage == 2">
+            <div class="row row-cols-2 style-col-image">
+                <div class="col">
+                    <h1 class="text-dark">แจ้งซ่อม</h1>
+                    <select formControlName="title" class="form-control mb-3 title-size" type="text">
+                        <option value="อินเทอร์เน็ต">อินเทอร์เน็ต</option>
+                        <option value="ไฟดับ">ไฟดับ</option>
+                        <option value="น้ำไม่ไหล">น้ำไม่ไหล</option>
+                        <option value="อุปกรณ์ภายในห้องชำรุด">อุปกรณ์ภายในห้องชำรุด</option>
+                        <option value="การชำระค่าห้องพัก">การชำระค่าห้องพัก</option>
+                        <option value="อื่นๆ">อื่นๆ</option>
+                    </select>
+                    <textarea formControlName="note" class="form-control text-area-css" type="text"
+                        placeholder="ข้อความ...">
             </textarea>
-            <div>
-                <label for="image">
-                    Tile Image
-                </label>
-                <input type="file" formControlName="image"  accept="image/*" (change)="onSelectFile($event)">
+                </div>
+                <div class="col">
+                    <input class="inputImage" type="file" accept="image/*" (change)="onSelectFile($event)">
+                    <div class="text-center" *ngIf="imageURL && imageURL !== ''">
+                        <img class="imagePreview" [src]="imageURL" [alt]="uploadForm.value.name">
+                    </div>
+                    <div class="text-center" *ngIf="imageURL == null ">
+                        <input class="inputImage" type="file" accept="image/*" (change)="onSelectFile($event)">
+                        <img class="imagePreview" src="https://img.icons8.com/color/100/image.png">
+                    </div>
+                    <h3 class="text-detail text-secondary">อัปโหลดรูปเพิ่มเติม</h3>
+                </div>
             </div>
 
-            <button class="btn btn-warning btn-send  d-block mx-auto mt-5"
-                (click)="onUploadImage()">ส่ง</button>
+
+            <button class="btn btn-warning btn-send  d-block mx-auto mt-2" (click)="onUploadImage()">ส่ง</button>
         </form>
 
 
@@ -296,13 +313,19 @@
 <div class="modal fade" id="modalTextReport" data-backdrop="static" aria-hidden="true">
     <div class="modal-dialog modal-dialog-full-width">
         <div class="modal-content modal-content-full-width" [formGroup]="formReport">
-            <div class="modal-header modal-header-bg"></div>
+            <div class="modal-header modal-header-bg">
+                <p class="align-middle text-center mt-3"> {{formReport.value.date | date:
+                    'dd/MM/yyyy'}} </p>
+            </div>
             <div class="modal-body modal-body-style">
                 <label class="text-white" for="title">หัวข้อ</label>
                 <input formControlName="title" class="form-control mb-3 p-2" type="text" readonly>
                 <label class="text-white" for="note">ข้อความ</label>
                 <div class="card p-2">
                     <textarea formControlName="note" cols="20" rows="10" class="p-3 text-note" readonly></textarea>
+                </div>
+                <div *ngIf="this.formReport.value.image != ''"  class="container" style="text-align: center; margin-top: 1rem;">
+                    <img [src]="this.formReport.value.image" width="300" height="300" style="object-fit: cover;">
                 </div>
             </div>
             <div class="modal-footer modal-footer-style">

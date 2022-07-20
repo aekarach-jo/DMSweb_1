@@ -9,6 +9,7 @@ import { ReportComponent } from './components/report/report.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'room',pathMatch: 'full' },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'report', component: ReportComponent},
   { path: 'profile', component: ProfileComponent},
   { path: 'setting', component: SettingComponent},
-  { path: 'checkout', component: CheckoutComponent}
+  { path: 'checkout', component: CheckoutComponent},
+  { path: 'payment', component: PaymentComponent}
 ]
 
 @NgModule({

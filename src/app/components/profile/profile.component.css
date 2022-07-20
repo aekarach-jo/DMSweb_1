@@ -2,7 +2,7 @@
     position: relative;
     align-items: center;
     justify-content: center;
-    max-height: calc(100vh - 172px);
+    max-height: calc(100vh - 160px);
     width: auto;
     padding: 20px;
     overflow-x: hidden;
@@ -481,9 +481,59 @@
 }
 
 .text-area-css {
-    width: 22rem;
+    width: 20.5rem;
     height: 10rem;
 }
 
+.imagePreview {
+    text-align: center;
+    width: 250px;
+    height: 250px;
+    border-radius: 20px;
+    margin-top: 1rem;
+    object-fit: content;
+}
 
-@media screen and (max-width:420px) {}
+.inputImage {
+    position: absolute;
+    margin: 1.5rem;
+    opacity: -1;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.style-col-image{
+    display: flex;
+}
+.text-detail{
+    text-align: center;
+}
+
+@media screen and (max-width:420px) {
+    .style-col-image{
+        display: block;
+    }
+    .imagePreview {
+        text-align: center;
+        width: 250px;
+        height: 250px;
+        border-radius: 20px;
+        margin: 1rem 2.5rem;
+        object-fit: content;
+    }
+    
+    .inputImage {
+        position: absolute;
+        margin: 1.5rem;
+        opacity: -1;
+        width: 200px;
+        height: 200px;
+        cursor: pointer;
+    }
+    .text-detail{
+        text-align: end;
+        margin-left: 4.6rem;
+        width: 100%;
+    }
+}

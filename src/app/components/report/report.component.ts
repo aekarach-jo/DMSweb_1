@@ -101,6 +101,11 @@ export class ReportComponent implements OnInit {
 
   getReportById(id: string) {
     this.callapi.getReportById(id).subscribe(data => {
+      if(data.image != ""){
+        data.image  = this.callapi.imagePath(data.image)
+      }else{
+        data.image  = ""
+      }
       this.reportDataById = data
       this.getId = data.reportId
       this.showRoomNumber = data.roomNumber
