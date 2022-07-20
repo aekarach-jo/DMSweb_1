@@ -6,8 +6,7 @@ export const environment = {
   production: false,
   // apiUrl : "https://localhost:5001/api/",
   // apiImage : "https://localhost:5001"
-  apiUrl : "https://dms-web-api.azurewebsites.net/api/",
-  apiImage : "https://dms-web-api.azurewebsites.net",
+  apiUrl : "https://dms-web-api.azurewebsites.net",
 };
 
 /*
