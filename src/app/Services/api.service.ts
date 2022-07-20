@@ -18,12 +18,9 @@ export class ApiService {
 
   constructor(public http: HttpClient) { }
 
-
-
   public imagePath(imagePath : any){
     return `${environment.apiUrl}/${imagePath}`
   }
-
   public uploadImage(image : any){
     return this.http.post<report>(`${environment.apiUrl}/api/Upload/UploadImage`, image)
   }
