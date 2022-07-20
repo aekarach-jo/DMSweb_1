@@ -18,6 +18,8 @@ export class ApiService {
 
   constructor(public http: HttpClient) { }
 
+
+
   public imagePath(imagePath : any){
     return `${environment.apiUrl}/${imagePath}`
   }
